@@ -13,11 +13,12 @@ The original standalone app remains at `projects/operations-data-review-suite`. 
 - Knowledge note search/filter/create/edit/remove/print.
 - Light/dark theme and reset to included synthetic sample.
 - English/Spanish UI switch and persistent local language selection.
+- Fictional United States / Canada business-unit values, generic editable `SAMPLE-RISK-*` tags, CSV import/export support for optional risk-code fields, and browser-data migration that preserves saved notes.
 - Reference normalization tested with punctuation, case, spaces, and leading zeroes.
 
 ## Limits
 
-- Uses fabricated sample records; no employer/customer system is connected.
+- Uses fabricated sample records and generic risk labels; no employer/customer system is connected. U.S./Canada are the only values reused from the user's provided material; the sample codes do not reproduce internal mappings.
 - CSV import only; XLSX import is not included.
 - Storage is browser-local and can be cleared by browser settings or the reset action.
 - No server, login, external API, or Sheets sync.
