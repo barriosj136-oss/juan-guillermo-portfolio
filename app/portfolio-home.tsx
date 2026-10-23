@@ -10,7 +10,7 @@ const copy = {
   en: {
     nav: ["Profile", "Projects", "Experience", "Education"],
     role: "Electronic Engineer · Data & Business Analysis",
-    headline: ["I review high-risk account", "cases and build reports", "to guide operational", "follow-up."],
+    headline: ["I analyzed 7,681 Bogotá", "budget records to track", "public commitments in", "2025."],
     intro: "In Iron Mountain’s High Risk function, I review complex account cases, reconcile account, service, invoice, and payment information, and build reports and charts that help the team prioritize follow-up. In some cases, I explain outstanding balances and payment requirements when a customer asks about restoring service; I do not authorize account reactivation. I’m building toward junior Data Analyst, BI Analyst, Business Analyst, and Operations Analyst roles.",
     primary: "Explore my work", resumeCTA: "View résumé", secondary: "Let’s connect", availability: "Open to junior analyst opportunities",
     visualLabel: "Bogotá 2025 budget analysis", visualCaption: "7,681 public records · 50 entity labels · COP 36.26T cumulative commitments", chartMonths: ["JAN", "JUN", "DEC"], chartLegend: "Net monthly change · COP",
@@ -33,7 +33,7 @@ const copy = {
   es: {
     nav: ["Perfil", "Proyectos", "Experiencia", "Formación"],
     role: "Ingeniero electrónico · Análisis de datos y negocio",
-    headline: ["Reviso casos de cuentas", "de alto riesgo y elaboro", "reportes para orientar", "seguimientos operativos."],
+    headline: ["Analicé 7.681 registros", "presupuestarios de Bogotá", "para seguir compromisos", "públicos de 2025."],
     intro: "En el área de High Risk de Iron Mountain, reviso casos complejos, concilio información de cuentas, servicios, facturas y pagos, y elaboro reportes y gráficos que ayudan al equipo a priorizar seguimientos. En algunos casos explico al cliente los saldos pendientes y los pagos requeridos cuando consulta cómo recuperar el servicio; no autorizo la reactivación de cuentas. Me proyecto hacia cargos junior de Analista de Datos, BI, Negocio y Operaciones.",
     primary: "Ver mis proyectos", resumeCTA: "Ver hoja de vida", secondary: "Conversemos", availability: "Abierto a oportunidades junior de análisis",
     visualLabel: "Análisis presupuestario de Bogotá 2025", visualCaption: "7.681 registros públicos · 50 nombres de entidad · COP 36,26 billones en compromisos acumulados", chartMonths: ["ENE", "JUN", "DIC"], chartLegend: "Cambio neto mensual · COP",
@@ -166,7 +166,7 @@ export default function PortfolioHome() {
     </div>
 
     <footer className={styles.footer} id="contact">
-      <div className={styles.footerTop}><div className={styles.footerCopy} data-reveal><p className={styles.eyebrow}>{t.contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className={styles.contactLinks}><a className={styles.footerLinkedin} href="mailto:juguibavi27@gmail.com">{t.email}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="/cv/Juan-Guillermo-Barrios-Resume.pdf" download>{t.resumeDownload}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.linkedin}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://github.com/barriosj136-oss" target="_blank" rel="noreferrer">{t.github}<Arrow diagonal/></a></div></div></div>
+      <div className={styles.footerTop}><div className={styles.footerCopy} data-reveal><p className={styles.eyebrow}>{t.contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className={styles.contactLinks}><a className={styles.footerLinkedin} href="mailto:juguibavi27@gmail.com">{t.email}<Arrow diagonal/></a><a className={styles.footerLinkedin} href={language === "en" ? "/cv/Juan-Guillermo-Barrios-Resume.pdf" : "/cv/Juan-Guillermo-Barrios-Hoja-de-Vida.pdf"} download>{t.resumeDownload}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.linkedin}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://github.com/barriosj136-oss" target="_blank" rel="noreferrer">{t.github}<Arrow diagonal/></a></div></div></div>
       <div className={styles.footerBottom}><a className={styles.footerBrand} href="#top">JGB<span>.</span></a><p>{t.footer}</p><span>© 2026 JUAN GUILLERMO BARRIOS VILLAMIL</span></div>
     </footer>
   </main>;
