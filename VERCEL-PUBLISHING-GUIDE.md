@@ -5,13 +5,13 @@
 - The portfolio is a Next.js app and a production deployment is live at <https://portfolio-nu-ashy-28.vercel.app>.
 - The GitHub repository is <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, private, with branch `main` pushed.
 - This local folder is linked to the existing Vercel project `portfolio` using the official CLI.
-- The Vercel GitHub App is installed with access limited to this portfolio repository. The project still needs its Git provider connection completed to enable deployments on every push.
+- The Vercel GitHub App is installed with access limited to this portfolio repository. The project is connected to GitHub and the `main` push triggers a production deployment.
 - The site needs no environment variables for the current features.
 - The CVs, certificates, and private profile audit files are outside this repository.
 
-## Enable deployment on every GitHub push
+## Deployment on every GitHub push
 
-Run this once from the portfolio folder in Visual Studio Code's terminal after GitHub and Vercel are authenticated:
+The Git connection is already set up. Vercel confirmed that it connected the GitHub remote to the existing project. Future commits pushed to `main` should deploy automatically. If the connection must be repaired, run this from the portfolio folder in Visual Studio Code's terminal:
 
 ```powershell
 pnpm dlx vercel git connect --yes
@@ -25,6 +25,6 @@ Manual production deploy, if ever needed:
 pnpm dlx vercel deploy --prod
 ```
 
-The official [Vercel CLI `git` command](https://vercel.com/docs/cli/git) connects a Git provider remote to the linked project. Vercel's [GitHub deployment documentation](https://vercel.com/docs/git/vercel-for-github) describes deployments from repository commits. The current production deployment is live; the `vercel git connect` step above is pending.
+The official [Vercel CLI `git` command](https://vercel.com/docs/cli/git) connects a Git provider remote to the linked project. Vercel's [GitHub deployment documentation](https://vercel.com/docs/git/vercel-for-github) describes deployments from repository commits. The latest production deployment is live.
 
 The local `.vercel` folder and `.env.local` credentials are ignored by Git. Never upload either to GitHub.
