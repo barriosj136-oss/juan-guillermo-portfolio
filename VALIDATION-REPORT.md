@@ -4,6 +4,7 @@ Date: October 22, 2026
 
 ## Production and routes
 
+- Added a continuous, bilingual “What I build” card marquee with pause control, hover/focus pause, and a static layout for reduced-motion preferences; the production build and TypeScript checks passed after this change.
 - Vercel production deployment is ready at <https://portfolio-nu-ashy-28.vercel.app>. Latest pushed commit deployment: `portfolio-79rxjyyr1-juguibavi27-7134s-projects.vercel.app`.
 - Anonymous HTTP requests to `/` and `/resume` returned status 200; `/resume` contains the updated résumé, print action, and GitHub link.
 - `pnpm build` completed successfully on this checkout. TypeScript passed and Next.js generated the portfolio, résumé, and three project routes.
