@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "Portfolio project",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.vercel": true,
+      "**/.env.local": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/.vercel": true,
+      "**/.env.local": true
+    }
+  }
+}

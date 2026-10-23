@@ -6,10 +6,14 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.exclude": {
     "**/node_modules": true,
-    "**/.next": true
+    "**/.next": true,
+    "**/.vercel": true,
+    "**/.env.local": true
   },
   "search.exclude": {
     "**/node_modules": true,
-    "**/.next": true
+    "**/.next": true,
+    "**/.vercel": true,
+    "**/.env.local": true
   }
 }
