@@ -12,7 +12,7 @@ Open `index.html` directly, or run `node preview-server.mjs` from the portfolio 
 - **Baseline Search:** enter up to 1,000 references, perform exact, normalized, and partial lookups, and download results or an input template.
 - **RMS Listing:** filter, sort, paginate, add/edit records, import/export CSV, and publish or clear a local snapshot.
 - **CSV Generator:** enter references and sample fields, then export reason, note, or combined CSV files and a template.
-- **Abandoned Records:** use an editable, generic review checklist; save local notes; print or download a note. It contains no real-world operational instructions.
+- **Follow-up Queue:** use an editable, generic review checklist; save local notes; print or download a note. It contains no real-world operational instructions.
 - **Knowledge Base:** search and filter generic sample notes, create/edit/remove local notes, and print an article.
 - **Workspace controls:** switch between light/dark themes and reset browser-local data to the included synthetic sample.
 
@@ -24,6 +24,6 @@ Uploads accept CSV only and require these columns: `id,month,unit,status,target,
 
 The documents describe a prior Apps Script and Sheets application with similar view areas, imports, exports, filters, lookups, charts, checklists and knowledge tools. This local demo implements generic equivalents using fictional data, rather than connecting to, or reproducing, company-specific rules and procedures. Source fragments did not include a complete deployable application; some backend functions or wiring were missing, and entry points/helpers conflicted across files.
 
-No Sheets API, backend, authentication, XLSX workbook import, internal action logic, customer/company content, logo, or measured results are included. No real company records or confidential materials were copied. Nothing is uploaded, published, or transmitted. The records and calculated values are fabricated examples.
+No Sheets API, backend, authentication, XLSX workbook import, internal action logic, customer/company content, logo, or measured results are included. No real company records or confidential materials were copied. The records and calculated values are fabricated examples; the app does not send them to a backend.
 
-Attribution still needs public review: Juan reports sole authorship, while a source footer also credits another contributor without describing the division of work. Resolve that conflict before publishing an authorship claim.
+Authorship: Juan Barrios states that he independently created the portfolio demonstration. Another person contributed the idea referenced by an earlier source footer, not the implementation. This demonstration uses synthetic data and contains no employer or customer records.

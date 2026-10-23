@@ -3,7 +3,7 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],STORAGE="ops-studio-fictional-demo-v2",PAGE_SIZE=10;
 const seed={records:window.DEMO_DATA.records, snapshot:null, notes:[], checklist:Array(window.DEMO_DATA.checklist.length).fill(false), articles:window.DEMO_DATA.articles};
 let state=loadState(), sort={key:"month",dir:-1}, page=1, baselineMatches=[], selectedArticle=null, noticeHidden=false;
-const units=["North","South","East","West","Shared Services"],statuses=["Open","Review","Closed","Waiting"], titles={dashboard:"Dashboard NA",baseline:"Baseline Search",listing:"RMS Listing",generator:"CSV Generator",followup:"Abandoned Records",knowledge:"Knowledge Base"};
+const units=["North","South","East","West","Shared Services"],statuses=["Open","Review","Closed","Waiting"], titles={dashboard:"Dashboard NA",baseline:"Baseline Search",listing:"RMS Listing",generator:"CSV Generator",followup:"Follow-up Queue",knowledge:"Knowledge Base"};
 const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(n), pct=n=>`${(Number(n)||0).toFixed(1)}%`, text=v=>String(v??"");
 function loadState(){try{let raw=localStorage.getItem(STORAGE);if(raw){let s=JSON.parse(raw);return{...seed,...s,records:Array.isArray(s.records)?s.records:seed.records,articles:Array.isArray(s.articles)?s.articles:seed.articles,notes:Array.isArray(s.notes)?s.notes:[],checklist:Array.isArray(s.checklist)?s.checklist:seed.checklist}}}catch{}return structuredClone(seed)}
 function save(){try{localStorage.setItem(STORAGE,JSON.stringify(state));$("#storageStatus").textContent="Saved in this browser only"}catch{$("#storageStatus").textContent="Session only · browser storage unavailable"}}

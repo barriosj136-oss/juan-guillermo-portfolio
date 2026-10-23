@@ -4,7 +4,7 @@ The original standalone app remains at `projects/operations-data-review-suite`. 
 
 ## Current feature inventory from source
 
-- Six navigation views: Dashboard NA, Baseline Search, RMS Listing, CSV Generator, Abandoned Records, Knowledge Base.
+- Six navigation views: Dashboard NA, Baseline Search, RMS Listing, CSV Generator, Follow-up Queue, Knowledge Base.
 - Synthetic dashboard filters and charts; dashboard CSV template and CSV upload.
 - Exact, normalized, and partial baseline reference matching with CSV export.
 - Listing search, status/unit filters, sort, pagination, add/edit, CSV import/export, and local snapshot publish/clear.
@@ -22,7 +22,7 @@ The original standalone app remains at `projects/operations-data-review-suite`. 
 - Storage is browser-local and can be cleared by browser settings or the reset action.
 - No server, login, external API, or Sheets sync.
 - Standalone suite remains English-only while bilingual site content is under development.
-- Attribution conflict in supplied source documents remains pending review before a public authorship claim.
+- Authorship note updated from the user's clarification: Juan Barrios states that he independently implemented the demonstration; another person contributed the idea referenced by an earlier footer.
 
 ## Behavior preservation
 

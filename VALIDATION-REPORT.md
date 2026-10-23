@@ -2,6 +2,22 @@
 
 Date: October 22, 2026
 
+## Blue palette and publication preparation
+
+- Updated the portfolio and standalone interactive demo to a white, charcoal, and blue palette; checked the production build from an isolated copy so existing local preview servers were not overwritten.
+- The optimized Next.js build completed successfully; TypeScript passed and all five routes generated.
+- Reviewed the desktop homepage in a browser at `http://localhost:3004`; navigation, bilingual content, sanitized current-role description, project links, and LinkedIn contact were present.
+- Replaced direct personal-email contact with LinkedIn and generalized employer workflow labels in the source and demo. No CV, certificates, account volumes, customer data, or credentials are in the project repository.
+- `git diff --check` passed. Responsive rules and reduced-motion handling remain enabled; mobile viewport review is still pending.
+
+## Follow-up after the October 22 profile update
+
+- TypeScript check (`tsc --noEmit`) passed after changing the current title, hybrid date line, and role bullets in the Next.js homepage.
+- The original project folder already had another Next.js build process using its `.next` directory, so I did not interrupt or overwrite that running process. I copied the app sources to a temporary review folder, ran TypeScript there, and completed a clean optimized production build using Webpack. All five routes were generated.
+- The production build was opened at `http://localhost:3001` from the temporary review copy. The Experience section was visually checked: the new English title, May 4, 2026 date, Hybrid label, workflow text, and approval boundary appeared correctly. The existing `http://localhost:3000` server still serves an older build and does not yet show this edit.
+- The LinkedIn current-role and headline changes were verified in the signed-in browser. The saved role text is available in English and Spanish; no network post was published.
+- The new v3 Word master contains the updated role and date. Visual rendering remains unavailable because LibreOffice `soffice.exe` is not installed.
+
 ## Portfolio build and browser checks
 
 - Next.js 16.4.0 production build completed successfully and TypeScript passed after the latest experience-page changes.
