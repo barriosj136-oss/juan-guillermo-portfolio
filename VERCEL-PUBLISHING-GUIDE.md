@@ -3,7 +3,7 @@
 ## Current state
 
 - The portfolio is a Next.js app and a production deployment is live at <https://portfolio-nu-ashy-28.vercel.app>.
-- The GitHub repository is <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, private, with branch `main` pushed.
+- The GitHub repository is public at <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, with branch `main` pushed.
 - This local folder is linked to the existing Vercel project `portfolio` using the official CLI.
 - The Vercel GitHub App is installed with access limited to this portfolio repository. The project is connected to GitHub and the `main` push triggers a production deployment.
 - The site needs no environment variables for the current features.

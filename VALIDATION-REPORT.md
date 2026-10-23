@@ -20,7 +20,7 @@ Date: October 22, 2026
 
 ## Git and deployment workflow
 
-- The private GitHub repository is <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, branch `main`.
+- The public GitHub repository is <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, branch `main`.
 - The local folder is linked to the Vercel project `portfolio`.
 - `pnpm dlx vercel git connect --yes` reported success. A push to `main` created a new Production deployment and it reached Ready.
 - `.env.local` and `.vercel/` are ignored by Git and were not committed.

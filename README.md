@@ -26,7 +26,7 @@ For an optimized local preview, run `pnpm build` then `pnpm start`.
 
 ## Vercel
 
-The app builds for production with Next.js and needs no environment variables. It is live on Vercel, and this local folder is linked to the existing Vercel project. The GitHub repository is private and pushed to `main`; automatic deployment on each GitHub push still needs the Git provider connection completed. See [VERCEL-PUBLISHING-GUIDE.md](VERCEL-PUBLISHING-GUIDE.md) for its current state. The app source is the Git repository root. Private CV source files and certificates stay outside the repository.
+The app builds for production with Next.js and needs no environment variables. It is live on Vercel, and this local folder is linked to the existing Vercel project. The GitHub repository is public at <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, with work pushed to `main`. Vercel is connected to GitHub for automatic production deployments after pushes to `main`. See [VERCEL-PUBLISHING-GUIDE.md](VERCEL-PUBLISHING-GUIDE.md) for the setup notes. The app source is the Git repository root. Private CV source files and certificates stay outside the repository.
 
 ## Data and privacy
 
