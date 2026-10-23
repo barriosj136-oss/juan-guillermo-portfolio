@@ -17,9 +17,9 @@ const resumeContent = {
     education: "Education", degree: "Electronic Engineering", school: "Universidad de los Andes · Degree awarded October 20, 2025", thesis: "Thesis: IoT automation of electronic systems integrating an adjustable voltage source and an AD9833 signal generator.",
     credentials: "Certifications", certs: ["Data Analytics Essentials · Cisco Networking Academy / MinTIC · May 23, 2026", "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026", "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026"], coursesLabel: "Additional courses · Platzi", courses: ["Frontend Developer · 2025", "Practical Frontend Developer · 2025", "Emotional Intelligence · 2023", "Effective Communication · 2023"],
     capabilities: "Capabilities", skillGroups: [["Experience-backed", "Operational case review · record validation · discrepancy investigation · customer service · software quality testing"], ["Learning", "Excel for analysis · SQL · Python fundamentals · Power BI and DAX · Git and GitHub"]],
-    projects: "Selected projects", projectNote: "Independent portfolio projects.",
-    projectsList: [["Operations Data Review Suite", "Explore a generic operational review workflow with synthetic records."], ["NovaTech monthly performance", "Fictional 12-month analysis with documented data checks and reproducible summaries."], ["Operations Decision Copilot", "Fictional decision-support case with documented assumptions and review steps."]],
-    footer: "Independent portfolio · Demonstration data is fictional · No employer systems connected.", language: "Español",
+    projects: "Selected projects", projectNote: "Independent projects and case studies.",
+    projectsList: [["Operations Data Review Suite", "Interactive operational review workflow with search, dashboards, and CSV tools."], ["NovaTech monthly performance", "12-month analysis of target attainment, budget variance, and documented data checks."], ["Operations Decision Copilot", "Decision-support case with documented assumptions and review steps."]],
+    footer: "Independent portfolio · selected projects and case studies.", language: "Español",
   },
   es: {
     back: "Portafolio", label: "HOJA DE VIDA PROFESIONAL", title: "Juan Guillermo Barrios Villamil",
@@ -33,9 +33,9 @@ const resumeContent = {
     education: "Formación", degree: "Ingeniería Electrónica", school: "Universidad de los Andes · Título otorgado el 20 de octubre de 2025", thesis: "Tesis: automatización IoT de sistemas electrónicos con una fuente de voltaje ajustable y un generador de señales AD9833.",
     credentials: "Certificaciones", certs: ["Fundamentos de Análisis de Datos · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Introducción a la Ciencia de Datos · Cisco Networking Academy / MinTIC · 5 de mayo de 2026", "Introducción a la Ciberseguridad · Cisco Networking Academy / MinTIC · 23 de mayo de 2026"], coursesLabel: "Cursos adicionales · Platzi", courses: ["Frontend Developer · 2025", "Practical Frontend Developer · 2025", "Inteligencia Emocional · 2023", "Comunicación Efectiva · 2023"],
     capabilities: "Habilidades", skillGroups: [["Respaldado por experiencia", "Revisión de casos operativos · validación de registros · investigación de discrepancias · servicio al cliente · pruebas de calidad de software"], ["En aprendizaje", "Excel para análisis · SQL · fundamentos de Python · Power BI y DAX · Git y GitHub"]],
-    projects: "Proyectos seleccionados", projectNote: "Proyectos independientes del portafolio.",
-    projectsList: [["Operations Data Review Suite", "Flujo genérico de revisión operativa con registros sintéticos."], ["Desempeño mensual de NovaTech", "Análisis ficticio de 12 meses con validaciones documentadas y resúmenes reproducibles."], ["Operations Decision Copilot", "Caso ficticio de apoyo a decisiones con supuestos y pasos de revisión documentados."]],
-    footer: "Portafolio independiente · Datos demostrativos ficticios · Sin conexión a sistemas de empleadores.", language: "English",
+    projects: "Proyectos seleccionados", projectNote: "Proyectos y casos independientes.",
+    projectsList: [["Operations Data Review Suite", "Flujo interactivo de revisión operativa con búsqueda, tableros y herramientas CSV."], ["Desempeño mensual de NovaTech", "Análisis de 12 meses sobre objetivos, desviación presupuestaria y validación de datos."], ["Operations Decision Copilot", "Caso de apoyo a decisiones con supuestos y pasos de revisión documentados."]],
+    footer: "Portafolio independiente · proyectos y casos seleccionados.", language: "English",
   },
 } as const;
 
