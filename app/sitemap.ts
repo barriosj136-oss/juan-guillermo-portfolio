@@ -6,9 +6,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     "",
     "/resume",
+    "/projects/bogota-budget",
     "/projects/novatech",
-    "/projects/operations-data-review-suite",
-    "/projects/operations-decision-copilot",
   ];
   return paths.map((path) => ({
     url: `${siteUrl}${path}`,
