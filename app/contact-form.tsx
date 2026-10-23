@@ -13,7 +13,7 @@ const copy = {
     consent: "I understand this message is stored locally on this computer so Juan can review it. It is not emailed or used for marketing.",
     send: "Save message locally", sending: "Saving…", success: "Saved in the local inbox. No email was sent.",
     failure: "The local inbox is unavailable. You can contact Juan through LinkedIn instead.",
-    unavailable: "For a public contact route, connect and configure a private backend and email provider first. For now, use LinkedIn.",
+    unavailable: "For professional inquiries, connect with me on LinkedIn.",
     honeypot: "Leave this field empty",
   },
   es: {
@@ -24,7 +24,7 @@ const copy = {
     consent: "Entiendo que el mensaje se guarda localmente en este computador para que Juan lo revise. No se envía por correo ni se usa para marketing.",
     send: "Guardar mensaje localmente", sending: "Guardando…", success: "Guardado en la bandeja local. No se envió ningún correo.",
     failure: "La bandeja local no está disponible. Puedes contactar a Juan por LinkedIn.",
-    unavailable: "Para habilitar el contacto público, primero hay que configurar un backend privado y un proveedor de correo. Por ahora, usa LinkedIn.",
+    unavailable: "Para consultas profesionales, puedes contactarme por LinkedIn.",
     honeypot: "Deja este campo vacío",
   },
 } as const;
@@ -35,7 +35,7 @@ export default function ContactForm({ language }: { language: Language }) {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
-  if (process.env.NODE_ENV === "production") return <p className="contact-form-unavailable">{t.unavailable}</p>;
+  if (process.env.NODE_ENV === "production") return <p className="contact-form-unavailable"><a href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.unavailable}</a></p>;
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

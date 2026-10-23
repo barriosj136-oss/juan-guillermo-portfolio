@@ -1,0 +1,523 @@
+{
+  "source": {
+    "publisher": "Secretaría Distrital de Hacienda - Secretaría de Hacienda de Bogotá D.C.",
+    "dataset": "Informe de gastos e inversiones. Bogotá D.C.",
+    "resource": "Informe de Gastos e Inversiones.Bogota.D.C.2025-12.csv",
+    "period": "2025-12",
+    "downloaded_on": "2026-10-23",
+    "license": "Creative Commons Attribution 4.0",
+    "url": "https://datosabiertos.bogota.gov.co/dataset/informe-de-gastos-e-inversiones-bogota/resource/788d304c-eebe-461d-b35b-2faed8659c85"
+  },
+  "units": "COP",
+  "measure_note": "Monthly source columns are cumulative commitments through each month. Net monthly change is calculated as current cumulative commitments minus the prior month's cumulative value; a negative change can reflect adjustments/reversals.",
+  "totals": {
+    "source_rows": 7681,
+    "entities": 50,
+    "rubrics": 2198,
+    "footer_rows_skipped": 1,
+    "cumulative_december_cop": 36256796365772,
+    "net_commitments_during_2025_cop": 36256796365772,
+    "rows_with_at_least_one_cumulative_decrease": 752,
+    "largest_entity_december": {
+      "entity_type": "AC",
+      "entity_code": "0112",
+      "entity_name": "Secretaría de Educación del Distrito",
+      "december_commitments_cop": 7132153444532
+    },
+    "largest_rubric_december": {
+      "rubric_code": "O232020200991122",
+      "rubric_name": "Servicios de la administración pública relacionados con la salud",
+      "december_commitments_cop": 4020459080592
+    }
+  },
+  "months": [
+    {
+      "month_number": 1,
+      "month": "Enero",
+      "cumulative_commitments_cop": 4656227798106,
+      "net_monthly_change_cop": 4656227798106
+    },
+    {
+      "month_number": 2,
+      "month": "Febrero",
+      "cumulative_commitments_cop": 7662918252646,
+      "net_monthly_change_cop": 3006690454540
+    },
+    {
+      "month_number": 3,
+      "month": "Marzo",
+      "cumulative_commitments_cop": 9870185596134,
+      "net_monthly_change_cop": 2207267343488
+    },
+    {
+      "month_number": 4,
+      "month": "Abril",
+      "cumulative_commitments_cop": 12734315483635,
+      "net_monthly_change_cop": 2864129887501
+    },
+    {
+      "month_number": 5,
+      "month": "Mayo",
+      "cumulative_commitments_cop": 14826164914725,
+      "net_monthly_change_cop": 2091849431090
+    },
+    {
+      "month_number": 6,
+      "month": "Junio",
+      "cumulative_commitments_cop": 19150394599022,
+      "net_monthly_change_cop": 4324229684297
+    },
+    {
+      "month_number": 7,
+      "month": "Julio",
+      "cumulative_commitments_cop": 21471726753292,
+      "net_monthly_change_cop": 2321332154270
+    },
+    {
+      "month_number": 8,
+      "month": "Agosto",
+      "cumulative_commitments_cop": 23346289941133,
+      "net_monthly_change_cop": 1874563187841
+    },
+    {
+      "month_number": 9,
+      "month": "Septiembre",
+      "cumulative_commitments_cop": 25452720395550,
+      "net_monthly_change_cop": 2106430454417
+    },
+    {
+      "month_number": 10,
+      "month": "Octubre",
+      "cumulative_commitments_cop": 27813126973160,
+      "net_monthly_change_cop": 2360406577610
+    },
+    {
+      "month_number": 11,
+      "month": "Noviembre",
+      "cumulative_commitments_cop": 30575687166983,
+      "net_monthly_change_cop": 2762560193823
+    },
+    {
+      "month_number": 12,
+      "month": "Diciembre",
+      "cumulative_commitments_cop": 36256796365772,
+      "net_monthly_change_cop": 5681109198789
+    }
+  ],
+  "top_entities": [
+    {
+      "entity_type": "AC",
+      "entity_code": "0112",
+      "entity_name": "Secretaría de Educación del Distrito",
+      "december_commitments_cop": 7132153444532
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 02",
+      "december_commitments_cop": 5354621254742
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0201",
+      "entity_name": "Fondo Financiero de Salud - FFDS",
+      "december_commitments_cop": 4338589013753
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0113",
+      "entity_name": "Secretaría Distrital de Movilidad - Unidad 02",
+      "december_commitments_cop": 3610030719839
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0204",
+      "entity_name": "Instituto de Desarrollo Urbano - IDU",
+      "december_commitments_cop": 2380846026887
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0122",
+      "entity_name": "Secretaría Distrital de Integración Social",
+      "december_commitments_cop": 2334388976696
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 03",
+      "december_commitments_cop": 1655618486732
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0118",
+      "entity_name": "Secretaría Distrital del Hábitat",
+      "december_commitments_cop": 778484643882
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0206",
+      "entity_name": "Fondo de Prestaciones Económicas, Cesantias y Pensiones - FONCEP - Unidad 02",
+      "december_commitments_cop": 712596442922
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0501",
+      "entity_name": "Agencia Distrital para la Educación Superior la Ciencia y la Tecnología - ATENEA",
+      "december_commitments_cop": 685198057717
+    }
+  ],
+  "entities": [
+    {
+      "entity_type": "AC",
+      "entity_code": "0112",
+      "entity_name": "Secretaría de Educación del Distrito",
+      "december_commitments_cop": 7132153444532
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 02",
+      "december_commitments_cop": 5354621254742
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0201",
+      "entity_name": "Fondo Financiero de Salud - FFDS",
+      "december_commitments_cop": 4338589013753
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0113",
+      "entity_name": "Secretaría Distrital de Movilidad - Unidad 02",
+      "december_commitments_cop": 3610030719839
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0204",
+      "entity_name": "Instituto de Desarrollo Urbano - IDU",
+      "december_commitments_cop": 2380846026887
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0122",
+      "entity_name": "Secretaría Distrital de Integración Social",
+      "december_commitments_cop": 2334388976696
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 03",
+      "december_commitments_cop": 1655618486732
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0118",
+      "entity_name": "Secretaría Distrital del Hábitat",
+      "december_commitments_cop": 778484643882
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0206",
+      "entity_name": "Fondo de Prestaciones Económicas, Cesantias y Pensiones - FONCEP - Unidad 02",
+      "december_commitments_cop": 712596442922
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0501",
+      "entity_name": "Agencia Distrital para la Educación Superior la Ciencia y la Tecnología - ATENEA",
+      "december_commitments_cop": 685198057717
+    },
+    {
+      "entity_type": "EAU",
+      "entity_code": "0230",
+      "entity_name": "Universidad Distrital \"Francisco José de Caldas\"",
+      "december_commitments_cop": 603221991650
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0211",
+      "entity_name": "Instituto Distrital de Recreación y Deporte - IDRD",
+      "december_commitments_cop": 549912340943
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0137",
+      "entity_name": "Secretaría Distrital de Seguridad, Convivencia y Justicia - Unidad 01",
+      "december_commitments_cop": 527188719807
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0228",
+      "entity_name": "Unidad Administrativa Especial de Servicios Públicos",
+      "december_commitments_cop": 492030997669
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 01",
+      "december_commitments_cop": 420478685314
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0119",
+      "entity_name": "Secretaría Distrital de Cultura, Recreación y Deporte",
+      "december_commitments_cop": 297424110950
+    },
+    {
+      "entity_type": "OC",
+      "entity_code": "0235",
+      "entity_name": "Contraloría de Bogotá",
+      "december_commitments_cop": 272543044680
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0110",
+      "entity_name": "Secretaría Distrital de Gobierno",
+      "december_commitments_cop": 263466653602
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0102",
+      "entity_name": "Personería Distrital",
+      "december_commitments_cop": 260587790351
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0104",
+      "entity_name": "Secretaría General",
+      "december_commitments_cop": 255839350958
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0227",
+      "entity_name": "Unidad Administrativa Especial de Rehabilitación y Mantenimiento Vial",
+      "december_commitments_cop": 246665469353
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0113",
+      "entity_name": "Secretaría Distrital de Movilidad - Unidad 01",
+      "december_commitments_cop": 241891462803
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0222",
+      "entity_name": "Instituto Distrital de las Artes - IDARTES",
+      "december_commitments_cop": 241706290425
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0137",
+      "entity_name": "Secretaría Distrital de Seguridad, Convivencia y Justicia - Unidad 02",
+      "december_commitments_cop": 227966352537
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0117",
+      "entity_name": "Secretaría Distrital de Desarrollo Económico",
+      "december_commitments_cop": 223239192801
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0120",
+      "entity_name": "Secretaría Distrital de Planeación",
+      "december_commitments_cop": 209896210591
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0126",
+      "entity_name": "Secretaría Distrital de Ambiente",
+      "december_commitments_cop": 198622366852
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0131",
+      "entity_name": "Unidad Administrativa Especial Cuerpo Oficial de Bomberos",
+      "december_commitments_cop": 194147742767
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0121",
+      "entity_name": "Secretaría Distrital de la Mujer",
+      "december_commitments_cop": 138807915006
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0100",
+      "entity_name": "Concejo de Bogotá D.C.",
+      "december_commitments_cop": 125278307684
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0226",
+      "entity_name": "Unidad Administrativa Especial de Catastro Distrital",
+      "december_commitments_cop": 118393231018
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0214",
+      "entity_name": "Instituto Distrital para la Protección de la Niñez y la Juventud - IDIPRON",
+      "december_commitments_cop": 117825274141
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0208",
+      "entity_name": "Caja de Vivienda Popular",
+      "december_commitments_cop": 110452034082
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0114",
+      "entity_name": "Secretaría Distrital de Salud",
+      "december_commitments_cop": 96629685647
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0200",
+      "entity_name": "Instituto para la Economía Social-IPES",
+      "december_commitments_cop": 90075399466
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0216",
+      "entity_name": "Orquesta Filarmónica de Bogotá",
+      "december_commitments_cop": 84112664628
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0218",
+      "entity_name": "Jardín Botánico \"José Celestino Mutis\"",
+      "december_commitments_cop": 72826750015
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0206",
+      "entity_name": "Fondo de Prestaciones Económicas, Cesantias y Pensiones - FONCEP - Unidad 01",
+      "december_commitments_cop": 68571543364
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0111",
+      "entity_name": "Secretaría Distrital de Hacienda - Unidad 04",
+      "december_commitments_cop": 68186247943
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0203",
+      "entity_name": "Instituto Distrital de Gestión de Riesgos y Cambio Climático - IDIGER",
+      "december_commitments_cop": 58681149911
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0215",
+      "entity_name": "Fundación Gilberto Alzate Avendaño",
+      "december_commitments_cop": 55852334190
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0127",
+      "entity_name": "Departamento Administrativo de la Defensoría del Espacio Público - DADEP",
+      "december_commitments_cop": 52700893497
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0229",
+      "entity_name": "Instituto Distrital de Protección y Bienestar Animal - IDPYBA",
+      "december_commitments_cop": 47965069535
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0220",
+      "entity_name": "Instituto Distrital de la Participación y Acción Comunal",
+      "december_commitments_cop": 46951694636
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0213",
+      "entity_name": "Instituto Distrital del Patrimonio Cultural - IDPC",
+      "december_commitments_cop": 44896893480
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0136",
+      "entity_name": "Secretaría Jurídica Distrital",
+      "december_commitments_cop": 43732618199
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0105",
+      "entity_name": "Veeduría Distrital",
+      "december_commitments_cop": 32838736034
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0221",
+      "entity_name": "Instituto Distrital de Turismo - Unidad 01",
+      "december_commitments_cop": 31714405940
+    },
+    {
+      "entity_type": "AC",
+      "entity_code": "0125",
+      "entity_name": "Departamento Administrativo del Servicio Civil Distrital - DASCD",
+      "december_commitments_cop": 25135558465
+    },
+    {
+      "entity_type": "EP",
+      "entity_code": "0219",
+      "entity_name": "Instituto para la Investigación Educativa y el Desarrollo Pedagógico - IDEP",
+      "december_commitments_cop": 15812117136
+    }
+  ],
+  "top_rubrics": [
+    {
+      "rubric_code": "O232020200991122",
+      "rubric_name": "Servicios de la administración pública relacionados con la salud",
+      "december_commitments_cop": 4020459080592
+    },
+    {
+      "rubric_code": "O2330102003010301",
+      "rubric_name": "Diferencial Tarifario",
+      "december_commitments_cop": 3133588134019
+    },
+    {
+      "rubric_code": "O231010100101",
+      "rubric_name": "Sueldo básico",
+      "december_commitments_cop": 2990112652993
+    },
+    {
+      "rubric_code": "O2320202005030253211",
+      "rubric_name": "Carreteras (excepto carreteras elevadas); calles",
+      "december_commitments_cop": 1147670201440
+    },
+    {
+      "rubric_code": "O211010100101",
+      "rubric_name": "Sueldo básico",
+      "december_commitments_cop": 1035615516124
+    },
+    {
+      "rubric_code": "O232020200991114",
+      "rubric_name": "Servicios de planificación económica, social y estadística de la administración publica",
+      "december_commitments_cop": 806436118696
+    },
+    {
+      "rubric_code": "O232020200663393",
+      "rubric_name": "Otros servicios de comidas contratadas",
+      "december_commitments_cop": 755245582536
+    },
+    {
+      "rubric_code": "O23305040011501",
+      "rubric_name": "Corporación Autonoma Regional CAR",
+      "december_commitments_cop": 753354508448
+    },
+    {
+      "rubric_code": "O2320202005030253290",
+      "rubric_name": "Otras obras de ingeniería civil",
+      "december_commitments_cop": 718140555429
+    },
+    {
+      "rubric_code": "O232020200991121",
+      "rubric_name": "Servicios de la administración pública relacionados con la educación",
+      "december_commitments_cop": 715685628776
+    }
+  ]
+}

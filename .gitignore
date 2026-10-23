@@ -14,7 +14,13 @@ pnpm-debug.log*
 *.xls
 *.csv
 !projects/novatech/data/*.csv
+!projects/bogota-budget/data/*.csv
 !public/projects/novatech/*.csv
+!public/projects/bogota-budget/*.csv
+!public/data/novatech/monthly_operations.csv
+!public/data/bogota/source_2025-12.csv
+!public/cv/Juan-Guillermo-Barrios-Resume.pdf
+!public/certificates/*.pdf
 outputs/
 work/
 .DS_Store
@@ -24,4 +30,5 @@ __pycache__/
 *.tsbuildinfo
 .vercel
 .local-data/
+/docs/EXPERIENCE-METRICS-TO-CONFIRM.md
 /app/classic/

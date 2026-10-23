@@ -1,0 +1,51 @@
+﻿entity_key,entity_type,entity_code,entity_name
+1,AC,0100,Concejo de Bogotá D.C.
+2,AC,0102,Personería Distrital
+3,AC,0104,Secretaría General
+4,AC,0105,Veeduría Distrital
+5,AC,0110,Secretaría Distrital de Gobierno
+6,AC,0111,Secretaría Distrital de Hacienda - Unidad 01
+7,AC,0111,Secretaría Distrital de Hacienda - Unidad 02
+8,AC,0111,Secretaría Distrital de Hacienda - Unidad 03
+9,AC,0111,Secretaría Distrital de Hacienda - Unidad 04
+10,AC,0112,Secretaría de Educación del Distrito
+11,AC,0113,Secretaría Distrital de Movilidad - Unidad 01
+12,AC,0113,Secretaría Distrital de Movilidad - Unidad 02
+13,AC,0114,Secretaría Distrital de Salud
+14,AC,0117,Secretaría Distrital de Desarrollo Económico
+15,AC,0118,Secretaría Distrital del Hábitat
+16,AC,0119,"Secretaría Distrital de Cultura, Recreación y Deporte"
+17,AC,0120,Secretaría Distrital de Planeación
+18,AC,0121,Secretaría Distrital de la Mujer
+19,AC,0122,Secretaría Distrital de Integración Social
+20,AC,0125,Departamento Administrativo del Servicio Civil Distrital - DASCD
+21,AC,0126,Secretaría Distrital de Ambiente
+22,AC,0127,Departamento Administrativo de la Defensoría del Espacio Público - DADEP
+23,AC,0131,Unidad Administrativa Especial Cuerpo Oficial de Bomberos
+24,AC,0136,Secretaría Jurídica Distrital
+25,AC,0137,"Secretaría Distrital de Seguridad, Convivencia y Justicia - Unidad 01"
+26,AC,0137,"Secretaría Distrital de Seguridad, Convivencia y Justicia - Unidad 02"
+27,EAU,0230,"Universidad Distrital ""Francisco José de Caldas"""
+28,EP,0200,Instituto para la Economía Social-IPES
+29,EP,0201,Fondo Financiero de Salud - FFDS
+30,EP,0203,Instituto Distrital de Gestión de Riesgos y Cambio Climático - IDIGER
+31,EP,0204,Instituto de Desarrollo Urbano - IDU
+32,EP,0206,"Fondo de Prestaciones Económicas, Cesantias y Pensiones - FONCEP - Unidad 01"
+33,EP,0206,"Fondo de Prestaciones Económicas, Cesantias y Pensiones - FONCEP - Unidad 02"
+34,EP,0208,Caja de Vivienda Popular
+35,EP,0211,Instituto Distrital de Recreación y Deporte - IDRD
+36,EP,0213,Instituto Distrital del Patrimonio Cultural - IDPC
+37,EP,0214,Instituto Distrital para la Protección de la Niñez y la Juventud - IDIPRON
+38,EP,0215,Fundación Gilberto Alzate Avendaño
+39,EP,0216,Orquesta Filarmónica de Bogotá
+40,EP,0218,"Jardín Botánico ""José Celestino Mutis"""
+41,EP,0219,Instituto para la Investigación Educativa y el Desarrollo Pedagógico - IDEP
+42,EP,0220,Instituto Distrital de la Participación y Acción Comunal
+43,EP,0221,Instituto Distrital de Turismo - Unidad 01
+44,EP,0222,Instituto Distrital de las Artes - IDARTES
+45,EP,0226,Unidad Administrativa Especial de Catastro Distrital
+46,EP,0227,Unidad Administrativa Especial de Rehabilitación y Mantenimiento Vial
+47,EP,0228,Unidad Administrativa Especial de Servicios Públicos
+48,EP,0229,Instituto Distrital de Protección y Bienestar Animal - IDPYBA
+49,EP,0501,Agencia Distrital para la Educación Superior la Ciencia y la Tecnología - ATENEA
+50,OC,0235,Contraloría de Bogotá

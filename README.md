@@ -23,6 +23,8 @@ For an optimized local preview, run `pnpm build` then `pnpm start`.
 - `/operations-data-review-suite/index.html` — standalone interactive app.
 - `/projects/novatech` — synthetic monthly performance case, data model, SQL, and Python checks.
 - `/projects/operations-decision-copilot` — fictional bilingual decision-support demonstration.
+- `docs/COLOMBIA-PUBLIC-DATA-PROJECTS.md` — three public-data case-study plans with sources, questions, methods, and validation gates.
+- `docs/LEARNING-ROADMAP.md` — beginner-friendly sequence for Excel, SQL, Python/pandas, statistics, Power BI, and Git/GitHub.
 
 ## Vercel
 

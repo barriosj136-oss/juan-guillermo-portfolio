@@ -1,59 +1,57 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ContactForm from "./contact-form";
 import styles from "./portfolio-home.module.css";
+import publicReport from "../projects/bogota-budget/data/summary.json";
 
 type Language = "en" | "es";
 
 const copy = {
   en: {
     nav: ["Profile", "Projects", "Experience", "Education"],
-    role: "Electronic Engineer · Business Intelligence & Financial Operations",
-    headline: ["I analyze account and", "billing data to support", "financial decisions."],
-    intro: "At Iron Mountain, I review high-risk accounts, validate invoice and payment records, investigate billing discrepancies, and coordinate follow-up. I’m applying that experience to Data Analyst and Business Intelligence Analyst roles.",
-    primary: "Explore my work", secondary: "Let’s connect", availability: "Open to junior analyst opportunities",
-    visualLabel: "Business intelligence & financial operations", visualCaption: "Account · invoice · payment analysis",
-    strip: ["High-risk account review", "Invoice validation", "Payment status", "Billing discrepancies"],
-    aboutEyebrow: "Profile", aboutTitle: "Account, billing, and payment analysis.",
-    about: "I’m Juan Guillermo Barrios Villamil, an Electronic Engineer from Universidad de los Andes and a Strategic Planning & High-Risk Account Specialist at Iron Mountain. I review account, invoice, and payment records; investigate discrepancies; and coordinate follow-up. My independent projects show how I approach business analysis questions with structured data and documented methods.",
-    focusLabel: "Relevant experience", focus: ["High-risk account and billing review", "Invoice, payment, and record validation", "Discrepancy investigation and team follow-up"],
-    workEyebrow: "Selected work", workTitle: "Data analysis projects.", workIntro: "Each project explains the business question, analysis, and tools used.",
-    demo: "Open demonstration", case: "Read the case study", fictional: "INDEPENDENT DEMO",
-    opsTitle: "Operations Data Review Suite", opsText: "An interactive operations review workspace with search, account views, dashboards, CSV utilities, notes, and sample records.",
-    novaTitle: "NovaTech monthly performance", novaText: "A 12-month business analysis exploring target attainment, budget variance, and monthly movement, with Python and SQL validation materials.",
-    copilotTitle: "Operations Decision Copilot", copilotText: "A decision-support exercise that separates confirmed facts from open questions and organizes next steps.",
+    role: "Electronic Engineer · Data & Business Analysis",
+    headline: ["I analyzed 7,681 Bogotá", "budget records to track", "public commitments in", "2025."],
+    intro: "I review account and billing records, validate invoice and payment information, investigate discrepancies, and coordinate follow-up. I’m building toward junior Data Analyst, BI Analyst, Business Analyst, and Operations Analyst roles through documented projects with public and editable data.",
+    primary: "Explore my work", resumeCTA: "View résumé", secondary: "Let’s connect", availability: "Open to junior analyst opportunities",
+    visualLabel: "Bogotá 2025 budget analysis", visualCaption: "7,681 public records · 50 entity labels · COP 36.26T cumulative commitments", chartMonths: ["JAN", "JUN", "DEC"], chartLegend: "Net monthly change · COP",
+    strip: ["Operational data review", "Record validation", "Trend analysis", "Business recommendations"],
+    aboutEyebrow: "Profile", aboutTitle: "I turn business questions into structured analysis.",
+    about: "I’m Juan Guillermo Barrios Villamil, an Electronic Engineer from Universidad de los Andes. My work has involved reviewing account, invoice, and payment records, checking data consistency, investigating discrepancies, and coordinating follow-up. Engineering trained me to work with measurements, systems, and evidence; I’m extending that foundation into data analysis and business intelligence through independent projects.",
+    focusLabel: "Transferable strengths", focus: ["Data and record validation", "Operational and financial analysis", "Structured problem investigation"],
+    workEyebrow: "Selected work", workTitle: "Public budget analysis and an editable operations dashboard.", workIntro: "One analysis uses an official Bogotá dataset. The second is a separate synthetic business simulation with a CSV you can edit in Excel.",
+    demo: "Open dashboard", case: "Read the analysis", publicLabel: "PUBLIC DATA · BOGOTÁ 2025", publicTitle: "Budget commitments in Bogotá", publicText: "Analyzed 7,681 official detail records to trace cumulative budget commitments by month, entity, and budget item. The December total reconciles to COP 36.26 trillion.",
+    fictional: "SYNTHETIC BUSINESS SIMULATION",
+    novaTitle: "NovaTech invoice and payment review", novaText: "Editable 4,800-row CSV demo with monthly invoiced, paid, recovered, and outstanding amounts, split by Canada/CAD and United States/USD.",
     experienceEyebrow: "Experience", experienceTitle: "Roles and responsibilities.",
     current: "Strategic Planning & High-Risk Account Specialist", currentDate: "May 4, 2026 – Present · Hybrid",
-    currentPoints: ["Review high-risk accounts across Abandoned Records, Bankruptcy, and Third-Party Collections workflows.", "Compare account, invoice, payment, inventory, and service records to investigate billing discrepancies and validate account status.", "Track billed, paid, outstanding, recovered, and unrecovered amounts to support account follow-up and financial review; escalate write-off decisions to authorized stakeholders."],
+    currentPoints: ["Review complex, high-risk account cases and track their status through operational follow-up.", "Compare account, invoice, payment, inventory, and service records to validate information and investigate billing discrepancies.", "Review billed, paid, outstanding, and recovered amounts to support case follow-up and financial review; refer accounting decisions to authorized stakeholders.", "Impact metric to confirm: [COMPLETAR: verified result from your work]."],
     civil: "IT Support Assistant", civilDate: "Dec 2025 – Jan 2026", civilDetail: "Supported software quality testing and electronics inventory management at CivilTech Ingeniería y Construcción S.A.S.",
     found: "Customer Service Agent", foundDate: "Feb 2025 – Jul 2025", foundDetail: "Responded to customer service requests in an English-language support environment at Foundever de Colombia.",
-    educationEyebrow: "Education & learning", educationTitle: "An engineering foundation.", degree: "Electronic Engineering", university: "Universidad de los Andes · degree awarded October 20, 2025", thesisLabel: "Thesis", thesis: "IoT automation of electronic systems integrating an adjustable voltage source and an AD9833 signal generator.", learningLabel: "Courses & certifications", certificates: ["Data Analytics Essentials · Cisco Networking Academy / MinTIC · May 23, 2026", "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026", "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026"], coursesLabel: "Platzi courses", courses: ["Frontend Developer · 2025", "Practical Frontend Developer · 2025", "Emotional Intelligence · 2023", "Effective Communication · 2023"],
-    contactEyebrow: "Contact", contactTitle: "Discuss a data or BI analyst role.", contactText: "I’m seeking junior opportunities in data analysis, Business Intelligence, and financial operations.", linkedin: "Connect on LinkedIn", footer: "Independent portfolio · selected projects and case studies.", language: "Español",
+    educationEyebrow: "Education & learning", educationTitle: "An engineering foundation.", degree: "Electronic Engineering", university: "Universidad de los Andes · degree awarded October 20, 2025", thesisLabel: "Thesis", thesis: "IoT automation of electronic systems integrating an adjustable voltage source and an AD9833 signal generator.", learningLabel: "Data-related certifications", certificates: ["Data Analytics Essentials · Cisco Networking Academy / MinTIC · May 23, 2026", "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026"], coursesLabel: "Additional courses", courses: ["Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026", "Frontend Developer · Platzi · 2025", "Practical Frontend Developer · Platzi · 2025", "Emotional Intelligence · Platzi · 2023", "Effective Communication · Platzi · 2023"],
+    contactEyebrow: "Contact", contactTitle: "Discuss a junior data or BI role.", contactText: "Email me, view my résumé, or open my profiles. Employment metrics remain pending confirmation.", linkedin: "LinkedIn", email: "Email Juan", resumeDownload: "Download résumé PDF", github: "GitHub", footer: "Portfolio analysis uses public and generated data, identified on each case.", language: "ES",
   },
   es: {
     nav: ["Perfil", "Proyectos", "Experiencia", "Formación"],
-    role: "Ingeniero electrónico · Inteligencia de Negocios y Operaciones Financieras",
-    headline: ["Analizo datos de cuentas", "y facturación para apoyar", "decisiones financieras."],
-    intro: "En Iron Mountain reviso cuentas de alto riesgo, valido registros de facturas y pagos, investigo diferencias de facturación y coordino seguimientos. Estoy orientando esa experiencia a cargos de Analista de Datos y Analista de Inteligencia de Negocios.",
-    primary: "Ver mis proyectos", secondary: "Conversemos", availability: "Abierto a oportunidades junior de análisis",
-    visualLabel: "Inteligencia de negocios y operaciones financieras", visualCaption: "Análisis de cuentas · facturas · pagos",
-    strip: ["Revisión de cuentas de alto riesgo", "Validación de facturas", "Estado de pagos", "Diferencias de facturación"],
-    aboutEyebrow: "Perfil", aboutTitle: "Análisis de cuentas, facturación y pagos.",
-    about: "Soy Juan Guillermo Barrios Villamil, ingeniero electrónico de la Universidad de los Andes y Strategic Planning & High-Risk Account Specialist en Iron Mountain. Reviso registros de cuentas, facturas y pagos; investigo discrepancias y coordino seguimientos. Mis proyectos independientes muestran cómo abordo preguntas de negocio con datos estructurados y métodos documentados.",
-    focusLabel: "Experiencia relevante", focus: ["Revisión de cuentas de alto riesgo y facturación", "Validación de facturas, pagos y registros", "Investigación de discrepancias y coordinación de seguimientos"],
-    workEyebrow: "Proyectos seleccionados", workTitle: "Proyectos de análisis de datos.", workIntro: "Cada proyecto explica la pregunta de negocio, el análisis y las herramientas utilizadas.",
-    demo: "Abrir demostración", case: "Leer el caso", fictional: "PROYECTO DEMO",
-    opsTitle: "Operations Data Review Suite", opsText: "Espacio interactivo para revisar operaciones, con búsqueda, vistas de cuentas, tableros, utilidades CSV, notas y registros de muestra.",
-    novaTitle: "Desempeño mensual de NovaTech", novaText: "Análisis empresarial de 12 meses sobre cumplimiento de objetivos, desviaciones presupuestarias y evolución mensual, con materiales de validación en Python y SQL.",
-    copilotTitle: "Operations Decision Copilot", copilotText: "Ejercicio de apoyo a decisiones que separa hechos confirmados de preguntas abiertas y organiza próximos pasos.",
+    role: "Ingeniero electrónico · Análisis de datos y negocio",
+    headline: ["Analicé 7.681 registros", "presupuestarios de Bogotá", "para seguir compromisos", "públicos de 2025."],
+    intro: "Reviso registros de cuentas y facturación, valido información de facturas y pagos, investigo discrepancias y coordino seguimientos. Estoy desarrollándome hacia roles junior de Analista de Datos, BI, Negocio y Operaciones mediante proyectos documentados con datos públicos y editables.",
+    primary: "Ver mis proyectos", resumeCTA: "Ver hoja de vida", secondary: "Conversemos", availability: "Abierto a oportunidades junior de análisis",
+    visualLabel: "Análisis presupuestario de Bogotá 2025", visualCaption: "7.681 registros públicos · 50 nombres de entidad · COP 36,26 billones en compromisos acumulados", chartMonths: ["ENE", "JUN", "DIC"], chartLegend: "Cambio neto mensual · COP",
+    strip: ["Revisión de datos operativos", "Validación de registros", "Análisis de tendencias", "Recomendaciones de negocio"],
+    aboutEyebrow: "Perfil", aboutTitle: "Convierto preguntas de negocio en análisis estructurado.",
+    about: "Soy Juan Guillermo Barrios Villamil, ingeniero electrónico de la Universidad de los Andes. Mi experiencia incluye revisar registros de cuentas, facturas y pagos, verificar la consistencia de datos, investigar discrepancias y coordinar seguimientos. La ingeniería me formó en medición, análisis de sistemas y uso de evidencia; ahora estoy extendiendo esa base hacia el análisis de datos y la inteligencia de negocios mediante proyectos independientes.",
+    focusLabel: "Fortalezas transferibles", focus: ["Validación de datos y registros", "Análisis operativo y financiero", "Investigación estructurada de problemas"],
+    workEyebrow: "Proyectos seleccionados", workTitle: "Análisis presupuestario público y dashboard operativo editable.", workIntro: "Un análisis usa datos oficiales de Bogotá. El segundo es una simulación empresarial sintética independiente con un CSV editable en Excel.",
+    demo: "Abrir dashboard", case: "Leer el análisis", publicLabel: "DATOS PÚBLICOS · BOGOTÁ 2025", publicTitle: "Compromisos presupuestarios de Bogotá", publicText: "Analicé 7.681 filas oficiales para seguir compromisos presupuestarios acumulados por mes, entidad y rubro. El total de diciembre concilia a COP 36,26 billones.",
+    fictional: "SIMULACIÓN EMPRESARIAL SINTÉTICA",
+    novaTitle: "Revisión de facturas y pagos de NovaTech", novaText: "Demo con CSV editable de 4.800 filas y valores mensuales facturados, pagados, recuperados y pendientes; separa Canadá/CAD de Estados Unidos/USD.",
     experienceEyebrow: "Experiencia", experienceTitle: "Cargos y responsabilidades.",
     current: "Especialista en Planeación Estratégica y Cuentas de Alto Riesgo", currentDate: "4 de mayo de 2026 – Actualidad · Híbrido",
-    currentPoints: ["Reviso cuentas de alto riesgo de los flujos de Abandoned Records, Bankruptcy y Third-Party Collections.", "Comparo registros de cuentas, facturas, pagos, inventario y servicio para investigar diferencias de facturación y validar el estado de las cuentas.", "Analizo montos facturados, pagados, pendientes, recuperados y no recuperados para apoyar seguimientos y revisiones financieras; las decisiones de write-off corresponden a responsables autorizados."],
+    currentPoints: ["Reviso casos complejos de cuentas de alto riesgo y hago seguimiento a su estado dentro de la operación.", "Comparo registros de cuentas, facturas, pagos, inventario y servicio para validar información e investigar diferencias de facturación.", "Reviso montos facturados, pagados, pendientes y recuperados para apoyar seguimientos y revisiones financieras; remito las decisiones contables a los responsables autorizados.", "Métrica de impacto pendiente: [COMPLETAR: resultado verificable de tu trabajo]."],
     civil: "Auxiliar de Soporte IT", civilDate: "Dic 2025 – Ene 2026", civilDetail: "Apoyé pruebas de calidad de software y gestión de inventario electrónico en CivilTech Ingeniería y Construcción S.A.S.",
     found: "Agente de Servicio al Cliente", foundDate: "Feb 2025 – Jul 2025", foundDetail: "Atendí solicitudes de servicio al cliente en un entorno de soporte en inglés en Foundever de Colombia.",
-    educationEyebrow: "Formación y aprendizaje", educationTitle: "Una base en ingeniería.", degree: "Ingeniería Electrónica", university: "Universidad de los Andes · título otorgado el 20 de octubre de 2025", thesisLabel: "Tesis", thesis: "Automatización IoT de sistemas electrónicos con integración de una fuente de voltaje variable y un generador de señales AD9833.", learningLabel: "Cursos y certificaciones", certificates: ["Fundamentos de Análisis de Datos · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Introducción a la Ciencia de Datos · Cisco Networking Academy / MinTIC · 5 de mayo de 2026", "Introducción a la Ciberseguridad · Cisco Networking Academy / MinTIC · 23 de mayo de 2026"], coursesLabel: "Cursos de Platzi", courses: ["Frontend Developer · 2025", "Practical Frontend Developer · 2025", "Inteligencia Emocional · 2023", "Comunicación Efectiva · 2023"],
-    contactEyebrow: "Contacto", contactTitle: "Conversemos sobre roles de análisis de datos o BI.", contactText: "Busco oportunidades junior en análisis de datos, Inteligencia de Negocios y operaciones financieras.", linkedin: "Conectar en LinkedIn", footer: "Portafolio independiente · proyectos y casos seleccionados.", language: "English",
+    educationEyebrow: "Formación y aprendizaje", educationTitle: "Una base en ingeniería.", degree: "Ingeniería Electrónica", university: "Universidad de los Andes · título otorgado el 20 de octubre de 2025", thesisLabel: "Tesis", thesis: "Automatización IoT de sistemas electrónicos con integración de una fuente de voltaje variable y un generador de señales AD9833.", learningLabel: "Certificaciones relacionadas con datos", certificates: ["Fundamentos de Análisis de Datos · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Introducción a la Ciencia de Datos · Cisco Networking Academy / MinTIC · 5 de mayo de 2026"], coursesLabel: "Cursos adicionales", courses: ["Introducción a la Ciberseguridad · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Frontend Developer · Platzi · 2025", "Practical Frontend Developer · Platzi · 2025", "Inteligencia Emocional · Platzi · 2023", "Comunicación Efectiva · Platzi · 2023"],
+    contactEyebrow: "Contacto", contactTitle: "Hablemos de un rol junior de datos o BI.", contactText: "Puedes escribirme, consultar mi hoja de vida o abrir mis perfiles. Las métricas laborales están pendientes de confirmar.", linkedin: "LinkedIn", email: "Escribir a Juan", resumeDownload: "Descargar hoja de vida PDF", github: "GitHub", footer: "Los proyectos usan datos públicos y generados, identificados en cada caso.", language: "EN",
   },
 } as const;
 
@@ -66,6 +64,11 @@ export default function PortfolioHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const t = copy[language];
 
+  useEffect(() => {
+    const saved = window.localStorage.getItem("portfolio-language");
+    const initial = saved === "en" || saved === "es" ? saved : navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+    setLanguage(initial);
+  }, []);
   useEffect(() => { document.documentElement.lang = language; }, [language]);
   useEffect(() => {
     if (!menuOpen) return;
@@ -98,7 +101,7 @@ export default function PortfolioHome() {
         {t.nav.map((label, index) => <a key={label} href={["#profile", "#projects", "#experience", "#education"][index]} onClick={closeMenu}>{label}</a>)}
         <a className={styles.navContact} href="#contact" onClick={closeMenu}>{t.secondary}<Arrow diagonal/></a>
       </nav>
-      <button className={styles.languageButton} type="button" onClick={() => setLanguage(language === "en" ? "es" : "en")} aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}><span className={styles.globe} aria-hidden="true">◎</span>{t.language}</button>
+      <button className={styles.languageButton} type="button" onClick={() => { const next = language === "en" ? "es" : "en"; setLanguage(next); window.localStorage.setItem("portfolio-language", next); }} aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}><span aria-hidden="true">{language === "en" ? "EN | ES" : "ES | EN"}</span></button>
     </header>
 
     <div id="main-content">
@@ -107,25 +110,23 @@ export default function PortfolioHome() {
           <p className={styles.eyebrow}><span className={styles.eyebrowLine}/>{t.role}</p>
           <h1 id="hero-title">{t.headline.map((line, index) => <span className={styles.heroLine} key={line} style={{ "--line-index": index } as React.CSSProperties}><span>{line}</span></span>)}</h1>
           <p className={styles.heroIntro}>{t.intro}</p>
-          <div className={styles.heroActions}><a className={styles.primaryButton} href="#projects">{t.primary}<Arrow/></a><a className={styles.secondaryLink} href="#contact">{t.secondary}<Arrow diagonal/></a></div>
+          <div className={styles.heroActions}><a className={styles.primaryButton} href="#projects">{t.primary}<Arrow/></a><a className={styles.secondaryLink} href="/resume">{t.resumeCTA}<Arrow diagonal/></a><a className={styles.secondaryLink} href="#contact">{t.secondary}<Arrow diagonal/></a></div>
           <p className={styles.availability}><span/> {t.availability}</p>
         </div>
         <div className={styles.heroVisual} role="img" aria-label={t.visualLabel}>
-          <div className={styles.visualHeader}><span>JGB — ANALYSIS NOTES</span><span>01 / 03</span></div>
+          <div className={styles.visualHeader}><span>PUBLIC BUDGET DATA</span><span>BOGOTÁ · 2025</span></div>
           <p className={styles.visualTitle}>{t.visualLabel}</p>
           <div className={styles.visualCanvas} aria-hidden="true">
-            <div className={styles.chartAxis}><span>Question</span><span>Evidence</span><span>Insight</span></div>
-            <svg viewBox="0 0 520 220" role="presentation" className={styles.chartSvg} preserveAspectRatio="none"><defs><linearGradient id="areaFade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#b15f2c" stopOpacity=".26"/><stop offset="1" stopColor="#b15f2c" stopOpacity="0"/></linearGradient></defs><path d="M0 168 C48 160 56 106 108 126 S176 174 220 125 S292 92 326 119 S390 153 426 74 S480 84 520 35 L520 220 L0 220Z" fill="url(#areaFade)"/><path d="M0 168 C48 160 56 106 108 126 S176 174 220 125 S292 92 326 119 S390 153 426 74 S480 84 520 35" fill="none" stroke="#b15f2c" strokeWidth="3" vectorEffect="non-scaling-stroke"/><path d="M0 194 C52 192 80 178 128 182 S208 156 260 164 S348 143 386 150 S462 117 520 126" fill="none" stroke="#38465a" strokeWidth="2" strokeDasharray="5 7" vectorEffect="non-scaling-stroke"/></svg>
-            <div className={styles.chartLegend}><span><i/>Observed pattern</span><span><i/>Comparison</span></div>
+            <div className={styles.chartAxis}>{t.chartMonths.map((month) => <span key={month}>{month}</span>)}</div>
+            <svg viewBox="0 0 520 220" role="presentation" className={styles.chartSvg} preserveAspectRatio="none"><defs><linearGradient id="areaFade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#45658f" stopOpacity=".3"/><stop offset="1" stopColor="#45658f" stopOpacity="0"/></linearGradient></defs>{(() => { const months = (publicReport as typeof publicReport & {months: {net_monthly_change_cop:number}[]}).months; const max = Math.max(...months.map((item) => item.net_monthly_change_cop)); const pts = months.map((item, i) => `${(i / (months.length - 1)) * 520},${200 - (item.net_monthly_change_cop / max) * 165}`).join(" "); return <><polyline points={`0,220 ${pts} 520,220`} fill="url(#areaFade)"/><polyline points={pts} fill="none" stroke="#45658f" strokeWidth="3" vectorEffect="non-scaling-stroke"/></>; })()}</svg>
+            <div className={styles.chartLegend}><span><i/>{t.chartLegend}</span></div>
           </div>
           <div className={styles.visualSteps}>{t.strip.slice(0, 3).map((label, index) => <div key={label}><span>0{index + 1}</span><b>{label}</b></div>)}</div>
           <p className={styles.visualCaption}>{t.visualCaption}</p>
-          <span className={styles.visualIndex} aria-hidden="true">ANALYTICS<br/>WITH CONTEXT</span>
+          <span className={styles.visualIndex} aria-hidden="true">SOURCE<br/>2025-12</span>
         </div>
         <a href="#profile" className={styles.scrollCue}><span/>Scroll to explore</a>
       </section>
-
-      <div className={styles.marquee} aria-label={t.strip.join(", ")}><div className={styles.marqueeTrack} aria-hidden="true">{[...t.strip, ...t.strip].map((item, index) => <span key={`${item}-${index}`}>{item}<i>✳</i></span>)}</div></div>
 
       <section className={`${styles.section} ${styles.profile}`} id="profile">
         <div className={styles.sectionMeta} data-reveal><span>01 / {t.aboutEyebrow}</span><span className={styles.metaRule}/><span>BOGOTÁ, COLOMBIA</span></div>
@@ -136,16 +137,12 @@ export default function PortfolioHome() {
         <div className={styles.projectsHeading} data-reveal><div><p className={styles.eyebrow}>{t.workEyebrow}</p><h2>{t.workTitle}</h2></div><p>{t.workIntro}</p></div>
         <div className={styles.projectGrid}>
           <article className={`${styles.projectCard} ${styles.projectLarge}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.opsArtwork}`} href="/projects/operations-data-review-suite" aria-label={`${t.demo}: ${t.opsTitle}`}><span className={styles.artLabel}>OPERATIONS / REVIEW</span><div className={styles.fakeDashboard}><div className={styles.fakeDashTop}><i/><i/><i/><span>DEMO WORKSPACE</span></div><div className={styles.fakeDashBody}><div className={styles.fakeSide}><b/><b/><b/><b/></div><div className={styles.fakeContent}><div className={styles.fakeKpis}><i/><i/><i/></div><div className={styles.fakeGraph}><b/><b/><b/><b/><b/><b/><b/><b/><b/><b/></div><div className={styles.fakeRows}><i/><i/><i/></div></div></div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.fictional}</p><h3>{t.opsTitle}</h3><p>{t.opsText}</p><div className={styles.tags}><span>HTML</span><span>CSS</span><span>JavaScript</span><span>CSV</span></div></div><a className={styles.roundArrow} href="/projects/operations-data-review-suite" aria-label={`${t.demo}: ${t.opsTitle}`}><Arrow diagonal/></a></div>
+            <a className={`${styles.projectArtwork} ${styles.publicArtwork}`} href="/projects/bogota-budget" aria-label={`${t.case}: ${t.publicTitle}`}><span className={styles.artLabel}>{t.publicLabel}</span><div className={styles.publicCardChart}>{(publicReport as typeof publicReport & {months: {month:string;net_monthly_change_cop:number}[]}).months.map((item) => <i key={item.month} style={{height:`${Math.max(6,item.net_monthly_change_cop/Math.max(...publicReport.months.map((row) => row.net_monthly_change_cop))*100)}%`}} />)}</div><div className={styles.publicCardFoot}><strong>COP 36.26T</strong><span>7,681 rows · 2025</span></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
+            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.publicLabel}</p><h3>{t.publicTitle}</h3><p>{t.publicText}</p><div className={styles.tags}><span>Python</span><span>SQLite</span><span>Public CSV</span></div><div className={styles.projectLinks}><a href="/projects/bogota-budget">{t.case}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/projects/bogota-budget" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/bogota-budget" aria-label={`${t.case}: ${t.publicTitle}`}><Arrow diagonal/></a></div>
           </article>
           <article className={`${styles.projectCard} ${styles.projectOffset}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.novaArtwork}`} href="/projects/novatech" aria-label={`${t.case}: ${t.novaTitle}`}><span className={styles.artLabel}>NOVATECH / MONTHLY REVIEW</span><div className={styles.novaComposition}><div className={styles.novaLabel}>TARGET<br/>vs.<br/>ACTUAL</div><div className={styles.novaChart}><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><div className={styles.novaAxis}><span>JAN</span><span>JUN</span><span>DEC</span></div><div className={styles.demoStamp}>SYNTHETIC<br/>DATA</div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.fictional}</p><h3>{t.novaTitle}</h3><p>{t.novaText}</p><div className={styles.tags}><span>Python</span><span>SQL</span><span>CSV</span></div></div><a className={styles.roundArrow} href="/projects/novatech" aria-label={`${t.case}: ${t.novaTitle}`}><Arrow diagonal/></a></div>
-          </article>
-          <article className={`${styles.projectCard} ${styles.projectWide}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.copilotArtwork}`} href="/projects/operations-decision-copilot" aria-label={`${t.case}: ${t.copilotTitle}`}><span className={styles.artLabel}>DECISION SUPPORT / FICTIONAL CASE</span><div className={styles.decisionVisual}><div className={styles.decisionNode}>Question</div><span>→</span><div className={styles.decisionNode}>Evidence</div><span>→</span><div className={styles.decisionNode}>Next step</div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.fictional}</p><h3>{t.copilotTitle}</h3><p>{t.copilotText}</p><div className={styles.tags}><span>Decision support</span><span>Process analysis</span></div></div><a className={styles.roundArrow} href="/projects/operations-decision-copilot" aria-label={`${t.case}: ${t.copilotTitle}`}><Arrow diagonal/></a></div>
+            <a className={`${styles.projectArtwork} ${styles.novaArtwork}`} href="/projects/novatech" aria-label={`${t.demo}: ${t.novaTitle}`}><span className={styles.artLabel}>NOVATECH · CSV-POWERED DASHBOARD</span><div className={styles.novaComposition}><div className={styles.novaLabel}>INVOICED<br/>PAID<br/>OPEN</div><div className={styles.novaChart}><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><div className={styles.novaAxis}><span>2024</span><span>2025</span></div><div className={styles.demoStamp}>4,800<br/>ROWS</div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
+            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.fictional}</p><h3>{t.novaTitle}</h3><p>{t.novaText}</p><div className={styles.tags}><span>Python</span><span>SQL</span><span>CSV</span></div><div className={styles.projectLinks}><a href="/projects/novatech">{t.demo}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/projects/novatech" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/novatech" aria-label={`${t.demo}: ${t.novaTitle}`}><Arrow diagonal/></a></div>
           </article>
         </div>
       </section>
@@ -163,13 +160,13 @@ export default function PortfolioHome() {
         <div className={styles.educationHeading} data-reveal><p className={styles.eyebrow}>{t.educationEyebrow}</p><h2>{t.educationTitle}</h2></div>
         <div className={styles.educationGrid}>
           <article className={styles.degreeCard} data-reveal><span className={styles.degreeIcon}>E</span><p className={styles.projectType}>UNIVERSIDAD DE LOS ANDES</p><h3>{t.degree}</h3><p>{t.university}</p><div className={styles.thesis}><span>{t.thesisLabel}</span><p>{t.thesis}</p></div></article>
-          <div className={styles.certificates} data-reveal><p className={styles.projectType}>{t.learningLabel}</p>{t.certificates.map((certificate, index) => <div className={styles.certificate} key={certificate}><span>0{index + 1}</span><p>{certificate}</p><span aria-hidden="true">↗</span></div>)}<p className={styles.projectType}>{t.coursesLabel}</p>{t.courses.map((course, index) => <div className={styles.certificate} key={course}><span>0{index + 1}</span><p>{course}</p><span aria-hidden="true">↗</span></div>)}</div>
+          <div className={styles.certificates} data-reveal><p className={styles.projectType}>{t.learningLabel}</p>{t.certificates.map((certificate, index) => <div className={styles.certificate} key={certificate}><span>0{index + 1}</span><p>{certificate}</p><a href={index === 0 ? "/certificates/data-analytics-essentials.pdf" : "/certificates/introduction-to-data-science.pdf"} target="_blank" rel="noreferrer">{language === "es" ? "Ver certificado" : "View certificate"} ↗</a></div>)}<details className={styles.otherCourses}><summary>{t.coursesLabel}</summary>{t.courses.map((course, index) => <div className={styles.certificate} key={`${course}-${index}`}><span>0{index + 1}</span><p>{course}</p>{course.includes("Cybersecurity") || course.includes("Ciberseguridad") ? <a href="/certificates/introduction-to-cybersecurity.pdf" target="_blank" rel="noreferrer">{language === "es" ? "Ver certificado" : "View certificate"} ↗</a> : null}</div>)}</details></div>
         </div>
       </section>
     </div>
 
     <footer className={styles.footer} id="contact">
-      <div className={styles.footerTop}><div className={styles.footerCopy} data-reveal><p className={styles.eyebrow}>{t.contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a className={styles.footerLinkedin} href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.linkedin}<Arrow diagonal/></a></div><div className={styles.contactForm} data-reveal><ContactForm language={language}/></div></div>
+      <div className={styles.footerTop}><div className={styles.footerCopy} data-reveal><p className={styles.eyebrow}>{t.contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className={styles.contactLinks}><a className={styles.footerLinkedin} href="mailto:juguibavi27@gmail.com">{t.email}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="/cv/Juan-Guillermo-Barrios-Resume.pdf" download>{t.resumeDownload}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.linkedin}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://github.com/barriosj136-oss" target="_blank" rel="noreferrer">{t.github}<Arrow diagonal/></a></div></div></div>
       <div className={styles.footerBottom}><a className={styles.footerBrand} href="#top">JGB<span>.</span></a><p>{t.footer}</p><span>© 2026 JUAN GUILLERMO BARRIOS VILLAMIL</span></div>
     </footer>
   </main>;

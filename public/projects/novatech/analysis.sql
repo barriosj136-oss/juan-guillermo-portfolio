@@ -1,49 +1,52 @@
--- Run with SQLite after creating the table from schema.sql and importing
--- data/monthly_performance.csv. All values are synthetic and illustrative.
+-- Synthetic NovaTech practice data only. Currency stays separated throughout.
 
--- 1) Monthly target, attainment, target gap, and budget variance.
-SELECT
-    month,
-    goal_target,
-    goal_actual,
-    ROUND(100.0 * goal_actual / NULLIF(goal_target, 0), 1) AS attainment_pct,
-    goal_actual - goal_target AS target_gap,
-    budget_planned,
-    budget_actual,
-    budget_actual - budget_planned AS budget_variance
-FROM monthly_performance
-ORDER BY month;
+-- 1. Monthly invoice, payment, recovery and remaining balance by unit/currency.
+SELECT month, business_unit, currency,
+       COUNT(*) AS invoice_records,
+       SUM(invoice_amount) AS invoiced,
+       SUM(paid_amount) AS paid,
+       SUM(recovered_amount) AS recovered_within_paid,
+       SUM(outstanding_amount) AS outstanding,
+       ROUND(100.0 * SUM(paid_amount) / NULLIF(SUM(invoice_amount), 0), 1) AS paid_to_invoiced_pct,
+       SUM(CASE WHEN status = 'Open' THEN 1 ELSE 0 END) AS open_records
+FROM monthly_operations
+GROUP BY month, business_unit, currency
+ORDER BY month, business_unit;
 
--- 2) Aggregate totals. Attainment is ratio of sums, not an average of ratios.
-SELECT
-    SUM(goal_target) AS target_total,
-    SUM(goal_actual) AS actual_total,
-    ROUND(100.0 * SUM(goal_actual) / NULLIF(SUM(goal_target), 0), 1) AS attainment_pct,
-    SUM(budget_planned) AS budget_planned_total,
-    SUM(budget_actual) AS budget_actual_total,
-    SUM(budget_actual) - SUM(budget_planned) AS budget_variance_total,
-    SUM(CASE WHEN budget_actual > budget_planned THEN 1 ELSE 0 END) AS months_over_budget
-FROM monthly_performance;
+-- 2. Outstanding balance by generic risk group, separated by currency.
+SELECT business_unit, currency, risk_group,
+       COUNT(*) AS record_count,
+       SUM(outstanding_amount) AS outstanding
+FROM monthly_operations
+GROUP BY business_unit, currency, risk_group
+ORDER BY business_unit, outstanding DESC;
 
--- 3) Month-over-month movement. January has no prior observation.
+-- 3. Month-over-month movement for each currency and business unit.
 WITH monthly AS (
-    SELECT
-        month,
-        goal_actual,
-        budget_actual,
-        goal_actual - LAG(goal_actual) OVER (ORDER BY month) AS actual_mom_change,
-        budget_actual - LAG(budget_actual) OVER (ORDER BY month) AS spend_mom_change
-    FROM monthly_performance
+  SELECT month, business_unit, currency,
+         SUM(invoice_amount) AS invoiced,
+         SUM(paid_amount) AS paid,
+         SUM(outstanding_amount) AS outstanding
+  FROM monthly_operations
+  GROUP BY month, business_unit, currency
 )
-SELECT * FROM monthly ORDER BY month;
+SELECT month, business_unit, currency, invoiced, paid, outstanding,
+       invoiced - LAG(invoiced) OVER (PARTITION BY business_unit, currency ORDER BY month) AS invoice_change_mom,
+       outstanding - LAG(outstanding) OVER (PARTITION BY business_unit, currency ORDER BY month) AS outstanding_change_mom
+FROM monthly
+ORDER BY business_unit, month;
 
--- 4) Simple source-quality checks. Each query should return no rows.
-SELECT month, COUNT(*) AS row_count
-FROM monthly_performance
-GROUP BY month
-HAVING COUNT(*) <> 1;
+-- 4. Data-quality checks: every query should return zero rows.
+SELECT record_id, COUNT(*) AS duplicate_count
+FROM monthly_operations
+GROUP BY record_id
+HAVING COUNT(*) > 1;
 
-SELECT *
-FROM monthly_performance
-WHERE month IS NULL OR goal_target < 0 OR goal_actual < 0
-   OR budget_planned < 0 OR budget_actual < 0;
+SELECT record_id
+FROM monthly_operations
+WHERE invoice_amount < 0 OR paid_amount < 0 OR recovered_amount < 0
+   OR outstanding_amount < 0 OR aging_days < 0
+   OR paid_amount + outstanding_amount <> invoice_amount
+   OR recovered_amount > paid_amount
+   OR currency <> CASE business_unit WHEN 'Canada' THEN 'CAD' WHEN 'United States' THEN 'USD' ELSE '' END
+   OR status <> CASE WHEN outstanding_amount > 0 THEN 'Open' ELSE 'Paid' END;

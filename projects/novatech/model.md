@@ -1,35 +1,44 @@
-# NovaTech synthetic analysis model
+# NovaTech synthetic invoice and payment review
 
-This is a small, fictional monthly performance dataset for practicing business analysis. It does not describe a real company, customer, or employer. Amounts are illustrative units; no currency is specified.
+## Purpose and provenance
 
-## Grain and source
+This is a fictional portfolio exercise. NovaTech, the record identifiers, risk groups and every row value are generated deterministically by `scripts/generate-novatech.mjs`. They are not facts from Iron Mountain, any employer, or any customer. The dataset has 4,800 generated records: 100 generated records per business unit per month, across January 2024–December 2025.
 
-`monthly_performance.csv` has one row for one month for one fictional business unit. The current demonstration contains one fictional unit and twelve months in 2025. Each row is the lowest level available; no transaction or customer-level detail exists.
+## Grain and fields
 
-## Fields
+One row represents one synthetic invoice record for one month. There are no real account identifiers or people.
 
-| Field | Type | Meaning | Rule |
-|---|---|---|---|
-| `month` | YYYY-MM text | Reporting month | Required, unique, valid calendar month. |
-| `goal_target` | Integer | Planned performance target | Required, nonnegative; greater than zero for aggregate attainment. |
-| `goal_actual` | Integer | Realized performance in fictional units | Required, nonnegative. |
-| `budget_planned` | Integer | Planned budget in fictional units | Required, nonnegative. |
-| `budget_actual` | Integer | Actual spend in fictional units | Required, nonnegative. |
+| Field | Meaning / validation |
+|---|---|
+| `record_id` | Unique `DEMO-` identifier generated for this exercise. |
+| `month` | Invoice month, `YYYY-MM`. |
+| `business_unit` | `Canada` or `United States`. |
+| `currency` | `CAD` for Canada, `USD` for United States. Never add totals across currencies. |
+| `risk_group` | Generic category: `Standard`, `Elevated`, or `High`; not an internal employer code. |
+| `invoice_amount` | Synthetic invoice amount in the row's currency. |
+| `paid_amount` | Paid portion of the invoice. |
+| `recovered_amount` | Part of `paid_amount`, not an additional payment. |
+| `outstanding_amount` | Must equal `invoice_amount - paid_amount`. |
+| `aging_days` | Generated age in days; zero-to-low age for settled examples and positive age for open balances. |
+| `status` | `Open` when outstanding is positive, otherwise `Paid`. |
 
-The file is already aggregated monthly. It contains no account names, personal data, or employer records.
+## Metric definitions
 
-## Measures and interpretation
+- Invoiced = sum of `invoice_amount` for the selected currency and period.
+- Paid = sum of `paid_amount` for the selected currency and period.
+- Recovered = sum of `recovered_amount`, already included in Paid.
+- Outstanding = sum of `outstanding_amount`.
+- Paid / invoiced = sum of paid divided by sum of invoiced, not an average of row ratios.
+- Open records = count where `status = 'Open'`.
 
-- Goal attainment = `SUM(goal_actual) / SUM(goal_target)`. The portfolio shows aggregate attainment; it does not average monthly percentages.
-- Target gap = `goal_actual - goal_target`; positive means actual is above target.
-- Budget variance = `budget_actual - budget_planned`; positive means spending is above plan.
-- Month-over-month change = this month's value minus the prior month's value. January has no prior month and is blank.
-- Months over budget count rows where `budget_actual > budget_planned`.
+All amounts are generated example values, not evidence of a business outcome. This dataset supports practicing data validation, joins/aggregations, filters and trends; it cannot support conclusions about a real employer or customer.
 
-## Assumptions and limits
+## Editing and refresh
 
-There is one row per month, one fictional entity, twelve observations, and no drivers explaining changes. No forecast, causal claim, recommendation about a real business, or currency conversion is supported by this file. A zero invoice amount in this separate Copilot scenario is not linked to NovaTech.
+1. Open `public/data/novatech/monthly_operations.csv` in Excel and enable editing if prompted.
+2. Preserve the header row and the field order; save as CSV UTF-8 to the same filename and folder.
+3. Run the site locally and reload `/projects/novatech`. The dashboard fetches this file without a browser cache and recalculates its numbers in the browser.
+4. Run `python projects/novatech/analyze.py` to validate the file and produce a grouped JSON summary under `projects/novatech/data/`.
+5. If an edit causes errors, the dashboard lists the invalid rows and hides the KPIs instead of presenting stale values.
 
-## Reproducible workflow
-
-Run `python analyze.py` from this directory. It checks the source structure and control totals, then writes `data/monthly_summary.csv`, `data/summary.json`, and `data/monthly_trend.svg`. Run `sqlite3 novatech.db < schema.sql`, import the source CSV as described in `README.md`, then run the read-only queries in `analysis.sql`. `validate.py` provides a small wrapper for the standard-library validation run.
+On the hosted site, the file is a static asset. Replacing it locally does not update production: a repository update and a new deployment are needed.
