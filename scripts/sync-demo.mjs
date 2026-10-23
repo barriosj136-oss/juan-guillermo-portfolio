@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 const root=process.cwd();
 const operationsDemo=resolve(root,"public/operations-data-review-suite");
 await mkdir(operationsDemo,{recursive:true});
-for(const name of ["index.html","app.js","data.js","i18n.js","styles.css"]) await cp(resolve(root,"projects/operations-data-review-suite",name),resolve(operationsDemo,name));
+for(const name of ["index.html","app.js","data.js","i18n.js","styles.css","README.md"]) await cp(resolve(root,"projects/operations-data-review-suite",name),resolve(operationsDemo,name));
 const nova=resolve(root,"public/projects/novatech");
 await mkdir(nova,{recursive:true});
 for(const name of ["analyze.py","validate.py","model.md","schema.sql","analysis.sql","README.md"]) await cp(resolve(root,"projects/novatech",name),resolve(nova,name));
