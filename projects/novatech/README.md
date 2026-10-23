@@ -1,36 +1,51 @@
-# Strategic Performance Analytics — NovaTech
+# NovaTech synthetic performance analysis
 
-**Status: first draft.** This is a fictional business case built with synthetic data. It does not describe Iron Mountain or any real company, client, budget, or result.
+**Portfolio demonstration only.** NovaTech and every value in this project are fictional. The dataset is not connected to Iron Mountain or any customer. No real business outcome is claimed.
 
-## Business questions
+## Questions
 
-1. How does actual monthly performance compare with the target?
-2. When is actual spending above or below the planned budget?
-3. How do performance and spending move over the year?
+- How did monthly actual performance compare with the target?
+- Which months had actual spend above or below budget?
+- How did the target, result, and spend evolve during 2025?
 
-## Data
+## Data model
 
-[`data/monthly_performance.csv`](data/monthly_performance.csv) contains 12 synthetic monthly records for 2025. `goal_target` and `goal_actual` are illustrative units; budget values are illustrative currency units with no specified currency. The numbers were created only to demonstrate an analysis workflow.
+The source `data/monthly_performance.csv` has one record per month for one fictional entity, with target, actual result, planned budget, and actual spend. The full field definitions, grain, formula rules, sign conventions, and limits are documented in [model.md](model.md).
 
-## Reproduce the first summary
+## Reproduce the checks, summaries, and graphic
 
-The script uses only Python's standard library, so it needs no extra packages. From this folder, run:
+With Python 3 available, open PowerShell in this folder and run:
 
 ```powershell
-python analyze.py
+python validate.py
 ```
 
-If Windows reports that Python is unavailable, install it from the official source and reopen PowerShell; the portfolio site itself does not require Python.
+The standard-library script checks the exact columns, valid and unique months, nonnegative integer values, expected 12-month coverage, and reconciled control totals. It then generates `data/monthly_summary.csv`, `data/summary.json`, and `data/monthly_trend.svg` from the source CSV. The portfolio's charts read the generated JSON summary, so the displayed metrics and trends use the same calculation output.
 
-The script reports total goal attainment (`sum(actual) / sum(target)`), total budget variance (`sum(actual spend) - sum(planned budget)`), and the number of months over budget. A positive budget variance means spending exceeded plan. These are descriptive summaries, not causal explanations or forecasts.
+The locked demonstration control totals are 1,420 target units, 1,415 actual units, 696,000 planned budget units, 703,000 actual spend units, a 7,000-unit positive variance (actual minus planned), and 7 of 12 months over budget. Attainment is the ratio of summed actual to summed target, not the average of monthly percentages.
 
-## What remains before this project is complete
+## SQL exercise (SQLite)
 
-- Run the script in a Python-enabled environment and verify the output.
-- Add a monthly table and readable charts based on the computed data.
-- Explain patterns only after checking the values and chart calculations.
-- Add recommendations supported by those results.
-- State limitations: synthetic values, one fictional business, no definitions for units/currency, no causal variables, and no forecast validation.
-- Review the final explanation so it is easy to reproduce and defend in an interview.
+`schema.sql` defines a constrained table and `analysis.sql` contains monthly measures, aggregate calculations, month-over-month changes, and source quality checks. If the SQLite command-line utility is installed, from this directory run:
 
-Do not present the dataset or its results as actual company performance.
+```text
+sqlite3 novatech.db
+.read schema.sql
+.mode csv
+.import --skip 1 data/monthly_performance.csv monthly_performance
+.read analysis.sql
+.quit
+```
+
+This imports the source CSV into a local SQLite database. The schema's primary key and `CHECK` constraints prevent duplicate months and invalid values. SQL window functions calculate month-over-month movement.
+
+## Meaning and limitations
+
+- Attainment = sum of actual / sum of target.
+- Target gap = actual minus target; positive is above target.
+- Budget variance = actual spend minus planned budget; positive is over plan.
+- Month-over-month change is the current month minus the prior month; January is blank.
+- One fictional entity and twelve observations cannot support causal claims, forecasting, or conclusions about real operations.
+- No currency is defined for the illustrative budget units.
+
+This project currently demonstrates CSV preparation, Python standard-library analysis, SQLite modeling and queries, trend visualization, and validation controls. Excel and Power BI versions remain future work and should only be added after the results reconcile to these source calculations.

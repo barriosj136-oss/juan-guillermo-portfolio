@@ -13,8 +13,10 @@ pnpm-debug.log*
 *.xlsx
 *.xls
 *.csv
-!public/projects/novatech/monthly_performance.csv
+!projects/novatech/data/*.csv
+!public/projects/novatech/*.csv
 outputs/
 work/
 .DS_Store
 Thumbs.db
+__pycache__/

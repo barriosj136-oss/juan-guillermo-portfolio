@@ -1,0 +1,158 @@
+{
+  "summary": {
+    "month_count": 12,
+    "goal_target_total": 1420,
+    "goal_actual_total": 1415,
+    "attainment_pct": 99.6,
+    "budget_planned_total": 696000,
+    "budget_actual_total": 703000,
+    "budget_variance_total": 7000,
+    "months_over_budget": 7
+  },
+  "months": [
+    {
+      "month": "2025-01",
+      "goal_target": 100,
+      "goal_actual": 92,
+      "budget_planned": 50000,
+      "budget_actual": 51500,
+      "target_gap": -8,
+      "attainment_pct": 92.0,
+      "budget_variance": 1500,
+      "actual_mom_change": null,
+      "spend_mom_change": null
+    },
+    {
+      "month": "2025-02",
+      "goal_target": 105,
+      "goal_actual": 101,
+      "budget_planned": 52000,
+      "budget_actual": 51800,
+      "target_gap": -4,
+      "attainment_pct": 96.2,
+      "budget_variance": -200,
+      "actual_mom_change": 9,
+      "spend_mom_change": 300
+    },
+    {
+      "month": "2025-03",
+      "goal_target": 110,
+      "goal_actual": 114,
+      "budget_planned": 54000,
+      "budget_actual": 55200,
+      "target_gap": 4,
+      "attainment_pct": 103.6,
+      "budget_variance": 1200,
+      "actual_mom_change": 13,
+      "spend_mom_change": 3400
+    },
+    {
+      "month": "2025-04",
+      "goal_target": 112,
+      "goal_actual": 108,
+      "budget_planned": 55000,
+      "budget_actual": 54100,
+      "target_gap": -4,
+      "attainment_pct": 96.4,
+      "budget_variance": -900,
+      "actual_mom_change": -6,
+      "spend_mom_change": -1100
+    },
+    {
+      "month": "2025-05",
+      "goal_target": 115,
+      "goal_actual": 119,
+      "budget_planned": 56000,
+      "budget_actual": 57400,
+      "target_gap": 4,
+      "attainment_pct": 103.5,
+      "budget_variance": 1400,
+      "actual_mom_change": 11,
+      "spend_mom_change": 3300
+    },
+    {
+      "month": "2025-06",
+      "goal_target": 118,
+      "goal_actual": 116,
+      "budget_planned": 57000,
+      "budget_actual": 56800,
+      "target_gap": -2,
+      "attainment_pct": 98.3,
+      "budget_variance": -200,
+      "actual_mom_change": -3,
+      "spend_mom_change": -600
+    },
+    {
+      "month": "2025-07",
+      "goal_target": 120,
+      "goal_actual": 126,
+      "budget_planned": 59000,
+      "budget_actual": 60200,
+      "target_gap": 6,
+      "attainment_pct": 105.0,
+      "budget_variance": 1200,
+      "actual_mom_change": 10,
+      "spend_mom_change": 3400
+    },
+    {
+      "month": "2025-08",
+      "goal_target": 122,
+      "goal_actual": 117,
+      "budget_planned": 60000,
+      "budget_actual": 58800,
+      "target_gap": -5,
+      "attainment_pct": 95.9,
+      "budget_variance": -1200,
+      "actual_mom_change": -9,
+      "spend_mom_change": -1400
+    },
+    {
+      "month": "2025-09",
+      "goal_target": 125,
+      "goal_actual": 130,
+      "budget_planned": 61000,
+      "budget_actual": 62800,
+      "target_gap": 5,
+      "attainment_pct": 104.0,
+      "budget_variance": 1800,
+      "actual_mom_change": 13,
+      "spend_mom_change": 4000
+    },
+    {
+      "month": "2025-10",
+      "goal_target": 128,
+      "goal_actual": 124,
+      "budget_planned": 62000,
+      "budget_actual": 61500,
+      "target_gap": -4,
+      "attainment_pct": 96.9,
+      "budget_variance": -500,
+      "actual_mom_change": -6,
+      "spend_mom_change": -1300
+    },
+    {
+      "month": "2025-11",
+      "goal_target": 130,
+      "goal_actual": 127,
+      "budget_planned": 64000,
+      "budget_actual": 65700,
+      "target_gap": -3,
+      "attainment_pct": 97.7,
+      "budget_variance": 1700,
+      "actual_mom_change": 3,
+      "spend_mom_change": 4200
+    },
+    {
+      "month": "2025-12",
+      "goal_target": 135,
+      "goal_actual": 141,
+      "budget_planned": 66000,
+      "budget_actual": 67200,
+      "target_gap": 6,
+      "attainment_pct": 104.4,
+      "budget_variance": 1200,
+      "actual_mom_change": 14,
+      "spend_mom_change": 1500
+    }
+  ]
+}
