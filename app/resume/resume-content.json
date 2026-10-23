@@ -1,0 +1,202 @@
+{
+  "en": {
+    "label": "PROFESSIONAL RÉSUMÉ",
+    "headline": "Electronic Engineer | Junior Data Analyst | Financial and Operational Data",
+    "summary": "Electronic Engineer from Universidad de los Andes with experience in High Risk account operations at Iron Mountain. I review account, service, invoice, and payment records; investigate billing discrepancies; and prepare reports, charts, and workflow tools for operational follow-up. I contributed to loading approximately 18,000 accounts into Oracle and automated abandoned-record processing. Seeking junior Data Analyst, BI Analyst, Business Analyst, or Operations Analyst roles.",
+    "contact": [
+      { "label": "Location", "value": "Bogotá, Colombia" },
+      { "label": "Email", "value": "juguibavi27@gmail.com", "href": "mailto:juguibavi27@gmail.com" },
+      { "label": "LinkedIn", "value": "linkedin.com/in/juan-guillermo-barrios-villamil-474733234", "href": "https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" },
+      { "label": "GitHub", "value": "github.com/barriosj136-oss", "href": "https://github.com/barriosj136-oss" },
+      { "label": "Portfolio", "value": "portfolio-nu-ashy-28.vercel.app", "href": "https://portfolio-nu-ashy-28.vercel.app/" }
+    ],
+    "experienceHeading": "Professional Experience",
+    "experience": [
+      {
+        "title": "Strategic Planning & High-Risk Account Specialist",
+        "company": "Iron Mountain",
+        "dates": "May 4, 2026 – Present",
+        "bullets": [
+          "Review and prioritize High Risk account cases, track case status, and coordinate operational follow-up.",
+          "Use Excel to compare account, invoice, payment, inventory, and service records and investigate billing discrepancies.",
+          "Contributed to the bulk loading of approximately 18,000 accounts into Oracle rather than entering each record individually.",
+          "Automated abandoned-record processing through a web tool and built a dashboard to track account loading and recovery.",
+          "In some inactive-account cases, explain outstanding invoice balances and payment requirements; authorized teams decide whether service is restored."
+        ]
+      },
+      {
+        "title": "IT Support Assistant",
+        "company": "CivilTech Ingeniería y Construcción S.A.S.",
+        "dates": "December 1, 2025 – January 31, 2026",
+        "bullets": [
+          "Performed software quality testing and managed electronics inventory.",
+          "Conducted preliminary exploration of business opportunities related to sensors."
+        ]
+      },
+      {
+        "title": "Customer Service Agent",
+        "company": "Foundever de Colombia",
+        "dates": "February 17, 2025 – July 2, 2025",
+        "bullets": [
+          "Handled customer service requests in an English-language support environment and followed service workflows."
+        ]
+      }
+    ],
+    "educationHeading": "Education",
+    "education": [
+      { "title": "Electronic Engineering", "organization": "Universidad de los Andes", "dates": "Degree awarded October 20, 2025", "detail": "Thesis: IoT automation of electronic systems integrating an adjustable voltage source and an AD9833 signal generator. Work involved system integration, measurement, and technical testing." }
+    ],
+    "projectsHeading": "Selected Projects",
+    "projects": [
+      {
+        "title": "Bogotá 2025 public-budget commitments",
+        "description": "Analyzed 7,681 official detail records covering 50 entity labels and 2,198 budget-item codes. Python cleaning and validation, plus SQL JOINs, CTEs, and window functions, reconcile monthly changes to COP 36.26 trillion in cumulative December commitments. Retained 752 records with cumulative decreases for review.",
+        "tools": "Python · SQL · SQLite · public CSV",
+        "href": "/projects/bogota-budget"
+      },
+      {
+        "title": "NovaTech monthly performance (12 months)",
+        "description": "A 2025 monthly view of invoices, payments, recoveries, and outstanding balances from the same 4,800-row generated invoice-and-payment dataset used for the NovaTech case. The source covers 2024–2025 and separates Canada/CAD from United States/USD; Python and SQL checks validate records and reconciliations. Edit the CSV in Excel and reload the local dashboard.",
+        "tools": "Python · SQL · SQLite · Excel · CSV · React · TypeScript",
+        "href": "/projects/novatech"
+      },
+      {
+        "title": "NovaTech invoices and payments: 4,800 generated rows",
+        "description": "Built the editable source dataset behind the monthly dashboard: 4,800 generated invoice and payment records for Canada/CAD and the United States/USD. Python and SQL checks verify record IDs, payment status, and invoice = paid + outstanding; recovered amounts are a subset of paid.",
+        "tools": "CSV · Excel · Python · SQL · SQLite",
+        "href": "/projects/novatech"
+      },
+      {
+        "title": "Operations Data Review Suite",
+        "description": "Built a browser-based tool with six workflows for filtering sample records, reference matching, CSV import/export, record updates, follow-up notes, and knowledge articles. The demo uses generated data and browser storage only.",
+        "tools": "HTML · CSS · JavaScript · CSV",
+        "href": "/operations-data-review-suite/"
+      },
+      {
+        "title": "Operations Decision Copilot",
+        "description": "Built a browser-based rule-driven prototype that structures a fictional operations case into confirmed facts, open questions, and verification steps for human review. It prepares a review note; it does not use AI or make account decisions.",
+        "tools": "Next.js · React · TypeScript",
+        "href": "/projects/operations-decision-copilot"
+      }
+    ],
+    "skillsHeading": "Technical Skills",
+    "skills": [
+      { "label": "Data review and analysis", "value": "Excel for operational record review · Python for project data cleaning and validation · SQL (SQLite), including JOINs, CTEs, and window functions in project work" },
+      { "label": "Web and data tools", "value": "HTML · CSS · JavaScript · React · Next.js · TypeScript · CSV" },
+      { "label": "Currently developing", "value": "pandas · Power BI · DAX · Git · GitHub workflows · further SQL and Python practice" }
+    ],
+    "credentialsHeading": "Certifications and Courses",
+    "credentials": [
+      "Data Analytics Essentials · Cisco Networking Academy / MinTIC · May 23, 2026",
+      "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026",
+      "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026",
+      "Frontend Developer · Platzi · 2025",
+      "Practical Frontend Developer · Platzi · 2025",
+      "Emotional Intelligence · Platzi · 2023",
+      "Effective Communication · Platzi · 2023"
+    ],
+    "languagesHeading": "Languages",
+    "languages": "Spanish · Native | English · C1, Universidad de los Andes",
+    "footer": "Project descriptions distinguish official public data from generated demonstrations."
+  },
+  "es": {
+    "label": "HOJA DE VIDA PROFESIONAL",
+    "headline": "Ingeniero Electrónico | Analista de Datos Junior | Datos Financieros y Operativos",
+    "summary": "Ingeniero Electrónico de la Universidad de los Andes con experiencia en operaciones de cuentas High Risk en Iron Mountain. Reviso registros de cuentas, servicios, facturas y pagos; investigo diferencias de facturación; y preparo reportes, gráficos y herramientas para el seguimiento operativo. Participé en la carga de aproximadamente 18.000 cuentas a Oracle y automaticé el procesamiento de registros abandonados. Busco cargos junior de Analista de Datos, BI, Negocio u Operaciones.",
+    "contact": [
+      { "label": "Ubicación", "value": "Bogotá, Colombia" },
+      { "label": "Correo", "value": "juguibavi27@gmail.com", "href": "mailto:juguibavi27@gmail.com" },
+      { "label": "LinkedIn", "value": "linkedin.com/in/juan-guillermo-barrios-villamil-474733234", "href": "https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" },
+      { "label": "GitHub", "value": "github.com/barriosj136-oss", "href": "https://github.com/barriosj136-oss" },
+      { "label": "Portafolio", "value": "portfolio-nu-ashy-28.vercel.app", "href": "https://portfolio-nu-ashy-28.vercel.app/" }
+    ],
+    "experienceHeading": "Experiencia profesional",
+    "experience": [
+      {
+        "title": "Strategic Planning & High-Risk Account Specialist",
+        "company": "Iron Mountain",
+        "dates": "4 de mayo de 2026 – Actualidad",
+        "bullets": [
+          "Reviso y priorizo casos de cuentas High Risk, hago seguimiento a su estado y coordino acciones operativas.",
+          "Uso Excel para comparar registros de cuentas, facturas, pagos, inventario y servicio e investigar diferencias de facturación.",
+          "Participé en la carga masiva de aproximadamente 18.000 cuentas a Oracle, en vez de ingresar cada registro individualmente.",
+          "Automaticé el procesamiento de registros abandonados mediante una herramienta web y creé un dashboard para seguir la carga de cuentas y su recuperación.",
+          "En algunos casos de cuentas inactivas, explico saldos pendientes y pagos requeridos; los equipos autorizados deciden si se restaura el servicio."
+        ]
+      },
+      {
+        "title": "Auxiliar de Soporte IT",
+        "company": "CivilTech Ingeniería y Construcción S.A.S.",
+        "dates": "1 de diciembre de 2025 – 31 de enero de 2026",
+        "bullets": [
+          "Realicé pruebas de calidad de software y gestioné inventario de electrónicos.",
+          "Exploré de forma preliminar oportunidades de negocio relacionadas con sensores."
+        ]
+      },
+      {
+        "title": "Agente de Servicio al Cliente",
+        "company": "Foundever de Colombia",
+        "dates": "17 de febrero de 2025 – 2 de julio de 2025",
+        "bullets": [
+          "Atendí solicitudes en un entorno de soporte en inglés y seguí los flujos de servicio establecidos."
+        ]
+      }
+    ],
+    "educationHeading": "Formación",
+    "education": [
+      { "title": "Ingeniería Electrónica", "organization": "Universidad de los Andes", "dates": "Título otorgado el 20 de octubre de 2025", "detail": "Tesis: automatización IoT de sistemas electrónicos con una fuente de voltaje ajustable y un generador de señales AD9833. El trabajo incluyó integración de sistemas, medición y pruebas técnicas." }
+    ],
+    "projectsHeading": "Proyectos seleccionados",
+    "projects": [
+      {
+        "title": "Compromisos presupuestales públicos de Bogotá 2025",
+        "description": "Analicé 7.681 registros oficiales con 50 nombres de entidades y 2.198 códigos de rubro. Usé Python para limpiar y validar y SQL con JOIN, CTE y funciones de ventana; los cambios mensuales concilian con COP 36,26 billones en compromisos acumulados a diciembre. Conservé para revisión 752 registros con disminuciones acumuladas.",
+        "tools": "Python · SQL · SQLite · CSV público",
+        "href": "/projects/bogota-budget"
+      },
+      {
+        "title": "NovaTech monthly performance (12 months)",
+        "description": "Vista mensual de 2025 sobre facturas, pagos, recuperaciones y saldos pendientes, basada en el mismo dataset generado de 4.800 filas del caso NovaTech de facturas y pagos. La fuente cubre 2024–2025 y separa Canadá/CAD de Estados Unidos/USD; validé registros y conciliaciones con Python y SQL. El CSV se puede editar en Excel y recargar en el dashboard local.",
+        "tools": "Python · SQL · SQLite · Excel · CSV · React · TypeScript",
+        "href": "/projects/novatech"
+      },
+      {
+        "title": "NovaTech facturas y pagos: 4.800 filas generadas",
+        "description": "Construí el dataset editable que alimenta el dashboard mensual: 4.800 registros generados de facturas y pagos para Canadá/CAD y Estados Unidos/USD. Las validaciones en Python y SQL comprueban IDs, estado de pago y la conciliación facturado = pagado + pendiente; lo recuperado ya está incluido en lo pagado.",
+        "tools": "CSV · Excel · Python · SQL · SQLite",
+        "href": "/projects/novatech"
+      },
+      {
+        "title": "Operations Data Review Suite",
+        "description": "Construí una herramienta web con seis flujos para filtrar registros de muestra, buscar referencias, importar/exportar CSV, editar registros, registrar seguimientos y consultar notas. La demo usa datos generados y almacenamiento del navegador.",
+        "tools": "HTML · CSS · JavaScript · CSV",
+        "href": "/operations-data-review-suite/"
+      },
+      {
+        "title": "Operations Decision Copilot",
+        "description": "Construí un prototipo en el navegador basado en reglas que estructura un caso operativo ficticio en hechos confirmados, preguntas abiertas y verificaciones para revisión humana. Prepara una nota; no usa IA ni toma decisiones sobre cuentas.",
+        "tools": "Next.js · React · TypeScript",
+        "href": "/projects/operations-decision-copilot"
+      }
+    ],
+    "skillsHeading": "Habilidades técnicas",
+    "skills": [
+      { "label": "Revisión y análisis de datos", "value": "Excel para revisar registros operativos · Python para limpieza y validación en proyectos · SQL (SQLite), con JOIN, CTE y funciones de ventana en proyectos" },
+      { "label": "Web y datos", "value": "HTML · CSS · JavaScript · React · Next.js · TypeScript · CSV" },
+      { "label": "En desarrollo", "value": "pandas · Power BI · DAX · Git · flujos de GitHub · práctica adicional en SQL y Python" }
+    ],
+    "credentialsHeading": "Certificaciones y cursos",
+    "credentials": [
+      "Data Analytics Essentials · Cisco Networking Academy / MinTIC · 23 de mayo de 2026",
+      "Introduction to Data Science · Cisco Networking Academy / MinTIC · 5 de mayo de 2026",
+      "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · 23 de mayo de 2026",
+      "Frontend Developer · Platzi · 2025",
+      "Practical Frontend Developer · Platzi · 2025",
+      "Inteligencia Emocional · Platzi · 2023",
+      "Comunicación Efectiva · Platzi · 2023"
+    ],
+    "languagesHeading": "Idiomas",
+    "languages": "Español · Nativo | Inglés · C1, Universidad de los Andes",
+    "footer": "Los proyectos distinguen los datos públicos oficiales de las demostraciones con datos generados."
+  }
+}

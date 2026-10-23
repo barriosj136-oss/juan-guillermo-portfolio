@@ -99,3 +99,24 @@ html.motion-ready [data-reveal].is-visible{opacity:1;transform:translateY(0)}
 @media(max-width:900px){.nova-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.case-source{margin-inline:14px}.public-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.live-dashboard{padding:0 22px}.dashboard-toolbar{align-items:start;flex-direction:column}.dashboard-toolbar label{width:100%}.dashboard-toolbar select{width:100%}.nova-metrics{grid-template-columns:1fr 1fr}.risk-bars>div{grid-template-columns:74px minmax(40px,1fr);gap:8px}.risk-bars>div>strong{grid-column:2}.live-bars{min-width:540px}.month-chart:has(.live-bars){overflow-x:auto}.public-metrics{grid-template-columns:1fr}.case-source{align-items:start;flex-direction:column;padding:18px}.public-rankings li{grid-template-columns:22px minmax(0,1fr)}.public-rankings li b{grid-column:2;text-align:left}.contactLinks{display:grid;grid-template-columns:1fr 1fr;gap:15px}.certificate{grid-template-columns:24px minmax(0,1fr);gap:8px}.certificate>a{grid-column:2}.certificate>span:last-child{grid-column:2}}
 @media(prefers-reduced-motion:reduce){.projectLinks a{transition:none}}
+
+/* Keep the résumé text-based and single-column for screen readers and ATS parsers. */
+.resume-skills{grid-template-columns:1fr}
+.resume-projects article{display:block;padding:12px 14px;border:1px solid #E2E7EE;border-radius:10px}
+.resume-projects h3 a{color:#17427E;text-decoration:underline;text-underline-offset:2px}
+.resume-projects .resume-tools{font-size:11px}
+.resume-header>div{display:flex;gap:8px}
+.resume-language,.resume-print{border:1px solid #D5DDE7;border-radius:999px;padding:8px 12px;background:#fff;color:#17427E;font:500 12px 'DM Sans',Arial,sans-serif;cursor:pointer}
+.resume-links span{border:1px solid #D5DDE7;border-radius:999px;padding:8px 13px;background:#F9FBFE;color:#374151;font:500 12px 'DM Sans',Arial,sans-serif}
+@media print{
+  .resume-page{padding:0;background:#fff}
+  .resume-header{display:none!important}
+  .resume-sheet{max-width:none;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;font-family:Arial,sans-serif}
+  .resume-section{break-inside:auto}
+  .resume-skills,.resume-projects{display:block}
+  .resume-role,.resume-projects article,.resume-skills article{break-inside:avoid}
+  .resume-projects article{padding:8px 0;border:0;border-radius:0}
+  .resume-links a,.resume-links span{padding:0;margin:0 12px 0 0;border:0;background:none;color:#17427E;font-size:9px}
+  .resume-section p,.resume-section li{font-size:10.5px;line-height:1.5}
+  .resume-section>h2{font-size:15px}
+}
