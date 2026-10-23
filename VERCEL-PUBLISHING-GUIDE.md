@@ -1,22 +1,30 @@
-# Vercel publishing plan
+# Vercel publishing and Git connection
 
 ## Current state
 
-- The portfolio is a Next.js app and `pnpm run build` succeeds.
-- The Git repository lives at the root of this folder (`outputs/portfolio` in the working folder). If you create a GitHub repository from it, its root will contain `package.json`, `pnpm-lock.yaml`, `app/`, and `projects/`.
-- No `.vercel` project link, Vercel CLI, Git remote, or deployment exists in this workspace.
+- The portfolio is a Next.js app and a production deployment is live at <https://portfolio-nu-ashy-28.vercel.app>.
+- The GitHub repository is <https://github.com/barriosj136-oss/juan-guillermo-portfolio>, private, with branch `main` pushed.
+- This local folder is linked to the existing Vercel project `portfolio` using the official CLI.
+- The Vercel GitHub App is installed with access limited to this portfolio repository. The project still needs its Git provider connection completed to enable deployments on every push.
 - The site needs no environment variables for the current features.
 - The CVs, certificates, and private profile audit files are outside this repository.
 
-## Publish after GitHub access is available
+## Enable deployment on every GitHub push
 
-1. Sign in to GitHub yourself and create an empty repository. Do not upload certificates, identity documents, private audit notes, `.env` files, or customer/company source data.
-2. From this folder, connect the existing local repository to the new GitHub repository and push the `main` branch. Do not create a second project folder or initialize over the existing local `.git` history.
-3. Sign in to Vercel yourself, choose **Add New → Project**, and import that GitHub repository.
-4. Vercel should detect Next.js. Keep the project root at `./`, install command at its detected pnpm default, and build command `pnpm run build`. No environment variables are needed for the current app.
-5. Deploy a Preview first. Open the provided preview URL on desktop and mobile, verify the English/Spanish controls, and confirm that synthetic data is clearly identified.
-6. When you approve that preview, promote/deploy the `main` branch to Production in Vercel. Add a custom domain only if you own it and want one.
+Run this once from the portfolio folder in Visual Studio Code's terminal after GitHub and Vercel are authenticated:
 
-Vercel's official Next.js docs describe the framework as zero-configuration. Their CLI deployment flow requires linking a project, while Git-connected deployments build on repository pushes. This workspace has neither a Vercel link nor a Git remote yet, so this guide is the prepared handoff rather than an active deployment.
+```powershell
+pnpm dlx vercel git connect --yes
+```
 
-Official docs: [Next.js on Vercel](https://vercel.com/docs/frameworks/full-stack/nextjs), [Deploying Git repositories](https://vercel.com/docs/git), [Deploy from the CLI](https://vercel.com/docs/projects/deploy-from-cli).
+This connects the remote Git repository to the Vercel project already linked in `.vercel`. Git commits pushed to `main` can then trigger production deployment automatically. If the CLI asks to select a repository or grant additional GitHub access, stop and review the permission screen; keep Vercel restricted to this repository.
+
+Manual production deploy, if ever needed:
+
+```powershell
+pnpm dlx vercel deploy --prod
+```
+
+The official [Vercel CLI `git` command](https://vercel.com/docs/cli/git) connects a Git provider remote to the linked project. Vercel's [GitHub deployment documentation](https://vercel.com/docs/git/vercel-for-github) describes deployments from repository commits. The current production deployment is live; the `vercel git connect` step above is pending.
+
+The local `.vercel` folder and `.env.local` credentials are ignored by Git. Never upload either to GitHub.
