@@ -6,6 +6,18 @@
 2. Haz doble clic en `Juan-Guillermo-Portfolio.code-workspace`. Si Windows pregunta con qué aplicación abrirlo, selecciona Visual Studio Code.
 3. En el panel **Explorer**, expande las carpetas para revisar el proyecto.
 
+## Usar Codex y Claude Code en esta carpeta
+
+El workspace recomienda las extensiones oficiales de **Codex (OpenAI)** y **Claude Code (Anthropic)**. Al abrirlo, VS Code puede mostrar un aviso para instalar las extensiones recomendadas; también puedes abrir **Extensions** (`Ctrl+Shift+X`) y buscar “Codex” de OpenAI y “Claude Code” de Anthropic. Comprueba el editor de cada extensión antes de instalar.
+
+Para abrir Codex y escribirle: pulsa `Ctrl+Shift+P`, ejecuta **Codex: Open Codex Sidebar** y selecciona la caja de mensaje del panel. Claude Code aparece como **Claude Code: Open in Side Bar** en la misma paleta de comandos. La primera vez, cada extensión puede pedir inicio de sesión en su servicio.
+
+Después, inicia sesión en cada extensión con su propia cuenta. Ambas leerán la carpeta `outputs/portfolio` abierta en este workspace, incluidas sus instrucciones `AGENTS.md` y `.agents/skills/`. No pegues claves, contraseñas ni tokens en el chat o en archivos del proyecto.
+
+La extensión puede descargarse gratis, pero el uso de Claude Code depende de tu cuenta o plan de Anthropic; iniciar sesión o usarlo mediante API puede requerir un plan o facturación. No actives facturación ni compres un plan para configurarlo. Codex usa el acceso de tu cuenta de ChatGPT.
+
+Para evitar que un agente sobrescriba cambios del otro, trabaja con uno a la vez y guarda/revisa los cambios en **Source Control** (`Ctrl+Shift+G`) antes de cambiar de agente. Si solo quieres preguntar, indica explícitamente que no modifique archivos.
+
 ## Carpetas principales
 
 - `app/`: páginas y componentes del sitio Next.js, incluida la página principal, la hoja de vida y los casos de proyecto.
