@@ -8,7 +8,7 @@ type Language = "en" | "es";
 
 const copy = {
   en: {
-    nav: ["Profile", "Projects", "Experience", "Education", "Learning plan"],
+    nav: ["Profile", "Projects", "Experience", "Education"],
     role: "Electronic Engineer · Junior Data Analyst",
     headline: ["Electronic Engineer", "Junior Data Analyst", "Financial & operations data"],
     intro: "I review account, invoice, payment, service, and operational records; investigate billing discrepancies; and build reports and workflow tools. My projects analyze Bogotá public-budget data and use Python and SQL to validate an editable, generated invoice dataset.",
@@ -33,7 +33,7 @@ const copy = {
     contactEyebrow: "Contact", contactTitle: "Discuss a junior data or BI role.", contactText: "Email me, view my résumé, or open my profiles.", linkedin: "LinkedIn", email: "Email Juan", resumeDownload: "Download résumé PDF", github: "GitHub", footer: "Project cards identify official public data and generated demonstrations.", language: "ES",
   },
   es: {
-    nav: ["Perfil", "Proyectos", "Experiencia", "Formación", "Guía de aprendizaje"],
+    nav: ["Perfil", "Proyectos", "Experiencia", "Formación"],
     role: "Ingeniero electrónico · Analista de datos junior",
     headline: ["Ingeniero electrónico", "Analista de datos junior", "Datos financieros y operativos"],
     intro: "Reviso registros de cuentas, facturas, pagos, servicios y operaciones; investigo diferencias de facturación; y elaboro reportes y herramientas de flujo de trabajo. Mis proyectos analizan datos presupuestales públicos de Bogotá y validan con Python y SQL un dataset editable de facturas con datos generados.",
@@ -102,7 +102,7 @@ export default function PortfolioHome() {
       <a className={styles.brand} href="#top" aria-label="Juan Guillermo Barrios Villamil, home" onClick={closeMenu}><span className={styles.brandMark}>J<span>.</span></span><span className={styles.brandName}>Juan Guillermo<br/>Barrios Villamil</span></a>
       <button className={styles.menuToggle} type="button" aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}<span aria-hidden="true">{menuOpen ? "×" : "＋"}</span></button>
       <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`} id="site-navigation" aria-label={language === "en" ? "Main navigation" : "Navegación principal"}>
-        {t.nav.map((label, index) => <a key={label} href={["#profile", "#projects", "#experience", "#education", "/learning"][index]} onClick={closeMenu}>{label}</a>)}
+        {t.nav.map((label, index) => <a key={label} href={["#profile", "#projects", "#experience", "#education"][index]} onClick={closeMenu}>{label}</a>)}
         <a className={styles.navContact} href="#contact" onClick={closeMenu}>{t.secondary}<Arrow diagonal/></a>
       </nav>
       <button className={styles.languageButton} type="button" onClick={() => { const next = language === "en" ? "es" : "en"; setLanguage(next); window.localStorage.setItem("portfolio-language", next); }} aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}><span aria-hidden="true">{language === "en" ? "EN | ES" : "ES | EN"}</span></button>
