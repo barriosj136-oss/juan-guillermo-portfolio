@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0a10">
+  <meta name="description" content="Una invitación especial para Soph.">
+  <title>Soph, tengo una pregunta</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient-bg"></div><div class="grid"></div><div class="noise"></div>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div>
+  <div class="progress" aria-hidden="true"><i class="active"></i><i></i><i></i><i></i><i></i></div>
+  <button class="sound" id="soundToggle" type="button" aria-label="Activar sonido ambiente">♫ <span>Ambiente</span></button>
+  <main>
+    <section class="screen active" data-step="0" id="home">
+      <div class="hero-center">
+        <p class="mono kicker">ARCHIVO // 30 OCTUBRE 2026</p>
+        <h1><span>Soph,</span><br><em>tengo una pregunta.</em></h1>
+        <p class="lead">No quería mandarte un “¿salimos?” por WhatsApp.<br>Así que hice algo un poquito más especial.</p>
+        <div class="countdown"><small>FALTA PARA MAÑANA</small><div><b id="days">00</b><span>d</span><b id="hours">00</b><span>h</span><b id="minutes">00</b><span>m</span><b id="seconds">00</b><span>s</span></div></div>
+        <button class="cta" data-go="1" type="button">Abrir invitación <span>↗</span></button>
+      </div>
+      <p class="bottom-note mono">UNA INVITACIÓN HECHA CON UN POQUITO DE FE ✦</p>
+    </section>
+
+    <section class="screen" data-step="1" id="invite">
+      <article class="card letter">
+        <div class="topline mono"><span>PARA: SOPH</span><span>30.10.26</span></div><span class="letter-mark">✦</span>
+        <p class="mono mini">MENSAJE PRIVADO</p>
+        <h2>¿Te gustaría salir<br><em>conmigo?</em></h2>
+        <p>Mañana quiero robarte unas horas. La idea es reírnos, ver disfraces y pasarla increíble juntos. <strong>Tú eliges el plan.</strong></p>
+        <div class="date"><b>30</b><span>OCTUBRE<br>2026</span></div>
+        <button class="cta" data-go="2" type="button">Ver mis propuestas <span>→</span></button>
+      </article>
+    </section>
+
+    <section class="screen" data-step="2" id="plans">
+      <div class="screen-head"><p class="mono kicker">02 // TÚ DECIDES</p><h2>¿Qué te provoca?</h2><p>Escoge una. Yo me encargo de convertirla en una mañana memorable.</p></div>
+      <div class="choices">
+        <button class="choice" data-plan="Comer rico"><span class="num">01</span><span class="emoji">🍷</span><div><h3>Comer rico</h3><p>Algo rico, buena conversación y cero mirar el reloj.</p></div><span class="arrow">↗</span></button>
+        <button class="choice" data-plan="Ir a ver disfraces (x2)"><span class="num">02</span><span class="emoji">🎭</span><div><h3>Ver disfraces x2</h3><p>Como no hay otra opción… ¡repetimos el plan! Esta vez con más análisis de vestuarios.</p></div><span class="arrow">↗</span></button>
+        <button class="choice" data-plan="Cuddling (aún tengo fe)"><span class="num">03</span><span class="emoji">♡</span><div><h3>Cuddling</h3><p>Un plan tranquilo, cerquita y sin perder la fe. Yo solo lo propongo 😌</p></div><span class="arrow">↗</span></button>
+      </div>
+    </section>
+
+    <section class="screen" data-step="3" id="time">
+      <div class="screen-head"><p class="mono kicker">03 // LA HORA</p><h2>Ahora dime <em>cuándo.</em></h2><p>Elige la hora que te quede mejor. Yo me organizo para recogerte.</p></div>
+      <div class="time-options"><button data-time="7:00 AM" type="button">7:00 AM</button><button data-time="8:45 AM" type="button">8:45 AM</button><button data-time="9:30 AM" type="button">9:30 AM</button><button data-time="10:00 AM" type="button">10:00 AM</button></div>
+      <label class="custom mono">O PREFIERES OTRA HORA <input id="customTime" type="time"></label>
+      <div class="chosen"><span>ELECCIÓN</span><b id="timeChoice">—</b></div>
+      <button class="cta small disabled" id="timeNext" type="button">Continuar <span>→</span></button>
+    </section>
+
+    <section class="screen" data-step="4" id="final">
+      <div class="final-wrap">
+        <p class="mono kicker">04 // ÚLTIMO DETALLE</p><h2>Hagámoslo <em>oficial.</em></h2><p class="lead2">Si aceptas, dime qué tipo de mañana quieres y, si quieres, déjame una nota.</p>
+        <div class="vibes"><button data-vibe="Sorpréndeme" type="button">✦ Sorpréndeme</button><button data-vibe="Algo tranquilo" type="button">☾ Algo tranquilo</button><button data-vibe="Que sea divertido" type="button">⌁ Que sea divertido</button></div>
+        <textarea id="note" maxlength="180" placeholder="Una nota para mí... (opcional)"></textarea>
+        <div class="summary"><span>PLAN</span><b id="sumPlan">—</b><span>HORA</span><b id="sumTime">—</b></div>
+        <div class="actions"><button class="cta" id="accept" type="button">Sí. Me apunto ✦</button><button class="nope" id="decline" type="button">Esta vez no</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-step="5" id="success">
+      <div class="success-wrap"><div class="seal">✦</div><p class="mono kicker">MISIÓN ACEPTADA</p><h2>Entonces tenemos<br><em>una cita.</em></h2><p>Ahora me toca a mí hacer que el 30 de octubre valga la pena.</p>
+        <div class="ticket"><div><span>FECHA</span><b>30 OCTUBRE 2026</b></div><div><span>PLAN</span><b id="ticketPlan">—</b></div><div><span>HORA</span><b id="ticketTime">—</b></div><div><span>VIBE</span><b id="ticketVibe">—</b></div></div>
+        <div class="success-actions"><a id="whatsapp" class="whatsapp" target="_blank" rel="noopener">Enviar mi elección por WhatsApp ↗</a><button id="copy" class="ghost" type="button">Copiar elección</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-step="6" id="declined">
+      <div class="success-wrap"><div class="seal dim">♡</div><p class="mono kicker">RESPUESTA RECIBIDA</p><h2>Todo bien,<br><em>de verdad.</em></h2><p>Gracias por ser sincera. La invitación era para hacerte sonreír, no para ponerte presión.</p><button class="ghost" data-go="1" type="button">Volver</button></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
