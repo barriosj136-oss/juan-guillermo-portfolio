@@ -120,3 +120,26 @@ html.motion-ready [data-reveal].is-visible{opacity:1;transform:translateY(0)}
   .resume-section p,.resume-section li{font-size:10.5px;line-height:1.5}
   .resume-section>h2{font-size:15px}
 }
+.ops-features{margin:0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.8}
+.ops-demo{max-width:1100px;margin:0 auto 48px;padding:0 30px}
+.ops-demo-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:12px}
+.ops-demo-heading h2{font-family:'Manrope',sans-serif;font-size:19px;margin:0}
+.ops-demo-heading a{font-size:12px;color:var(--accent)}
+.ops-demo iframe{display:block;width:100%;height:min(80vh,760px);border:1px solid var(--line);border-radius:14px;background:#fff}
+.ops-demo>p{font-size:11px;color:var(--muted);margin:10px 0 0}
+.ops-other{max-width:1100px;margin:0 auto 56px;padding:0 30px}
+.ops-other h2{font-family:'Manrope',sans-serif;font-size:15px;margin:0 0 12px}
+.ops-other div{display:flex;flex-wrap:wrap;gap:10px}
+.ops-other a{border:1px solid #D5D9DF;border-radius:999px;padding:8px 13px;background:#fff;color:#404A58;font-size:11px}
+.ops-other a:hover{border-color:#7688A2;background:#EFF2F6}
+.ops-modules{margin-top:64px}
+.ops-modules-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 32px;margin-bottom:22px}
+.ops-modules-heading h3{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.4vw,40px);letter-spacing:-.04em;margin:0}
+.ops-modules-heading p{max-width:440px;margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.ops-modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.ops-modules-grid a{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);transition:border-color .2s,transform .2s}
+.ops-modules-grid a:hover{border-color:#7688A2;transform:translateY(-2px)}
+.ops-modules-grid span{font-size:9px;letter-spacing:1.3px;color:#8A8F97}
+.ops-modules-grid b{font-size:16px;font-weight:600}
+.ops-modules-grid p{margin:0;font-size:12.5px;line-height:1.6;color:var(--muted)}
+@media (max-width:640px){.ops-demo,.ops-other{padding:0 20px}.ops-demo iframe{height:70vh}}
