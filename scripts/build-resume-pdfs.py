@@ -61,6 +61,9 @@ def build(language, content, output_path):
     contact = " | ".join(f"{item['label']}: {item['value']}" for item in content["contact"])
     story.extend([p(contact, contact_style), p(content["summary"], body_style), Spacer(1, 3)])
 
+    story.append(p(content["skillsHeading"], section_style))
+    for skill in content["skills"]:
+        story.append(p(f"{skill['label']}: {skill['value']}", skills_style))
     story.append(p(content["experienceHeading"], section_style))
     for role in content["experience"]:
         section = [p(role["title"], title_style), p(f"{role['company']} · {role['dates']}", meta_style)]
@@ -69,7 +72,7 @@ def build(language, content, output_path):
 
     story.append(p(content["projectsHeading"], section_style))
     for project in content["projects"]:
-        section = [p(project["title"], title_style), p(project["description"], project_style), p(f"Tools: {project['tools']}", meta_style)]
+        section = [p(project["title"], title_style), p(project["description"], project_style), p(f"{'Tools' if language == 'en' else 'Herramientas'}: {project['tools']}", meta_style)]
         story.append(KeepTogether(section))
 
     story.append(p(content["educationHeading"], section_style))
@@ -77,9 +80,6 @@ def build(language, content, output_path):
         section = [p(item["title"], title_style), p(f"{item['organization']} · {item['dates']}", meta_style), p(item["detail"], body_style)]
         story.append(KeepTogether(section))
 
-    story.append(p(content["skillsHeading"], section_style))
-    for skill in content["skills"]:
-        story.append(p(f"{skill['label']}: {skill['value']}", skills_style))
 
     story.append(p(content["credentialsHeading"], section_style))
     for credential in content["credentials"]:

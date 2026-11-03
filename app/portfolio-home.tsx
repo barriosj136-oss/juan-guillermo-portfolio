@@ -9,7 +9,7 @@ type Language = "en" | "es";
 const copy = {
   en: {
     nav: ["Profile", "Projects", "Experience", "Education"],
-    role: "Electronic Engineer · Junior Data Analyst",
+    role: "Juan Guillermo Barrios Villamil · Bogotá",
     headline: ["Electronic Engineer", "Junior Data Analyst", "Financial & operations data"],
     intro: "I review account, invoice, payment, service, and operational records; investigate billing discrepancies; and build reports and workflow tools. My projects analyze Bogotá public-budget data and use Python and SQL to validate an editable, generated invoice dataset.",
     primary: "Explore my work", resumeCTA: "View résumé", secondary: "Let’s connect", availability: "Open to junior analyst opportunities",
@@ -34,7 +34,7 @@ const copy = {
   },
   es: {
     nav: ["Perfil", "Proyectos", "Experiencia", "Formación"],
-    role: "Ingeniero electrónico · Analista de datos junior",
+    role: "Juan Guillermo Barrios Villamil · Bogotá",
     headline: ["Ingeniero electrónico", "Analista de datos junior", "Datos financieros y operativos"],
     intro: "Reviso registros de cuentas, facturas, pagos, servicios y operaciones; investigo diferencias de facturación; y elaboro reportes y herramientas de flujo de trabajo. Mis proyectos analizan datos presupuestales públicos de Bogotá y validan con Python y SQL un dataset editable de facturas con datos generados.",
     primary: "Ver mis proyectos", resumeCTA: "Ver hoja de vida", secondary: "Conversemos", availability: "Abierto a oportunidades junior de análisis",

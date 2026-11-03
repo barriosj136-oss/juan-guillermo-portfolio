@@ -17,11 +17,11 @@
         "company": "Iron Mountain",
         "dates": "May 4, 2026 – Present",
         "bullets": [
-          "Review and prioritize High Risk account cases, track case status, and coordinate operational follow-up.",
-          "Use Excel to compare account, invoice, payment, inventory, and service records and investigate billing discrepancies.",
-          "Contributed to the bulk loading of approximately 18,000 accounts into Oracle rather than entering each record individually.",
-          "Automated abandoned-record processing through a web tool and built a dashboard to track account loading and recovery.",
-          "In some inactive-account cases, explain outstanding invoice balances and payment requirements; authorized teams decide whether service is restored."
+          "Contributed to the bulk load of approximately 18,000 accounts into Oracle, replacing record-by-record manual entry.",
+          "Automated abandoned-record processing with a web tool and built a dashboard to track account loading and recovery.",
+          "Compare account, invoice, payment, inventory, and service records in Excel to find and investigate billing discrepancies.",
+          "Review and prioritize High Risk account cases, track their status, and coordinate operational follow-up.",
+          "Explain outstanding balances and payment requirements on inactive accounts so authorized teams can decide on service restoration."
         ]
       },
       {
@@ -55,15 +55,9 @@
         "href": "/projects/bogota-budget"
       },
       {
-        "title": "NovaTech monthly performance (12 months)",
-        "description": "A 2025 monthly view of invoices, payments, recoveries, and outstanding balances from the same 4,800-row generated invoice-and-payment dataset used for the NovaTech case. The source covers 2024–2025 and separates Canada/CAD from United States/USD; Python and SQL checks validate records and reconciliations. Edit the CSV in Excel and reload the local dashboard.",
+        "title": "NovaTech: invoices, payments, and monthly performance",
+        "description": "Built a 4,800-row generated invoice-and-payment dataset (Canada/CAD and United States/USD, 2024–2025) and a monthly dashboard of invoiced, paid, recovered, and outstanding amounts. Python and SQL checks verify record IDs, payment status, and invoice = paid + outstanding. The CSV can be edited in Excel and reloaded into the dashboard.",
         "tools": "Python · SQL · SQLite · Excel · CSV · React · TypeScript",
-        "href": "/projects/novatech"
-      },
-      {
-        "title": "NovaTech invoices and payments: 4,800 generated rows",
-        "description": "Built the editable source dataset behind the monthly dashboard: 4,800 generated invoice and payment records for Canada/CAD and the United States/USD. Python and SQL checks verify record IDs, payment status, and invoice = paid + outstanding; recovered amounts are a subset of paid.",
-        "tools": "CSV · Excel · Python · SQL · SQLite",
         "href": "/projects/novatech"
       },
       {
@@ -91,9 +85,7 @@
       "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026",
       "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026",
       "Frontend Developer · Platzi · 2025",
-      "Practical Frontend Developer · Platzi · 2025",
-      "Emotional Intelligence · Platzi · 2023",
-      "Effective Communication · Platzi · 2023"
+      "Practical Frontend Developer · Platzi · 2025"
     ],
     "languagesHeading": "Languages",
     "languages": "Spanish · Native | English · C1, Universidad de los Andes",
@@ -117,11 +109,11 @@
         "company": "Iron Mountain",
         "dates": "4 de mayo de 2026 – Actualidad",
         "bullets": [
+          "Participé en la carga masiva de aproximadamente 18.000 cuentas a Oracle, en reemplazo del ingreso manual registro por registro.",
+          "Automaticé el procesamiento de registros abandonados con una herramienta web y creé un dashboard para seguir la carga y recuperación de cuentas.",
+          "Comparo en Excel registros de cuentas, facturas, pagos, inventario y servicio para detectar e investigar diferencias de facturación.",
           "Reviso y priorizo casos de cuentas High Risk, hago seguimiento a su estado y coordino acciones operativas.",
-          "Uso Excel para comparar registros de cuentas, facturas, pagos, inventario y servicio e investigar diferencias de facturación.",
-          "Participé en la carga masiva de aproximadamente 18.000 cuentas a Oracle, en vez de ingresar cada registro individualmente.",
-          "Automaticé el procesamiento de registros abandonados mediante una herramienta web y creé un dashboard para seguir la carga de cuentas y su recuperación.",
-          "En algunos casos de cuentas inactivas, explico saldos pendientes y pagos requeridos; los equipos autorizados deciden si se restaura el servicio."
+          "Explico saldos pendientes y pagos requeridos en cuentas inactivas para que los equipos autorizados decidan sobre la restauración del servicio."
         ]
       },
       {
@@ -155,15 +147,9 @@
         "href": "/projects/bogota-budget"
       },
       {
-        "title": "NovaTech monthly performance (12 months)",
-        "description": "Vista mensual de 2025 sobre facturas, pagos, recuperaciones y saldos pendientes, basada en el mismo dataset generado de 4.800 filas del caso NovaTech de facturas y pagos. La fuente cubre 2024–2025 y separa Canadá/CAD de Estados Unidos/USD; validé registros y conciliaciones con Python y SQL. El CSV se puede editar en Excel y recargar en el dashboard local.",
+        "title": "NovaTech: facturas, pagos y desempeño mensual",
+        "description": "Construí un dataset generado de 4.800 facturas y pagos (Canadá/CAD y Estados Unidos/USD, 2024–2025) y un dashboard mensual de lo facturado, pagado, recuperado y pendiente. Validé IDs, estado de pago y la conciliación facturado = pagado + pendiente con Python y SQL. El CSV se edita en Excel y se recarga en el dashboard.",
         "tools": "Python · SQL · SQLite · Excel · CSV · React · TypeScript",
-        "href": "/projects/novatech"
-      },
-      {
-        "title": "NovaTech facturas y pagos: 4.800 filas generadas",
-        "description": "Construí el dataset editable que alimenta el dashboard mensual: 4.800 registros generados de facturas y pagos para Canadá/CAD y Estados Unidos/USD. Las validaciones en Python y SQL comprueban IDs, estado de pago y la conciliación facturado = pagado + pendiente; lo recuperado ya está incluido en lo pagado.",
-        "tools": "CSV · Excel · Python · SQL · SQLite",
         "href": "/projects/novatech"
       },
       {
@@ -191,9 +177,7 @@
       "Introduction to Data Science · Cisco Networking Academy / MinTIC · 5 de mayo de 2026",
       "Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · 23 de mayo de 2026",
       "Frontend Developer · Platzi · 2025",
-      "Practical Frontend Developer · Platzi · 2025",
-      "Inteligencia Emocional · Platzi · 2023",
-      "Comunicación Efectiva · Platzi · 2023"
+      "Practical Frontend Developer · Platzi · 2025"
     ],
     "languagesHeading": "Idiomas",
     "languages": "Español · Nativo | Inglés · C1, Universidad de los Andes",
