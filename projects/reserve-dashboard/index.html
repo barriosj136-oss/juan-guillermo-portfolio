@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reserve Dashboard · Fictional demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --paper: #eef2f4;
+    --surface: #ffffff;
+    --ink: #142235;
+    --ink-2: #4a5a6e;
+    --ink-3: #6b7a8c;
+    --rule: #d6dee5;
+    --accent: #2a78d6;
+    --accent-ink: #1d5fae;
+    --cell: 42, 120, 214;
+    --good: #1a7f4b;
+    --bad: #b4410c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --paper: #0e151d;
+      --surface: #151f2a;
+      --ink: #e7edf3;
+      --ink-2: #a9b8c8;
+      --ink-3: #8193a6;
+      --rule: #263442;
+      --accent: #3987e5;
+      --accent-ink: #8dbaf2;
+      --cell: 57, 135, 229;
+      --good: #4ade80;
+      --bad: #fb923c;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --paper: #0e151d; --surface: #151f2a; --ink: #e7edf3; --ink-2: #a9b8c8; --ink-3: #8193a6;
+    --rule: #263442; --accent: #3987e5; --accent-ink: #8dbaf2; --cell: 57, 135, 229; --good: #4ade80; --bad: #fb923c;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 15px/1.5 "Hanken Grotesk", system-ui, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-block: 20px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; }
+  .top h1 { margin: 0; font-size: 17px; font-weight: 600; }
+  .top-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  .seg { display: inline-flex; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 3px; }
+  .seg button { border: 0; background: none; color: var(--ink-2); font-weight: 600; padding: 7px 14px; border-radius: 7px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+
+  .hero { margin: 40px 0 28px; }
+  .hero h2 { margin: 0; font-size: clamp(34px, 6.4vw, 64px); line-height: 1.02; font-weight: 700; letter-spacing: -.025em; }
+  .hero .figure { margin: 8px 0 0; font-size: clamp(26px, 4.4vw, 42px); font-weight: 500; letter-spacing: -.01em; color: var(--accent-ink); }
+  .hero .sub { margin: 10px 0 0; color: var(--ink-2); max-width: 62ch; }
+  .hero .sub .up { color: var(--bad); font-weight: 600; }
+  .hero .sub .down { color: var(--good); font-weight: 600; }
+  .check { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; }
+  .check.ok { color: var(--good); }
+  .check.off { color: var(--bad); }
+
+  section.block { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 18px 18px 14px; margin-top: 18px; }
+  section.block h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+  section.block .hint { margin: 0 0 12px; color: var(--ink-3); font-size: 13px; }
+
+  .chart { position: relative; }
+  .chart svg { display: block; width: 100%; height: 280px; overflow: visible; }
+  .chart .grid line { stroke: var(--rule); }
+  .chart .grid text, .chart .xlab { fill: var(--ink-3); font-size: 12px; }
+  .chart .bar { fill: var(--accent); opacity: .42; transition: opacity .15s; }
+  .chart .col:hover .bar, .chart .col:focus-visible .bar { opacity: .7; }
+  .chart .col.sel .bar { opacity: 1; }
+  .chart .col.sel .xlab { fill: var(--ink); font-weight: 600; }
+  .chart .col { cursor: pointer; outline: none; }
+  .chart .col:focus-visible .hit { stroke: var(--accent); stroke-width: 2; }
+  .chart .vlab { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  .tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--surface); font-size: 13px; padding: 6px 9px; border-radius: 7px; white-space: nowrap; transform: translate(-50%, -100%); display: none; }
+
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 8px 12px; text-align: right; white-space: nowrap; }
+  thead th { color: var(--ink-3); font-weight: 600; font-size: 13px; border-bottom: 1px solid var(--rule); }
+  thead th.sel { color: var(--ink); }
+  th:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); z-index: 1; }
+  tbody th { font-weight: 500; }
+  tbody tr + tr > * { border-top: 1px solid var(--rule); }
+  td { background: rgba(var(--cell), var(--a, 0)); }
+  td.sel { box-shadow: inset 2px 0 0 var(--accent), inset -2px 0 0 var(--accent); }
+  td.zero { color: var(--ink-3); }
+  tfoot > tr > * { border-top: 2px solid var(--ink); font-weight: 700; }
+  tfoot td { background: none; }
+
+  .empty { margin: 72px 0; max-width: 52ch; }
+  .empty h2 { font-size: clamp(30px, 5vw, 48px); margin: 0 0 12px; letter-spacing: -.02em; line-height: 1.05; }
+  .empty p { color: var(--ink-2); margin: 0; }
+  .meta { margin-top: 14px; color: var(--ink-3); font-size: 13px; }
+
+  .btn { border: 1px solid var(--rule); background: var(--surface); padding: 8px 14px; border-radius: 9px; font-weight: 600; cursor: pointer; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:disabled { opacity: .5; cursor: default; }
+  dialog { border: 1px solid var(--rule); border-radius: 14px; background: var(--surface); color: var(--ink); padding: 22px; width: min(500px, calc(100vw - 32px)); }
+  dialog::backdrop { background: rgba(10, 18, 28, .45); }
+  dialog h2 { margin: 0 0 4px; font-size: 20px; }
+  dialog .lead { margin: 0 0 6px; color: var(--ink-2); font-size: 14px; }
+  .field { display: grid; gap: 5px; margin: 16px 0; font-weight: 600; font-size: 14px; }
+  .field small { font-weight: 400; color: var(--ink-3); }
+  .field select { padding: 8px 10px; border: 1px solid var(--rule); border-radius: 8px; background: var(--paper); font-weight: 400; }
+  .alt { margin: 6px 0 0; font-size: 14px; }
+  .alt summary { cursor: pointer; color: var(--ink-2); }
+  .foot { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+  .credit { margin: 0; color: var(--ink-3); font-size: 13px; }
+  .linkish { background: none; border: 0; padding: 4px 0; color: var(--ink-3); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .linkish:hover { color: var(--ink-2); }
+  .status { min-height: 1.5em; color: var(--ink-2); font-size: 14px; margin: 8px 0 0; }
+  .status.err { color: var(--bad); }
+  .actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; }
+
+  .credit a { color: var(--accent-ink); }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Reserve Dashboard</h1>
+    <div class="top-actions">
+      <div class="seg" role="group" aria-label="View">
+        <button type="button" data-view="rolling" aria-pressed="true">General Reserve</button>
+        <button type="button" data-view="general" aria-pressed="false">Rolling</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main"></main>
+
+  <footer class="foot">
+    <p class="credit">Hub by Juan Guillermo Barrios · <strong>Fictional demo data</strong> · Sample files: <a id="dlGeneral" download="sample-monthly-360.csv">monthly 360+</a>, <a id="dlRolling" download="sample-accumulated-reserve.csv">accumulated reserve</a></p>
+    <button type="button" class="linkish" id="openLoader" hidden>Load data</button>
+  </footer>
+</div>
+
+<dialog id="loader" aria-labelledby="ldTitle">
+  <h2 id="ldTitle">Load data</h2>
+  <p class="lead">Pick the Excel workbook. The tabs are chosen and loaded automatically, and the new numbers replace the demo data in this browser tab only.</p>
+  <label class="field">Excel workbook
+    <input type="file" id="xlsxFile" accept=".xlsx,.xlsm,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+  </label>
+  <details class="alt" id="tabPick" hidden>
+    <summary>Change tabs</summary>
+    <label class="field">General Reserve tab (accumulated, with the Reserve column) <select id="tabRolling"></select></label>
+    <label class="field">Rolling tab (monthly 360+ balances) <select id="tabGeneral"></select></label>
+  </details>
+  <details class="alt">
+    <summary>Use CSV files instead</summary>
+    <label class="field">General Reserve sheet (accumulated, with the Reserve column)
+      <input type="file" id="csvRolling" accept=".csv,text/csv">
+    </label>
+    <label class="field">Rolling sheet (monthly 360+ balances, PV)
+      <input type="file" id="csvGeneral" accept=".csv,text/csv">
+      <small>In Excel: File › Save As › CSV UTF-8, once for each sheet. CSV loads faster than a large workbook.</small>
+    </label>
+  </details>
+  <p class="status" id="ldStatus" role="status"></p>
+  <div class="actions">
+    <button type="button" class="btn" id="ldCancel">Cancel</button>
+    <button type="button" class="btn primary" id="ldGo">Load data</button>
+  </div>
+</dialog>
+
+<script>
+/**
+ * Reserve math, run in the browser when the admin loads CSV files. Pure functions: test/logic.test.js runs them in Node.
+ *
+ * General: per month, sum Balance due per account, floor each account at zero, then add up.
+ * Rolling: per account row, running total across periods, floored at zero at each step, then add up.
+ */
+
+var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var MONTH_ABBR = MONTHS.map(function (m) { return m.slice(0, 3).toLowerCase(); });
+
+function norm(s) { return String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' '); }
+
+// Numbers may arrive as numbers or as text in en ("1,215.60") or es ("1.215,60") format.
+function parseNum(v) {
+  if (typeof v === 'number') return isFinite(v) ? v : 0;
+  var s = String(v == null ? '' : v).trim();
+  if (!s) return 0;
+  var neg = s.indexOf('-') >= 0 || /^\(.*\)$/.test(s);
+  s = s.replace(/[^0-9.,]/g, '');
+  var lc = s.lastIndexOf(','), ld = s.lastIndexOf('.');
+  var dec = lc >= 0 && ld >= 0 ? (lc > ld ? ',' : '.')
+    : lc >= 0 ? (/,\d{1,2}$/.test(s) && s.indexOf(',') === lc ? ',' : '')
+    : ld >= 0 ? (s.indexOf('.') === ld ? '.' : '')
+    : '';
+  if (dec === ',') s = s.replace(/\./g, '').replace(',', '.');
+  else if (dec === '.') s = s.replace(/,/g, '');
+  else s = s.replace(/[.,]/g, '');
+  var n = parseFloat(s);
+  return isNaN(n) ? 0 : (neg ? -n : n);
+}
+
+// Any month-ish value (text "10-2026", a Date, "Oct-26") -> "MM-YYYY"; "Reserve" -> "Reserve"; else ''.
+function normMonth(v) {
+  if (Object.prototype.toString.call(v) === '[object Date]') return isNaN(v) ? '' : pad2(v.getMonth() + 1) + '-' + v.getFullYear();
+  // Excel date serial (an .xlsx month column or header stored as a date), years 2000-2099.
+  if (typeof v === 'number' && v >= 36526 && v < 73051) {
+    var d = new Date(Date.UTC(1899, 11, 30) + Math.round(v) * 864e5);
+    return pad2(d.getUTCMonth() + 1) + '-' + d.getUTCFullYear();
+  }
+  var s = String(v == null ? '' : v).trim(), m;
+  if (!s) return '';
+  if (/^reserve$/i.test(s)) return 'Reserve';
+  if ((m = s.match(/^(\d{1,2})[-\/.](\d{4})$/))) return pad2(m[1]) + '-' + m[2];
+  if ((m = s.match(/^(\d{4})-(\d{1,2})(?:-\d{1,2})?(?:T.*)?$/))) return pad2(m[2]) + '-' + m[1];
+  if ((m = s.match(/^([a-z]{3})[a-z]*\.?[\s\-\/](\d{2}|\d{4})$/i))) {
+    var i = MONTH_ABBR.indexOf(m[1].toLowerCase());
+    if (i >= 0) return pad2(i + 1) + '-' + (m[2].length === 2 ? '20' + m[2] : m[2]);
+  }
+  return '';
+}
+function pad2(x) { return ('0' + x).slice(-2); }
+
+function periodKey(p) { var m = /^(\d{2})-(\d{4})$/.exec(p); return m ? (+m[2]) * 12 + (+m[1]) : -1; }
+function cmpPeriod(a, b) { return periodKey(a) - periodKey(b); }
+
+function findHeaderRow(rows) {
+  for (var i = 0; i < rows.length; i++) {
+    if (rows[i].some(function (c) { return norm(c) === 'oracle_account_number'; })) return i;
+  }
+  return -1;
+}
+
+function firstIndex(h, test) { for (var i = 0; i < h.length; i++) if (test(norm(h[i]))) return i; return -1; }
+
+function requireCols(found, names) {
+  var missing = Object.keys(found).filter(function (k) { return found[k] < 0; }).map(function (k) { return names[k]; });
+  if (missing.length) throw new Error('Missing column' + (missing.length > 1 ? 's' : '') + ': ' + missing.join(', ') + '.');
+  return found;
+}
+
+function resolveGeneral(h) {
+  return requireCols({
+    // A sheet can have several Mont-Year columns; the 360+ one is the bucket month the pivot filters on.
+    m: (function () {
+      var i360 = firstIndex(h, function (s) { return /^month?[\s-]*year/.test(s) && s.indexOf('360') >= 0; });
+      return i360 >= 0 ? i360 : firstIndex(h, function (s) { return /^month?[\s-]*year/.test(s); });
+    })(),
+    a: firstIndex(h, function (s) { return s === 'oracle_account_number'; }),
+    v: firstIndex(h, function (s) { return s === 'collections_vsl'; }),
+    b: firstIndex(h, function (s) { return s === 'balance due'; })
+  }, { m: 'Mont-Year 360+', a: 'oracle_account_number', v: 'collections_vsl', b: 'Balance due' });
+}
+
+// The Rolling sheet repeats each period header in 3 blocks (inflows, running total, floored).
+// First occurrence = monthly inflows we compute from; last occurrence = the workbook's floored values, used as a check.
+function resolveRolling(h) {
+  var cols = requireCols({
+    a: firstIndex(h, function (s) { return s === 'oracle_account_number'; }),
+    v: firstIndex(h, function (s) { return s === 'collections_vsl'; })
+  }, { a: 'oracle_account_number', v: 'collections_vsl' });
+  var groups = {}, order = [];
+  h.forEach(function (cell, i) {
+    var p = normMonth(cell);
+    if (!p) return;
+    if (!groups[p]) { groups[p] = []; order.push(p); }
+    groups[p].push(i);
+  });
+  if (!groups.Reserve) throw new Error('Missing column: Reserve.');
+  var periods = ['Reserve'].concat(order.filter(function (p) { return p !== 'Reserve'; }).sort(cmpPeriod));
+  var hasCheck = periods.every(function (p) { return groups[p].length > 1; });
+  return {
+    a: cols.a, v: cols.v, periods: periods,
+    inflow: periods.map(function (p) { return groups[p][0]; }),
+    check: hasCheck ? periods.map(function (p) { return groups[p][groups[p].length - 1]; }) : null
+  };
+}
+
+function vslName(v) { return String(v == null ? '' : v).trim() || 'Unassigned'; }
+
+/**
+ * h: header row (array of labels). read(indexes) returns { index: columnValues[] } for 0-based column indexes.
+ */
+function buildGeneral(h, read) {
+  var c = resolveGeneral(h), d = read([c.m, c.a, c.v, c.b]), n = d[c.a].length;
+  var per = {}, rows = 0;
+  for (var i = 0; i < n; i++) {
+    var m = normMonth(d[c.m][i]);
+    if (!m || m === 'Reserve') continue;
+    rows++;
+    var acct = String(d[c.a][i] == null ? '' : d[c.a][i]).trim(), k = m + '|' + acct;
+    if (!per[k]) per[k] = { m: m, a: acct, v: vslName(d[c.v][i]), s: 0 };
+    per[k].s += parseNum(d[c.b][i]);
+  }
+  var tot = {}, byVsl = {}, accts = {};
+  Object.keys(per).forEach(function (k) {
+    var o = per[k], x = o.s > 0 ? o.s : 0;
+    accts[o.a] = 1;
+    tot[o.m] = (tot[o.m] || 0) + x;
+    byVsl[o.v] = byVsl[o.v] || {};
+    byVsl[o.v][o.m] = (byVsl[o.v][o.m] || 0) + x;
+  });
+  var periods = Object.keys(tot).sort(cmpPeriod);
+  return {
+    kind: 'general', periods: periods,
+    totals: periods.map(function (p) { return tot[p]; }),
+    vsl: Object.keys(byVsl).map(function (name) { return { name: name, vals: periods.map(function (p) { return byVsl[name][p] || 0; }) }; }),
+    meta: { rows: rows, accounts: Object.keys(accts).length, monthColumn: String(h[c.m]).trim() }
+  };
+}
+
+function buildRolling(h, read) {
+  var c = resolveRolling(h), P = c.periods.length;
+  var d = read([c.a, c.v].concat(c.inflow, c.check || [])), n = d[c.a].length;
+  var tot = new Array(P).fill(0), chk = c.check ? new Array(P).fill(0) : null, byVsl = {}, rows = 0;
+  for (var i = 0; i < n; i++) {
+    if (!String(d[c.a][i] == null ? '' : d[c.a][i]).trim()) continue;
+    rows++;
+    var name = vslName(d[c.v][i]);
+    var r = byVsl[name] || (byVsl[name] = new Array(P).fill(0)), run = 0;
+    for (var p = 0; p < P; p++) {
+      run += parseNum(d[c.inflow[p]][i]);
+      var x = run > 0 ? run : 0;
+      tot[p] += x; r[p] += x;
+      if (chk) chk[p] += parseNum(d[c.check[p]][i]);
+    }
+  }
+  return {
+    kind: 'rolling', periods: c.periods, totals: tot, check: chk,
+    vsl: Object.keys(byVsl).map(function (name) { return { name: name, vals: byVsl[name] }; }),
+    meta: { rows: rows, accounts: rows }
+  };
+}
+
+function detectDelim(text) {
+  var sample = text.slice(0, 5000), best = ',', bestN = -1;
+  [',', ';', '\t'].forEach(function (d) { var n = sample.split(d).length; if (n > bestN) { bestN = n; best = d; } });
+  return best;
+}
+
+function* csvRows(text, delim) {
+  var i = 0, n = text.length;
+  while (i < n) {
+    var row = [], field = '', q = false;
+    for (;;) {
+      if (i >= n) { row.push(field); break; }
+      var c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i += 2; continue; } q = false; i++; continue; }
+        field += c; i++; continue;
+      }
+      if (c === '"') { q = true; i++; continue; }
+      if (c === delim) { row.push(field); field = ''; i++; continue; }
+      if (c === '\r' || c === '\n') { row.push(field); i++; if (c === '\r' && text[i] === '\n') i++; break; }
+      field += c; i++;
+    }
+    yield row;
+  }
+}
+
+// CSV text (Excel: Save As > CSV) -> summary. kind: 'general' | 'rolling'. Keeps only the columns the math needs.
+function processCsv(text, kind) {
+  text = text.replace(/^\uFEFF/, '');
+  var it = csvRows(text, detectDelim(text)), head = [], step;
+  while (head.length < 15 && !(step = it.next()).done) {
+    head.push(step.value);
+    if (findHeaderRow([step.value]) === 0) break;
+  }
+  var hi = findHeaderRow(head);
+  if (hi < 0) throw new Error("Couldn't find the header row (a column named oracle_account_number) in the first 15 rows.");
+  var build = kind === 'general' ? buildGeneral : buildRolling;
+  return build(head[hi], function (indexes) {
+    var out = {};
+    indexes.forEach(function (x) { out[x] = []; });
+    while (!(step = it.next()).done) {
+      var row = step.value;
+      if (row.length === 1 && row[0] === '') continue;
+      indexes.forEach(function (x) { out[x].push(row[x]); });
+    }
+    return out;
+  });
+}
+</script>
+<script src="demo-data.js"></script>
+<script>
+var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function periodKey(p) { var m = /^(\d{2})-(\d{4})$/.exec(p); return m ? (+m[2]) * 12 + (+m[1]) : -1; }
+function longLabel(p) { return periodKey(p) < 0 ? p : MONTHS[+p.slice(0, 2) - 1] + ' ' + p.slice(3); }
+function shortLabel(p) { return periodKey(p) < 0 ? p : MONTHS[+p.slice(0, 2) - 1].slice(0, 3) + " '" + p.slice(5); }
+var state = { general: null, rolling: null, view: 'rolling', sel: { general: 0, rolling: 0 }, source: '', updated: '', error: '', loaded: false, isAdmin: false };
+var money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+var money2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+var compact = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', maximumFractionDigits: 1 });
+var int = new Intl.NumberFormat('en-US');
+var $ = function (id) { return document.getElementById(id); };
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+function defaultGeneralIndex(periods) {
+  if (state.rolling) {
+    var firstDated = state.rolling.periods[1], i = periods.indexOf(firstDated);
+    if (i >= 0) return i;
+  }
+  var now = new Date(), target = now.getFullYear() * 12 + now.getMonth(); // previous month = closed month
+  var best = 0;
+  periods.forEach(function (p, i) { if (periodKey(p) <= target) best = i; });
+  return best;
+}
+
+function render() {
+  document.querySelectorAll('[data-view]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === state.view)); });
+  var d = state[state.view], main = $('main');
+  if (!d) {
+    main.innerHTML = state.error
+      ? '<div class="empty" role="alert"><h2>The data could not be loaded</h2><p>' + esc(state.error) + '</p></div>'
+      : !state.loaded
+        ? '<div class="empty" role="status"><h2>Loading reserve data…</h2><p>Getting the latest numbers.</p></div>'
+        : state.isAdmin
+          ? '<div class="empty"><h2>No data loaded yet</h2><p>Use Load data at the bottom of the page to upload the Excel workbook.</p></div>'
+          : '<div class="empty"><h2>No data yet</h2><p>The reserve numbers haven’t been loaded. Check back later.</p></div>';
+    return;
+  }
+  var i = state.sel[state.view];
+  main.innerHTML =
+    '<div class="hero" id="hero"></div>' +
+    '<section class="block"><h3>' + (d.kind === 'general' ? 'New 360+ balances by month' : 'Reserve by month') + '</h3>' +
+      '<p class="hint">Select a month to update the figures above and the table below.</p>' +
+      '<div class="chart" id="chart"><div class="tip" id="tip"></div></div></section>' +
+    '<section class="block"><h3>By VSL</h3><div class="scroll" id="table"></div>' +
+      '<p class="meta">' + int.format(d.meta.rows) + ' rows, ' + int.format(d.meta.accounts) + ' accounts' + (d.meta.monthColumn ? ', month column “' + esc(d.meta.monthColumn) + '”' : '') + (state.source ? ' from ' + esc(state.source) : '') + (state.updated ? ', updated ' + new Date(state.updated).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) : '') + '.</p></section>';
+  renderHero(d, i);
+  renderChart(d, i);
+  renderTable(d, i);
+}
+
+function select(i) {
+  var d = state[state.view];
+  if (!d || i < 0 || i >= d.periods.length) return;
+  state.sel[state.view] = i;
+  renderHero(d, i);
+  renderChart(d, i);
+  renderTable(d, i);
+  var focus = document.querySelector('.col[data-i="' + i + '"]');
+  if (focus) focus.focus();
+}
+
+function renderHero(d, i) {
+  var p = d.periods[i], title, sub;
+  if (d.kind === 'general') {
+    title = longLabel(p);
+    sub = 'Balances that reached 360+ days in ' + longLabel(p) + ', netted per account and floored at zero.';
+  } else if (p === 'Reserve') {
+    title = 'Reserve';
+    sub = (d.periods[1] ? longLabel(d.periods[1]) + ' reserve: ' : '') + 'the accumulated stock in the Reserve column.';
+  } else {
+    title = longLabel(p);
+    sub = 'Reserve plus everything that rolled into 360+ through ' + longLabel(p) + '.';
+  }
+  var delta = '';
+  if (i > 0) {
+    var diff = d.totals[i] - d.totals[i - 1];
+    delta = ' <span class="' + (diff >= 0 ? 'up' : 'down') + '">' + (diff >= 0 ? '+' : '−') + money.format(Math.abs(diff)) + '</span> vs ' + esc(shortLabel(d.periods[i - 1])) + '.';
+  }
+  var check = '';
+  if (d.check) {
+    var gap = d.totals[i] - d.check[i];
+    check = Math.abs(gap) < 1
+      ? '<span class="check ok">Matches the workbook total for this column.</span>'
+      : '<span class="check off">Workbook shows ' + money.format(d.check[i]) + ' for this column (' + money2.format(gap) + ' apart). Check the sheet formulas.</span>';
+  }
+  $('hero').innerHTML = '<h2>' + esc(title) + '</h2><p class="figure">' + money.format(d.totals[i]) + '</p><p class="sub">' + esc(sub) + delta + '</p>' + check;
+}
+
+function niceMax(v) {
+  if (v <= 0) return 1;
+  var raw = v / 4, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  var step = [1, 2, 2.5, 5, 10].map(function (k) { return k * mag; }).find(function (s) { return s >= raw; });
+  return step * 4;
+}
+
+function renderChart(d, sel) {
+  var box = $('chart'), W = Math.max(300, box.clientWidth), H = 280;
+  var padL = 58, padR = 8, padT = 26, padB = 30, n = d.periods.length;
+  var max = niceMax(Math.max.apply(null, d.totals)), plotH = H - padT - padB;
+  var slot = (W - padL - padR) / n, bw = Math.max(6, Math.min(56, slot * 0.62));
+  var every = Math.max(1, Math.ceil(58 / slot));
+  var y = function (v) { return padT + plotH - (v / max) * plotH; };
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="group" aria-label="Reserve by month"><g class="grid">';
+  for (var t = 0; t <= 4; t++) {
+    var tv = max * t / 4, ty = y(tv);
+    svg += '<line x1="' + padL + '" x2="' + (W - padR) + '" y1="' + ty + '" y2="' + ty + '"/><text x="' + (padL - 8) + '" y="' + (ty + 4) + '" text-anchor="end">' + compact.format(tv) + '</text>';
+  }
+  svg += '</g>';
+  d.periods.forEach(function (p, i) {
+    var cx = padL + slot * i + slot / 2, v = d.totals[i], top = y(v), h = padT + plotH - top, x = cx - bw / 2, r = Math.min(4, bw / 2, h);
+    var path = h > 0 ? 'M' + x + ',' + (padT + plotH) + 'V' + (top + r) + 'Q' + x + ',' + top + ' ' + (x + r) + ',' + top + 'H' + (x + bw - r) + 'Q' + (x + bw) + ',' + top + ' ' + (x + bw) + ',' + (top + r) + 'V' + (padT + plotH) + 'Z' : '';
+    svg += '<g class="col' + (i === sel ? ' sel' : '') + '" data-i="' + i + '" tabindex="' + (i === sel ? 0 : -1) + '" role="button" aria-pressed="' + (i === sel) + '" aria-label="' + esc(longLabel(p) + ': ' + money.format(v)) + '">' +
+      '<rect class="hit" x="' + (cx - slot / 2 + 1) + '" y="' + padT + '" width="' + (slot - 2) + '" height="' + plotH + '" fill="transparent" rx="6"/>' +
+      (path ? '<path class="bar" d="' + path + '"/>' : '') +
+      (i === sel ? '<text class="vlab" x="' + cx + '" y="' + (top - 8) + '" text-anchor="middle">' + compact.format(v) + '</text>' : '') +
+      ((i % every === 0 || i === sel) ? '<text class="xlab" x="' + cx + '" y="' + (H - 8) + '" text-anchor="middle">' + esc(shortLabel(p)) + '</text>' : '') +
+      '</g>';
+  });
+  svg += '</svg>';
+  var tip = $('tip');
+  box.innerHTML = svg;
+  box.appendChild(tip);
+  box.querySelectorAll('.col').forEach(function (g) {
+    var i = +g.dataset.i;
+    g.addEventListener('click', function () { select(i); });
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(i); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); select(i + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); select(i - 1); }
+    });
+    g.addEventListener('mouseenter', function () {
+      var cx = padL + slot * i + slot / 2;
+      tip.textContent = longLabel(d.periods[i]) + ': ' + money.format(d.totals[i]);
+      tip.style.left = (cx / W * box.clientWidth) + 'px';
+      tip.style.top = (y(d.totals[i]) / H * box.clientHeight - 10) + 'px';
+      tip.style.display = 'block';
+    });
+    g.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+  });
+}
+
+function renderTable(d, sel) {
+  var rows = d.vsl.filter(function (r) { return r.vals.some(function (v) { return v > 0; }); })
+    .sort(function (a, b) { return b.vals[sel] - a.vals[sel] || a.name.localeCompare(b.name); });
+  var max = 0;
+  rows.forEach(function (r) { r.vals.forEach(function (v) { if (v > max) max = v; }); });
+  var html = '<table><thead><tr><th scope="col">VSL</th>' + d.periods.map(function (p, i) {
+    return '<th scope="col"' + (i === sel ? ' class="sel"' : '') + '>' + esc(shortLabel(p)) + '</th>';
+  }).join('') + '</tr></thead><tbody>';
+  rows.forEach(function (r) {
+    html += '<tr><th scope="row">' + esc(r.name) + '</th>' + r.vals.map(function (v, i) {
+      var a = max > 0 && v > 0 ? (0.05 + 0.4 * Math.sqrt(v / max)).toFixed(3) : 0;
+      return '<td class="' + (v > 0 ? '' : 'zero') + (i === sel ? ' sel' : '') + '" style="--a:' + a + '">' + (v > 0 ? money.format(v) : '–') + '</td>';
+    }).join('') + '</tr>';
+  });
+  html += '</tbody><tfoot><tr><th scope="row">Total</th>' + d.totals.map(function (v, i) {
+    return '<td' + (i === sel ? ' class="sel"' : '') + '>' + money.format(v) + '</td>';
+  }).join('') + '</tr></tfoot></table>';
+  $('table').innerHTML = html;
+}
+
+document.querySelectorAll('[data-view]').forEach(function (b) {
+  b.addEventListener('click', function () { state.view = b.dataset.view; render(); });
+});
+var resizeTimer;
+window.addEventListener('resize', function () {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () { var d = state[state.view]; if (d) renderChart(d, state.sel[state.view]); }, 120);
+});
+var hasServer = !window.DEMO_DATA && typeof google !== 'undefined' && google.script && google.script.run;
+
+function gs(fn, arg) {
+  return new Promise(function (resolve, reject) { google.script.run.withSuccessHandler(resolve).withFailureHandler(reject)[fn](arg); });
+}
+
+function show(data) {
+  data = data || {};
+  state.loaded = true;
+  state.general = data.general || null; state.rolling = data.rolling || null;
+  state.source = data.source || ''; state.updated = data.updated || '';
+  state.sel.rolling = 0;
+  if (state.general) state.sel.general = defaultGeneralIndex(state.general.periods);
+  var both = state.general && state.rolling;
+  document.querySelector('.seg[aria-label="View"]').hidden = !both;
+  if (!state[state.view]) state.view = state.rolling ? 'rolling' : 'general';
+  render();
+}
+
+// ---------- Load data (admins only; the server checks too) ----------
+function setStatus(msg, err) { $('ldStatus').textContent = msg; $('ldStatus').className = 'status' + (err ? ' err' : ''); }
+function tick() { return new Promise(function (r) { setTimeout(r, 30); }); }
+
+$('openLoader').addEventListener('click', function () { setStatus(''); $('loader').showModal(); });
+$('ldCancel').addEventListener('click', function () { $('loader').close(); });
+// ---- Excel workbook (SheetJS loads only when an admin picks a workbook) ----
+var XLSX_URL = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+var XLSX_OPTS = { type: 'array', dense: true, cellText: false, cellNF: false, cellHTML: false, cellStyles: false };
+var xlsxBuf = null, xlsxName = '';
+
+function loadXlsxLib() {
+  if (window.XLSX) return Promise.resolve();
+  return new Promise(function (resolve, reject) {
+    var s = document.createElement('script');
+    s.src = XLSX_URL;
+    s.onload = resolve;
+    s.onerror = function () { reject(new Error('The Excel reader could not be loaded. Save the sheets as CSV and use that option instead.')); };
+    document.head.appendChild(s);
+  });
+}
+
+// Uniform cell access for dense (0.18 array / 0.19+ "!data") and sparse worksheets.
+function grid(ws) {
+  if (!ws || !ws['!ref']) return null;
+  var R = XLSX.utils.decode_range(ws['!ref']);
+  var data = ws['!data'] || (Array.isArray(ws) ? ws : null);
+  var get = data
+    ? function (r, c) { var row = data[r], x = row && row[c]; return x ? x.v : ''; }
+    : function (r, c) { var x = ws[XLSX.utils.encode_cell({ r: r, c: c })]; return x ? x.v : ''; };
+  return { last: R.e.r, width: R.e.c + 1, get: get };
+}
+
+function gridHead(g) {
+  var rows = [];
+  for (var r = 0; r <= Math.min(g.last, 14); r++) {
+    var row = [];
+    for (var c = 0; c < g.width; c++) row.push(g.get(r, c));
+    rows.push(row);
+  }
+  return rows;
+}
+
+function buildFromGrid(g, kind) {
+  var head = gridHead(g), hi = findHeaderRow(head);
+  if (hi < 0) throw new Error('no header row with oracle_account_number in the first 15 rows.');
+  return (kind === 'general' ? buildGeneral : buildRolling)(head[hi], function (indexes) {
+    var out = {};
+    indexes.forEach(function (x) { out[x] = []; });
+    for (var r = hi + 1; r <= g.last; r++) indexes.forEach(function (x) { out[x].push(g.get(r, x)); });
+    return out;
+  });
+}
+
+// Pre-selects a tab only when there is no doubt; otherwise the admin must choose (a wrong guess gives wrong totals).
+function fillTabs(id, tabs, prefer) {
+  var sel = $(id);
+  sel.innerHTML = '<option value="">' + (tabs.length > 1 ? 'Choose a tab…' : 'None') + '</option>' + tabs.map(function (t) {
+    return '<option value="' + esc(t.name) + '">' + esc(t.name) + (t.rows ? ' (' + int.format(t.rows) + ' rows)' : '') + '</option>';
+  }).join('');
+  // prefer: name patterns in priority order; falls back to the first matching tab.
+  var pick = '';
+  prefer.some(function (re) { var t = tabs.find(function (x) { return re.test(x.name.trim()); }); if (t) pick = t.name; return !!t; });
+  sel.value = pick || (tabs[0] ? tabs[0].name : '');
+}
+
+// Tab names used by the source workbook:
+// monthly 360+ data is in "Rolling Oct" (column "Month-Year 360+"), the accumulated sheet is "PV".
+var MONTHLY_TABS = [/^rolling oct/i, /^rolling/i, /risk/i];
+var ACCUMULATED_TABS = [/^pv$/i, /^rolling/i];
+
+$('xlsxFile').addEventListener('change', async function () {
+  var f = this.files[0];
+  xlsxBuf = null; xlsxName = ''; $('tabPick').hidden = true;
+  if (!f) return;
+  try {
+    setStatus('Opening ' + f.name + '…');
+    await loadXlsxLib();
+    var buf = await f.arrayBuffer();
+    var wb = XLSX.read(buf, Object.assign({ sheetRows: 15 }, XLSX_OPTS));
+    var found = { general: [], rolling: [] };
+    wb.SheetNames.forEach(function (n) {
+      var g = grid(wb.Sheets[n]); if (!g) return;
+      var head = gridHead(g), hi = findHeaderRow(head); if (hi < 0) return;
+      var full = wb.Sheets[n]['!fullref'] || wb.Sheets[n]['!ref'];
+      var tab = { name: n, rows: Math.max(0, XLSX.utils.decode_range(full).e.r - hi) };
+      try { resolveGeneral(head[hi]); found.general.push(tab); } catch (e) { /* not a monthly (PV) tab */ }
+      try { resolveRolling(head[hi]); found.rolling.push(tab); } catch (e) { /* not an accumulated tab */ }
+    });
+    if (!found.general.length && !found.rolling.length) {
+      throw new Error('No tab in ' + f.name + ' has the expected columns (oracle_account_number with Mont-Year 360+ and Balance due, or with Reserve).');
+    }
+    fillTabs('tabGeneral', found.general, MONTHLY_TABS);
+    fillTabs('tabRolling', found.rolling, ACCUMULATED_TABS);
+    xlsxBuf = buf; xlsxName = f.name;
+    $('tabPick').hidden = false;
+  } catch (e) {
+    setStatus((e && e.message) || String(e), true);
+    return;
+  }
+  runLoad();
+});
+
+$('ldGo').addEventListener('click', runLoad);
+async function runLoad() {
+  var go = $('ldGo'), files = { general: $('csvGeneral').files[0], rolling: $('csvRolling').files[0] };
+  var tabs = { general: $('tabGeneral').value, rolling: $('tabRolling').value };
+  var useXlsx = xlsxBuf && (tabs.general || tabs.rolling);
+  go.disabled = true;
+  try {
+    var part = {};
+    if (useXlsx) {
+      setStatus('Reading ' + xlsxName + '. Large workbooks can take a minute…'); await tick();
+      var names = [tabs.general, tabs.rolling].filter(Boolean);
+      var wb = XLSX.read(xlsxBuf, Object.assign({ sheets: names }, XLSX_OPTS));
+      ['general', 'rolling'].forEach(function (kind) {
+        if (!tabs[kind]) return;
+        try { part[kind] = buildFromGrid(grid(wb.Sheets[tabs[kind]]), kind); }
+        catch (e) { throw new Error('Tab "' + tabs[kind] + '": ' + e.message); }
+      });
+      part.source = xlsxName + ' (' + names.join(', ') + ')';
+    } else {
+      if (xlsxBuf && !files.general && !files.rolling) throw new Error('Choose at least one tab.');
+      if (!files.general && !files.rolling) throw new Error('Choose an Excel workbook, or CSV files.');
+      part.source = [files.general, files.rolling].filter(Boolean).map(function (f) { return f.name; }).join(' and ');
+      for (var kind in files) {
+        if (!files[kind]) continue;
+        setStatus('Reading ' + files[kind].name + '…'); await tick();
+        try { part[kind] = processCsv(await files[kind].text(), kind); }
+        catch (e) { throw new Error(files[kind].name + ': ' + e.message); }
+      }
+    }
+    setStatus('Saving…');
+    var saved = hasServer ? await gs('saveDashboard', part)
+      : { general: part.general || state.general, rolling: part.rolling || state.rolling, source: part.source, updated: new Date().toISOString() };
+    show(saved);
+    $('xlsxFile').value = ''; // lets the admin pick the same file again next time
+    $('loader').close();
+  } catch (e) {
+    setStatus((e && e.message) || String(e), true);
+  } finally {
+    go.disabled = false;
+  }
+}
+
+function start(resp) {
+  state.isAdmin = !!(resp && resp.isAdmin);
+  $('openLoader').hidden = !state.isAdmin;
+  show(resp && resp.data);
+}
+render();
+if (window.DEMO_DATA) {
+  start({ data: window.DEMO_DATA, isAdmin: true });
+  ['General', 'Rolling'].forEach(function (k) { $('dl' + k).href = URL.createObjectURL(new Blob([window.DEMO_CSV[k.toLowerCase()]], { type: 'text/csv' })); });
+}
+else if (hasServer) {
+  google.script.run
+    .withSuccessHandler(start)
+    .withFailureHandler(function (e) { state.error = (e && e.message) || String(e); render(); })
+    .getDashboard();
+}
+</script>
+</body>
+</html>

@@ -2,186 +2,255 @@
 
 import { useEffect, useState } from "react";
 import styles from "./portfolio-home.module.css";
-import publicReport from "../projects/bogota-budget/data/summary.json";
-import { opsViews } from "./projects/ops-studio/views";
+import ValueCleaner from "./value-cleaner";
 
 type Language = "en" | "es";
+type Skill = "sql" | "python" | "excel" | "dashboards" | "script";
+
+const EMAIL = "juguibavi27@gmail.com";
+const LINKEDIN = "https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/";
+const GITHUB = "https://github.com/barriosj136-oss";
+
+const projects: { id: string; href: string; img?: string; skills: Skill[]; en: [string, string, string]; es: [string, string, string] }[] = [
+  { id: "reserve", href: "/projects/reserve-dashboard", img: "/shots/reserve.jpg", skills: ["excel", "dashboards", "script"],
+    en: ["Reserve & Rolling dashboard", "Excel logic rebuilt in Apps Script", "Fictional demo"], es: ["Dashboard de reserva y rolling", "Lógica de Excel llevada a Apps Script", "Demo ficticia"] },
+  { id: "ops", href: "/projects/ops-studio", img: "/shots/ops-actionplan.jpg", skills: ["dashboards", "script", "excel"],
+    en: ["Ops Studio", "Collections workspace in seven views", "Fictional demo"], es: ["Ops Studio", "Espacio de cobranza en siete vistas", "Demo ficticia"] },
+  { id: "bogota", href: "/projects/bogota-budget", img: "/shots/bogota.jpg", skills: ["sql", "python"],
+    en: ["Bogotá 2025 public budget", "7,681 official records in SQL and Python", "Public data"], es: ["Presupuesto público de Bogotá 2025", "7.681 registros oficiales en SQL y Python", "Datos públicos"] },
+  { id: "novatech", href: "/projects/novatech", img: "/shots/novatech.jpg", skills: ["sql", "python", "excel", "dashboards"],
+    en: ["NovaTech invoices and payments", "4,800 rows that must reconcile", "Synthetic data"], es: ["NovaTech: facturas y pagos", "4.800 filas que deben cuadrar", "Datos sintéticos"] },
+  { id: "lukas", href: "/projects/lukas", img: "/shots/lukas-home.jpg", skills: ["script", "dashboards"],
+    en: ["Lukas, a budgeting app", "Bank statements read from PDF", "Live app"], es: ["Lukas, app de presupuesto", "Extractos bancarios leídos desde PDF", "App en uso"] },
+  { id: "trazo", href: "/projects/unit-economics", skills: ["excel"],
+    en: ["Unit economics for a small shop", "Cost build-up and break-even model", "Case study"], es: ["Economía unitaria de un emprendimiento", "Costos, comisiones y punto de equilibrio", "Caso escrito"] },
+  { id: "copilot", href: "/projects/operations-decision-copilot", skills: ["script"],
+    en: ["Operations Decision Copilot", "Rules that turn a case into a review note", "Fictional demo"], es: ["Operations Decision Copilot", "Reglas que convierten un caso en nota", "Demo ficticia"] },
+];
 
 const copy = {
   en: {
-    nav: ["Profile", "Projects", "Experience", "Education"],
-    role: "Juan Guillermo Barrios Villamil · Bogotá",
-    headline: ["Electronic Engineer", "Junior Data Analyst", "Financial & operations data"],
-    intro: "I review account, invoice, payment, service, and operational records; investigate billing discrepancies; and build reports and workflow tools. My projects analyze Bogotá public-budget data and use Python and SQL to validate an editable, generated invoice dataset.",
-    primary: "Explore my work", resumeCTA: "View résumé", secondary: "Let’s connect", availability: "Open to junior analyst opportunities",
-    visualLabel: "Bogotá 2025 budget analysis", visualCaption: "7,681 public records · 50 entity labels · COP 36.26T cumulative commitments", chartMonths: ["JAN", "JUN", "DEC"], chartLegend: "Net monthly change · COP",
-    strip: ["Operational data review", "Record validation", "Trend analysis", "Business recommendations"],
-    aboutEyebrow: "Profile", aboutTitle: "I analyze public budgets, invoices, and high-risk account records.",
-    about: "I’m Juan Guillermo Barrios Villamil, an Electronic Engineer from Universidad de los Andes. In Iron Mountain’s High Risk function, I review account and billing records, investigate discrepancies, coordinate case follow-up, and build reports, charts, and workflow automation. I have also contributed to loading approximately 18,000 accounts into Oracle. My portfolio demonstrates these skills with public Bogotá budget data and clearly labeled generated datasets.",
-    focusLabel: "Tools & current development", focus: ["Excel for operational record review", "Python · SQL (SQLite) used in project analysis", "Currently developing: pandas · Power BI · DAX · Git · GitHub"],
-    workEyebrow: "Selected projects", workTitle: "Public budget analysis, invoice reporting, and operational tools.", workIntro: "The Bogotá analysis uses official public data. NovaTech, Ops Studio, and Decision Copilot are labeled demonstrations with generated examples.",
-    demo: "Open demo", case: "Read case study", code: "View code", publicLabel: "PUBLIC DATA · BOGOTÁ 2025", publicTitle: "Bogotá 2025 public-budget commitments", publicText: "Analyzed 7,681 official records with Python and SQL to compare cumulative commitments by month, entity, and budget item. The December total reconciles to COP 36.26 trillion; 752 records with decreases are retained for review.",
-    fictional: "GENERATED DATA · 4,800 ROWS",
-    novaTitle: "NovaTech monthly performance (12 months)", novaText: "A 2025 dashboard view of invoices, payments, recoveries, and outstanding balances from a 4,800-row generated CSV covering 2024–2025. It separates Canada/CAD from United States/USD and includes Python and SQL checks.",
-    opsLabel: "SYNTHETIC CSV WORKFLOW · HTML · CSS · JAVASCRIPT", opsTitle: "Ops Studio: operations review workspace", opsText: "A seven-view browser workspace with a backlog dashboard, an Action Plan collections dashboard, reference search, an editable register, a CSV generator, a follow-up queue, and a knowledge base. Each view has its own page below. Fictional records and browser storage only; no employer system connected.", opsModules: "Ops Studio, view by view", opsModulesIntro: "Each view of the same app solves a different problem, so each one is explained on its own page with a live demo.",
-    copilotLabel: "CLIENT-SIDE RULE-BASED PROTOTYPE · NEXT.JS · REACT · TYPESCRIPT", copilotTitle: "Operations Decision Copilot", copilotText: "A browser-based prototype that organizes a fictional operations case into confirmed facts, open questions, and verification steps for human review. It formats a review note; it does not use AI or make account decisions.",
-    experienceEyebrow: "Experience", experienceTitle: "High-risk account operations, billing review and workflow automation.",
-    current: "Strategic Planning & High-Risk Account Specialist", currentDate: "May 4, 2026 – Present · Hybrid",
-    currentPoints: ["Review and prioritize high-risk account cases, track statuses, and coordinate the appropriate operational follow-up across a broader High Risk function.", "Compare account, invoice, payment, inventory, and service records in Excel to validate information and investigate billing discrepancies.", "Helped bulk-load approximately 18,000 accounts into Oracle instead of entering them one at a time.", "Built a web-tool workflow to automate abandoned-record processing and created a dashboard to track account loading and recovery.", "For some inactive accounts, explain outstanding invoices and payment requirements when customers ask about restoring service; account reactivation decisions remain with authorized teams."],
-    civil: "IT Support Assistant", civilDate: "Dec 2025 – Jan 2026", civilDetail: "Supported software quality testing and electronics inventory management at CivilTech Ingeniería y Construcción S.A.S.",
-    found: "Customer Service Agent", foundDate: "Feb 2025 – Jul 2025", foundDetail: "Responded to customer service requests in an English-language support environment at Foundever de Colombia.",
-    educationEyebrow: "Education & learning", educationTitle: "An engineering foundation.", degree: "Electronic Engineering", university: "Universidad de los Andes · degree awarded October 20, 2025", thesisLabel: "Thesis", thesis: "IoT automation of electronic systems integrating an adjustable voltage source and an AD9833 signal generator.", learningLabel: "Data-related certifications", certificates: ["Data Analytics Essentials · Cisco Networking Academy / MinTIC · May 23, 2026", "Introduction to Data Science · Cisco Networking Academy / MinTIC · May 5, 2026"], coursesLabel: "Additional courses", courses: ["Introduction to Cybersecurity · Cisco Networking Academy / MinTIC · May 23, 2026", "Frontend Developer · Platzi · 2025", "Practical Frontend Developer · Platzi · 2025", "Emotional Intelligence · Platzi · 2023", "Effective Communication · Platzi · 2023"],
-    contactEyebrow: "Contact", contactTitle: "Discuss a junior data or BI role.", contactText: "Email me, view my résumé, or open my profiles.", linkedin: "LinkedIn", email: "Email Juan", resumeDownload: "Download résumé PDF", github: "GitHub", footer: "Project cards identify official public data and generated demonstrations.", language: "ES",
+    nav: ["Work", "Process", "Experience"], resume: "Résumé", cta: "See the work", lang: "Español", langLabel: "Cambiar a español",
+    title: ["Data that", "adds up."],
+    lead: "I’m Juan Guillermo Barrios, an electronic engineer working as a data analyst in Bogotá. I clean, reconcile and chart financial and operational data until every total matches its source.",
+    pdf: "Download résumé (PDF)", pdfHref: "/cv/Juan-Guillermo-Barrios-Resume.pdf",
+    aboutTitle: "Engineer first, analyst by practice",
+    about: "Engineering taught me to measure before I trust a reading. My job in collections operations put that to work on invoices, payments, write-offs and reserves: when a total looks wrong, I rebuild the logic behind the spreadsheet, test it against the numbers the team already trusts, and only then turn it into a dashboard people can read in a minute.",
+    facts: [["Based in", "Bogotá, Colombia"], ["Degree", "Electronic Engineering, Universidad de los Andes"], ["Languages", "Spanish, English (C1)"]],
+    numbers: [["7,681", "official budget records cleaned and reconciled in SQL and Python"], ["18,000", "accounts I helped bulk-load into Oracle instead of typing them one by one"], ["0", "difference between my rebuilt reserve logic and the workbook’s control totals"]],
+    toolkit: "Toolkit", using: "Working with", learning: "Learning now",
+    tools: [["SQL", "joins, CTEs, window functions"], ["Python", "cleaning and validation"], ["Excel", "pivots, lookups, reconciliation"], ["Apps Script and JavaScript", "dashboards and tools"], ["Charts", "SVG, Chart.js"], ["AI-assisted development", "Claude Code, Codex"]],
+    next: [["Power BI and DAX", "in progress"], ["pandas", "in progress"], ["PostgreSQL", "next"], ["Statistics", "next"]],
+    workTitle: "Selected work", filterLabel: "Filter by skill", all: "All",
+    skills: { sql: "SQL", python: "Python", excel: "Excel", dashboards: "Dashboards", script: "Apps Script & JS" },
+    bandCaption: "The reserve dashboard demo. Every month is checked against the workbook’s own floored totals before it is shown.",
+    galleryTitle: "Built to be used",
+    gallery: [["Action Plan in Ops Studio: settlements, payments and open balance per customer.", "/projects/ops-studio/action-plan"], ["Bogotá’s 2025 commitments, month by month, from the District Treasury’s open data.", "/projects/bogota-budget"], ["Lukas on a phone: what is left this month, and what each day cost.", "/projects/lukas"]],
+    processTitle: "From raw file to answer",
+    process: "Most of the work happens before the chart. This is the order I follow on every project on this page.",
+    slip: [["Before the data", [["Write the question and who acts on it", "Brief"], ["Find the source and its owner", "Source"]]], ["In the data", [["Fix formats, keys and duplicates", "Python, SQL"], ["Rebuild the logic people already trust", "Excel to code"], ["Check every total against its control", "Gap = 0"]]], ["After", [["Chart only what answers the question", "Dashboard"], ["Write what changed and why", "Note"]]]] as [string, [string, string][]][],
+    slipEnd: ["A number the team can act on", "Checked"],
+    expTitle: "Experience and education",
+    groups: [
+      ["Experience", [
+        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Reconcile invoices, payments and services; built a reserve dashboard and an internal operations suite.", "2026 – now"],
+        ["CivilTech Ingeniería y Construcción · IT Support Assistant", "Software quality testing and electronics inventory.", "2025 – 2026"],
+        ["Foundever de Colombia · Customer Service Agent", "Support in an English-language environment.", "2025"]]],
+      ["Education", [["Universidad de los Andes · Electronic Engineering", "Thesis: IoT automation of an adjustable voltage source and an AD9833 signal generator.", "2025"]]],
+      ["Certificates", [["Data Analytics Essentials · Cisco / MinTIC", "", "2026"], ["Introduction to Data Science · Cisco / MinTIC", "", "2026"], ["Introduction to Cybersecurity · Cisco / MinTIC", "", "2026"], ["Frontend Developer · Platzi", "", "2025"]]],
+    ] as [string, [string, string, string][]][],
+    fullResume: "Full résumé",
+    contactLine: "Hiring a data analyst? Write to me.",
+    place: "Bogotá, Colombia · Spanish and English",
+    footerLinks: [["Work", [["Reserve dashboard", "/projects/reserve-dashboard"], ["Ops Studio", "/projects/ops-studio"], ["Bogotá budget", "/projects/bogota-budget"], ["Lukas", "/projects/lukas"]]], ["Résumé", [["Web résumé", "/resume"], ["PDF in English", "/cv/Juan-Guillermo-Barrios-Resume.pdf"], ["PDF en español", "/cv/Juan-Guillermo-Barrios-Hoja-de-Vida.pdf"]]]] as [string, [string, string][]][],
+    legal: "© 2026 Juan Guillermo Barrios Villamil. Demos use public, synthetic or fictional data only.", top: "Back to top",
   },
   es: {
-    nav: ["Perfil", "Proyectos", "Experiencia", "Formación"],
-    role: "Juan Guillermo Barrios Villamil · Bogotá",
-    headline: ["Ingeniero electrónico", "Analista de datos junior", "Datos financieros y operativos"],
-    intro: "Reviso registros de cuentas, facturas, pagos, servicios y operaciones; investigo diferencias de facturación; y elaboro reportes y herramientas de flujo de trabajo. Mis proyectos analizan datos presupuestales públicos de Bogotá y validan con Python y SQL un dataset editable de facturas con datos generados.",
-    primary: "Ver mis proyectos", resumeCTA: "Ver hoja de vida", secondary: "Conversemos", availability: "Abierto a oportunidades junior de análisis",
-    visualLabel: "Análisis presupuestario de Bogotá 2025", visualCaption: "7.681 registros públicos · 50 nombres de entidad · COP 36,26 billones en compromisos acumulados", chartMonths: ["ENE", "JUN", "DIC"], chartLegend: "Cambio neto mensual · COP",
-    strip: ["Revisión de datos operativos", "Validación de registros", "Análisis de tendencias", "Recomendaciones de negocio"],
-    aboutEyebrow: "Perfil", aboutTitle: "Analizo presupuestos públicos, facturas y registros de cuentas de alto riesgo.",
-    about: "Soy Juan Guillermo Barrios Villamil, ingeniero electrónico de la Universidad de los Andes. En la función de High Risk de Iron Mountain reviso registros de cuentas y facturación, investigo discrepancias, coordino seguimientos y elaboro reportes, gráficos y automatizaciones de flujo de trabajo. También participé en la carga de aproximadamente 18.000 cuentas a Oracle. Mi portafolio demuestra estas habilidades con datos públicos de Bogotá y datasets generados claramente identificados.",
-    focusLabel: "Herramientas y aprendizaje actual", focus: ["Excel para revisión de registros operativos", "Python · SQL (SQLite) aplicados en proyectos", "En desarrollo: pandas · Power BI · DAX · Git · GitHub"],
-    workEyebrow: "Proyectos seleccionados", workTitle: "Análisis presupuestal, facturación y herramientas operativas.", workIntro: "El análisis de Bogotá usa datos públicos oficiales. NovaTech, Ops Studio y Decision Copilot son demostraciones identificadas con datos generados.",
-    demo: "Abrir demo", case: "Ver caso de estudio", code: "Ver código", publicLabel: "DATOS PÚBLICOS · BOGOTÁ 2025", publicTitle: "Compromisos presupuestales públicos de Bogotá 2025", publicText: "Analicé 7.681 registros oficiales con Python y SQL para comparar compromisos acumulados por mes, entidad y rubro. El total de diciembre concilia con COP 36,26 billones; conservé para revisión 752 registros con disminuciones.",
-    fictional: "DATOS GENERADOS · 4.800 FILAS",
-    novaTitle: "NovaTech monthly performance (12 months)", novaText: "Vista de 2025 con facturas, pagos, recuperaciones y saldos pendientes a partir de un CSV generado de 4.800 filas que cubre 2024–2025. Separa Canadá/CAD de Estados Unidos/USD e incluye validaciones en Python y SQL.",
-    opsLabel: "FLUJO CSV SINTÉTICO · HTML · CSS · JAVASCRIPT", opsTitle: "Ops Studio: espacio de revisión operativa", opsText: "Espacio web de siete vistas: dashboard de backlog, dashboard de plan de acción para cobranza, búsqueda de referencias, registro editable, generador de CSV, cola de seguimiento y base de conocimiento. Cada vista tiene su propia página abajo. Solo registros ficticios y almacenamiento del navegador; no se conecta a sistemas de empleadores.", opsModules: "Ops Studio, vista por vista", opsModulesIntro: "Cada vista de la misma app resuelve un problema distinto, así que cada una se explica en su propia página con demo en vivo.",
-    copilotLabel: "PROTOTIPO EN EL NAVEGADOR BASADO EN REGLAS · NEXT.JS · REACT · TYPESCRIPT", copilotTitle: "Operations Decision Copilot", copilotText: "Prototipo en el navegador que organiza un caso operativo ficticio en hechos confirmados, preguntas abiertas y pasos de verificación para revisión humana. Prepara una nota; no usa IA ni toma decisiones sobre cuentas.",
-    experienceEyebrow: "Experiencia", experienceTitle: "Operaciones de alto riesgo, revisión de facturación y automatización.",
-    current: "Especialista en Planeación Estratégica y Cuentas de Alto Riesgo", currentDate: "4 de mayo de 2026 – Actualidad · Híbrido",
-    currentPoints: ["Reviso y priorizo casos de cuentas de alto riesgo, hago seguimiento a sus estados y coordino las acciones operativas correspondientes dentro de una función amplia de High Risk.", "Comparo en Excel registros de cuentas, facturas, pagos, inventario y servicio para validar información e investigar diferencias de facturación.", "Participé en la carga masiva de aproximadamente 18.000 cuentas a Oracle, en vez de ingresarlas una por una.", "Automaticé el procesamiento de registros abandonados mediante una herramienta web y creé un dashboard para dar seguimiento a la carga de cuentas y su recuperación.", "En algunos casos de cuentas inactivas, explico las facturas pendientes y los pagos requeridos cuando un cliente consulta cómo recuperar el servicio; la reactivación corresponde a los equipos autorizados."],
-    civil: "Auxiliar de Soporte IT", civilDate: "Dic 2025 – Ene 2026", civilDetail: "Apoyé pruebas de calidad de software y gestión de inventario electrónico en CivilTech Ingeniería y Construcción S.A.S.",
-    found: "Agente de Servicio al Cliente", foundDate: "Feb 2025 – Jul 2025", foundDetail: "Atendí solicitudes de servicio al cliente en un entorno de soporte en inglés en Foundever de Colombia.",
-    educationEyebrow: "Formación y aprendizaje", educationTitle: "Una base en ingeniería.", degree: "Ingeniería Electrónica", university: "Universidad de los Andes · título otorgado el 20 de octubre de 2025", thesisLabel: "Tesis", thesis: "Automatización IoT de sistemas electrónicos con integración de una fuente de voltaje variable y un generador de señales AD9833.", learningLabel: "Certificaciones relacionadas con datos", certificates: ["Fundamentos de Análisis de Datos · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Introducción a la Ciencia de Datos · Cisco Networking Academy / MinTIC · 5 de mayo de 2026"], coursesLabel: "Cursos adicionales", courses: ["Introducción a la Ciberseguridad · Cisco Networking Academy / MinTIC · 23 de mayo de 2026", "Frontend Developer · Platzi · 2025", "Practical Frontend Developer · Platzi · 2025", "Inteligencia Emocional · Platzi · 2023", "Comunicación Efectiva · Platzi · 2023"],
-    contactEyebrow: "Contacto", contactTitle: "Hablemos de un rol junior de datos o BI.", contactText: "Puedes escribirme, consultar mi hoja de vida o abrir mis perfiles.", linkedin: "LinkedIn", email: "Escribir a Juan", resumeDownload: "Descargar hoja de vida PDF", github: "GitHub", footer: "Los proyectos usan datos públicos y generados, identificados en cada caso.", language: "EN",
+    nav: ["Proyectos", "Proceso", "Experiencia"], resume: "Hoja de vida", cta: "Ver proyectos", lang: "English", langLabel: "Switch to English",
+    title: ["Datos que", "cuadran."],
+    lead: "Soy Juan Guillermo Barrios, ingeniero electrónico y analista de datos en Bogotá. Limpio, concilio y grafico datos financieros y operativos hasta que cada total coincide con su fuente.",
+    pdf: "Descargar hoja de vida (PDF)", pdfHref: "/cv/Juan-Guillermo-Barrios-Hoja-de-Vida.pdf",
+    aboutTitle: "Ingeniero de base, analista en la práctica",
+    about: "La ingeniería me enseñó a medir antes de confiar en una lectura. Mi trabajo en operaciones de cobranza lo puso a prueba con facturas, pagos, castigos y reservas: cuando un total no se ve bien, reconstruyo la lógica detrás de la hoja de cálculo, la pruebo contra los números en los que el equipo ya confía y solo entonces la convierto en un dashboard que se lee en un minuto.",
+    facts: [["Ciudad", "Bogotá, Colombia"], ["Título", "Ingeniería Electrónica, Universidad de los Andes"], ["Idiomas", "Español, inglés (C1)"]],
+    numbers: [["7.681", "registros oficiales de presupuesto limpiados y conciliados en SQL y Python"], ["18.000", "cuentas que ayudé a cargar a Oracle en bloque, en vez de digitarlas una por una"], ["0", "de diferencia entre mi lógica de reserva y los totales de control del libro de Excel"]],
+    toolkit: "Herramientas", using: "Trabajo con", learning: "Aprendiendo",
+    tools: [["SQL", "JOIN, CTE, funciones de ventana"], ["Python", "limpieza y validación"], ["Excel", "tablas dinámicas, búsquedas, conciliación"], ["Apps Script y JavaScript", "dashboards y herramientas"], ["Gráficos", "SVG, Chart.js"], ["Desarrollo asistido por IA", "Claude Code, Codex"]],
+    next: [["Power BI y DAX", "en curso"], ["pandas", "en curso"], ["PostgreSQL", "siguiente"], ["Estadística", "siguiente"]],
+    workTitle: "Proyectos", filterLabel: "Filtrar por habilidad", all: "Todos",
+    skills: { sql: "SQL", python: "Python", excel: "Excel", dashboards: "Dashboards", script: "Apps Script y JS" },
+    bandCaption: "La demo del dashboard de reserva. Cada mes se compara con los totales del propio libro de Excel antes de mostrarse.",
+    galleryTitle: "Hechos para usarse",
+    gallery: [["Action Plan en Ops Studio: acuerdos, pagos y saldo abierto por cliente.", "/projects/ops-studio/action-plan"], ["Compromisos de Bogotá 2025 mes a mes, con datos abiertos de la Secretaría de Hacienda.", "/projects/bogota-budget"], ["Lukas en el celular: cuánto queda este mes y cuánto costó cada día.", "/projects/lukas"]],
+    processTitle: "Del archivo a la respuesta",
+    process: "Casi todo el trabajo ocurre antes del gráfico. Este es el orden que sigo en cada proyecto de esta página.",
+    slip: [["Antes de los datos", [["Escribir la pregunta y quién actúa con ella", "Brief"], ["Encontrar la fuente y su dueño", "Fuente"]]], ["En los datos", [["Arreglar formatos, llaves y duplicados", "Python, SQL"], ["Reconstruir la lógica en la que ya confían", "Excel a código"], ["Comparar cada total con su control", "Dif. = 0"]]], ["Después", [["Graficar solo lo que responde la pregunta", "Dashboard"], ["Escribir qué cambió y por qué", "Nota"]]]] as [string, [string, string][]][],
+    slipEnd: ["Un número con el que el equipo puede actuar", "Verificado"],
+    expTitle: "Experiencia y formación",
+    groups: [
+      ["Experiencia", [
+        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Concilio facturas, pagos y servicios; construí un dashboard de reserva y una suite operativa interna.", "2026 – hoy"],
+        ["CivilTech Ingeniería y Construcción · Auxiliar de Soporte IT", "Pruebas de calidad de software e inventario de electrónicos.", "2025 – 2026"],
+        ["Foundever de Colombia · Agente de Servicio al Cliente", "Soporte en un entorno en inglés.", "2025"]]],
+      ["Formación", [["Universidad de los Andes · Ingeniería Electrónica", "Tesis: automatización IoT de una fuente de voltaje ajustable y un generador de señales AD9833.", "2025"]]],
+      ["Certificados", [["Data Analytics Essentials · Cisco / MinTIC", "", "2026"], ["Introduction to Data Science · Cisco / MinTIC", "", "2026"], ["Introduction to Cybersecurity · Cisco / MinTIC", "", "2026"], ["Frontend Developer · Platzi", "", "2025"]]],
+    ] as [string, [string, string, string][]][],
+    fullResume: "Hoja de vida completa",
+    contactLine: "¿Buscas un analista de datos? Escríbeme.",
+    place: "Bogotá, Colombia · Español e inglés",
+    footerLinks: [["Proyectos", [["Dashboard de reserva", "/projects/reserve-dashboard"], ["Ops Studio", "/projects/ops-studio"], ["Presupuesto de Bogotá", "/projects/bogota-budget"], ["Lukas", "/projects/lukas"]]], ["Hoja de vida", [["Hoja de vida web", "/resume"], ["PDF en español", "/cv/Juan-Guillermo-Barrios-Hoja-de-Vida.pdf"], ["PDF in English", "/cv/Juan-Guillermo-Barrios-Resume.pdf"]]]] as [string, [string, string][]][],
+    legal: "© 2026 Juan Guillermo Barrios Villamil. Las demos usan solo datos públicos, sintéticos o ficticios.", top: "Volver arriba",
   },
-} as const;
-
-function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return <svg aria-hidden="true" viewBox="0 0 24 24" className={styles.arrow}><path d={diagonal ? "M7 17 17 7M8 7h9v9" : "M5 12h14m-6-6 6 6-6 6"} /></svg>;
-}
+};
 
 export default function PortfolioHome() {
   const [language, setLanguage] = useState<Language>("en");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [filter, setFilter] = useState<Skill | "all">("all");
+  const [hovered, setHovered] = useState<string | null>(null);
   const t = copy[language];
 
   useEffect(() => {
     const saved = window.localStorage.getItem("portfolio-language");
-    const initial = saved === "en" || saved === "es" ? saved : navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
-    setLanguage(initial);
+    setLanguage(saved === "en" || saved === "es" ? saved : navigator.language.toLowerCase().startsWith("es") ? "es" : "en");
   }, []);
   useEffect(() => { document.documentElement.lang = language; }, [language]);
   useEffect(() => {
-    if (!menuOpen) return;
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setMenuOpen(false); };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, [menuOpen]);
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
     const root = document.querySelector<HTMLElement>(`.${styles.page}`);
     if (!root) return;
-    root.classList.add(styles.motionReady);
-    const nodes = root.querySelectorAll<HTMLElement>("[data-reveal]");
+    root.classList.add(styles.motion);
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) { entry.target.classList.add(styles.visible); observer.unobserve(entry.target); }
-    }), { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
-    nodes.forEach((node) => observer.observe(node));
-    return () => { observer.disconnect(); root.classList.remove(styles.motionReady); };
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add(styles.seen);
+      observer.unobserve(entry.target);
+    }), { rootMargin: "0px 0px -10% 0px" });
+    root.querySelectorAll("[data-reveal]").forEach((node) => observer.observe(node));
+    return () => observer.disconnect();
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
+  const toggleLanguage = () => { const next = language === "en" ? "es" : "en"; setLanguage(next); window.localStorage.setItem("portfolio-language", next); };
+  const shown = projects.filter((p) => filter === "all" || p.skills.includes(filter));
+  const preview = projects.find((p) => p.id === hovered && p.img) || shown.find((p) => p.img);
 
-  return <main className={styles.page}>
-    <a className={styles.skipLink} href="#main-content">Skip to content</a>
-    <header className={styles.header}>
-      <a className={styles.brand} href="#top" aria-label="Juan Guillermo Barrios Villamil, home" onClick={closeMenu}><span className={styles.brandMark}>J<span>.</span></span><span className={styles.brandName}>Juan Guillermo<br/>Barrios Villamil</span></a>
-      <button className={styles.menuToggle} type="button" aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}<span aria-hidden="true">{menuOpen ? "×" : "＋"}</span></button>
-      <nav className={`${styles.nav} ${menuOpen ? styles.navOpen : ""}`} id="site-navigation" aria-label={language === "en" ? "Main navigation" : "Navegación principal"}>
-        {t.nav.map((label, index) => <a key={label} href={["#profile", "#projects", "#experience", "#education"][index]} onClick={closeMenu}>{label}</a>)}
-        <a className={styles.navContact} href="#contact" onClick={closeMenu}>{t.secondary}<Arrow diagonal/></a>
+  return <div className={styles.page}>
+    <a className={styles.skip} href="#work">{language === "en" ? "Skip to the work" : "Ir a los proyectos"}</a>
+    <header className={styles.top}>
+      <a className={styles.wordmark} href="#top">Juan Guillermo Barrios</a>
+      <nav className={styles.topLinks} aria-label={language === "en" ? "Sections" : "Secciones"}>
+        {t.nav.map((label, i) => <a key={label} href={["#work", "#process", "#experience"][i]}>{label}</a>)}
+        <a href="/resume">{t.resume}</a>
       </nav>
-      <button className={styles.languageButton} type="button" onClick={() => { const next = language === "en" ? "es" : "en"; setLanguage(next); window.localStorage.setItem("portfolio-language", next); }} aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}><span aria-hidden="true">{language === "en" ? "EN | ES" : "ES | EN"}</span></button>
+      <button type="button" className={styles.langButton} onClick={toggleLanguage} aria-label={t.langLabel}>{t.lang}</button>
     </header>
 
-    <div id="main-content">
-      <section className={styles.hero} id="top" aria-labelledby="hero-title">
-        <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}><span className={styles.eyebrowLine}/>{t.role}</p>
-          <h1 id="hero-title">{t.headline.map((line, index) => <span className={styles.heroLine} key={line} style={{ "--line-index": index } as React.CSSProperties}><span>{line}</span></span>)}</h1>
-          <p className={styles.heroIntro}>{t.intro}</p>
-          <div className={styles.heroActions}><a className={styles.primaryButton} href="#projects">{t.primary}<Arrow/></a><a className={styles.secondaryLink} href="/resume">{t.resumeCTA}<Arrow diagonal/></a><a className={styles.secondaryLink} href="#contact">{t.secondary}<Arrow diagonal/></a></div>
-          <p className={styles.availability}><span/> {t.availability}</p>
+    <main id="top">
+      <section className={styles.hero} aria-labelledby="hero-title">
+        <p className={styles.heroLead}>{t.lead}</p>
+        <h1 id="hero-title" className={styles.heroTitle}>{t.title.map((line, i) => <span key={line} className={styles.line} style={{ "--i": i } as React.CSSProperties}><span>{line}</span></span>)}</h1>
+        <div className={styles.heroActions}>
+          <a className={styles.button} href="#work">{t.cta}</a>
+          <a className={styles.textLink} href={t.pdfHref}>{t.pdf}</a>
         </div>
-        <div className={styles.heroVisual} role="img" aria-label={t.visualLabel}>
-          <div className={styles.visualHeader}><span>PUBLIC BUDGET DATA</span><span>BOGOTÁ · 2025</span></div>
-          <p className={styles.visualTitle}>{t.visualLabel}</p>
-          <div className={styles.visualCanvas} aria-hidden="true">
-            <div className={styles.chartAxis}>{t.chartMonths.map((month) => <span key={month}>{month}</span>)}</div>
-            <svg viewBox="0 0 520 220" role="presentation" className={styles.chartSvg} preserveAspectRatio="none"><defs><linearGradient id="areaFade" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#45658f" stopOpacity=".3"/><stop offset="1" stopColor="#45658f" stopOpacity="0"/></linearGradient></defs>{(() => { const months = (publicReport as typeof publicReport & {months: {net_monthly_change_cop:number}[]}).months; const max = Math.max(...months.map((item) => item.net_monthly_change_cop)); const pts = months.map((item, i) => `${(i / (months.length - 1)) * 520},${200 - (item.net_monthly_change_cop / max) * 165}`).join(" "); return <><polyline points={`0,220 ${pts} 520,220`} fill="url(#areaFade)"/><polyline points={pts} fill="none" stroke="#45658f" strokeWidth="3" vectorEffect="non-scaling-stroke"/></>; })()}</svg>
-            <div className={styles.chartLegend}><span><i/>{t.chartLegend}</span></div>
+      </section>
+
+      <section className={styles.about} aria-labelledby="about-title">
+        <div className={styles.aboutRow}>
+          <dl className={styles.facts}>{t.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+          <div className={styles.aboutText}>
+            <h2 id="about-title" className={styles.h2}>{t.aboutTitle}</h2>
+            <p className={styles.statement}>{t.about}</p>
           </div>
-          <div className={styles.visualSteps}>{t.strip.slice(0, 3).map((label, index) => <div key={label}><span>0{index + 1}</span><b>{label}</b></div>)}</div>
-          <p className={styles.visualCaption}>{t.visualCaption}</p>
-          <span className={styles.visualIndex} aria-hidden="true">SOURCE<br/>2025-12</span>
         </div>
-        <a href="#profile" className={styles.scrollCue}><span/>Scroll to explore</a>
-      </section>
-
-      <section className={`${styles.section} ${styles.profile}`} id="profile">
-        <div className={styles.sectionMeta} data-reveal><span>01 / {t.aboutEyebrow}</span><span className={styles.metaRule}/><span>BOGOTÁ, COLOMBIA</span></div>
-        <div className={styles.profileContent} data-reveal><p className={styles.eyebrow}>{t.aboutEyebrow}</p><h2>{t.aboutTitle}</h2><p className={styles.profileText}>{t.about}</p><div className={styles.focusBlock}><p>{t.focusLabel}</p><ul>{t.focus.map((item, index) => <li key={item}><span>0{index + 1}</span>{item}</li>)}</ul></div></div>
-      </section>
-
-      <section className={styles.projects} id="projects">
-        <div className={styles.projectsHeading} data-reveal><div><p className={styles.eyebrow}>{t.workEyebrow}</p><h2>{t.workTitle}</h2></div><p>{t.workIntro}</p></div>
-        <div className={styles.projectGrid}>
-          <article className={`${styles.projectCard} ${styles.projectLarge}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.publicArtwork}`} href="/projects/bogota-budget" aria-label={`${t.case}: ${t.publicTitle}`}><span className={styles.artLabel}>{t.publicLabel}</span><div className={styles.publicCardChart}>{(publicReport as typeof publicReport & {months: {month:string;net_monthly_change_cop:number}[]}).months.map((item) => <i key={item.month} style={{height:`${Math.max(6,item.net_monthly_change_cop/Math.max(...publicReport.months.map((row) => row.net_monthly_change_cop))*100)}%`}} />)}</div><div className={styles.publicCardFoot}><strong>COP 36.26T</strong><span>7,681 rows · 2025</span></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.publicLabel}</p><h3>{t.publicTitle}</h3><p>{t.publicText}</p><div className={styles.tags}><span>Python</span><span>SQL</span><span>SQLite</span><span>Public CSV</span></div><div className={styles.projectLinks}><a href="/projects/bogota-budget">{t.case}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/projects/bogota-budget" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/bogota-budget" aria-label={`${t.case}: ${t.publicTitle}`}><Arrow diagonal/></a></div>
-          </article>
-          <article className={`${styles.projectCard} ${styles.projectOffset}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.novaArtwork}`} href="/projects/novatech" aria-label={`${t.demo}: ${t.novaTitle}`}><span className={styles.artLabel}>NOVATECH · CSV-POWERED DASHBOARD</span><div className={styles.novaComposition}><div className={styles.novaLabel}>INVOICED<br/>PAID<br/>OPEN</div><div className={styles.novaChart}><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/><i/></div><div className={styles.novaAxis}><span>2024</span><span>2025</span></div><div className={styles.demoStamp}>4,800<br/>ROWS</div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.fictional}</p><h3>{t.novaTitle}</h3><p>{t.novaText}</p><div className={styles.tags}><span>Python</span><span>SQL</span><span>SQLite</span><span>Excel</span><span>CSV</span></div><div className={styles.projectLinks}><a href="/projects/novatech">{t.demo}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/projects/novatech" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/novatech" aria-label={`${t.demo}: ${t.novaTitle}`}><Arrow diagonal/></a></div>
-          </article>
-          <article className={styles.projectCard} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.opsArtwork}`} href="/projects/ops-studio/backlog-dashboard" aria-label={`${t.demo}: ${t.opsTitle}`}><span className={styles.artLabel}>{t.opsLabel}</span><div className={styles.fakeDashboard}><div className={styles.fakeDashTop}><i/><i/><i/><span>OPS STUDIO</span></div><div className={styles.fakeDashBody}><div className={styles.fakeSide}><b/><b/><b/><b/><b/></div><div className={styles.fakeContent}><div className={styles.fakeKpis}><i/><i/><i/></div><div className={styles.fakeGraph}>{Array.from({length: 9}, (_, index) => <b key={index}/>)}</div><div className={styles.fakeRows}><i/><i/><i/></div></div></div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.opsLabel}</p><h3>{t.opsTitle}</h3><p>{t.opsText}</p><div className={styles.tags}><span>HTML</span><span>CSS</span><span>JavaScript</span><span>CSV</span></div><div className={styles.projectLinks}><a href="/projects/ops-studio/backlog-dashboard">{t.demo}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/projects/ops-studio" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/ops-studio/backlog-dashboard" aria-label={`${t.demo}: ${t.opsTitle}`}><Arrow diagonal/></a></div>
-          </article>
-          <article className={`${styles.projectCard} ${styles.projectOffset}`} data-reveal>
-            <a className={`${styles.projectArtwork} ${styles.copilotArtwork}`} href="/projects/operations-decision-copilot" aria-label={`${t.demo}: ${t.copilotTitle}`}><span className={styles.artLabel}>{t.copilotLabel}</span><div className={styles.decisionVisual}><div className={styles.decisionNode}>Confirmed<br/>facts</div><span aria-hidden="true">→</span><div className={styles.decisionNode}>Open<br/>questions</div><span aria-hidden="true">→</span><div className={styles.decisionNode}>Next<br/>checks</div></div><span className={styles.artArrow}><Arrow diagonal/></span></a>
-            <div className={styles.projectDetails}><div><p className={styles.projectType}>{t.copilotLabel}</p><h3>{t.copilotTitle}</h3><p>{t.copilotText}</p><div className={styles.tags}><span>Next.js</span><span>React</span><span>TypeScript</span></div><div className={styles.projectLinks}><a href="/projects/operations-decision-copilot">{t.demo}<Arrow diagonal/></a><a href="https://github.com/barriosj136-oss/juan-guillermo-portfolio/tree/main/app/projects/operations-decision-copilot" target="_blank" rel="noreferrer">GitHub / code<Arrow diagonal/></a></div></div><a className={styles.roundArrow} href="/projects/operations-decision-copilot" aria-label={`${t.demo}: ${t.copilotTitle}`}><Arrow diagonal/></a></div>
-          </article>
-        </div>
-        <div className="ops-modules" data-reveal><div className="ops-modules-heading"><h3>{t.opsModules}</h3><p>{t.opsModulesIntro}</p></div><div className="ops-modules-grid">{opsViews.map((view, index) => <a key={view.slug} href={`/projects/ops-studio/${view.slug}`}><span>0{index + 1} · {view[language].label}</span><b>{view[language].title}</b><p>{view[language].summary}</p></a>)}</div></div>
-      </section>
-
-      <section className={styles.experience} id="experience">
-        <div className={styles.experienceIntro} data-reveal><p className={styles.eyebrow}>{t.experienceEyebrow}</p><h2>{t.experienceTitle}</h2><span className={styles.experienceMark}>02</span></div>
-        <div className={styles.timeline}>
-          <article className={styles.timelineItem} data-reveal><div className={styles.timelineDate}>{t.currentDate}<span>01 / 03</span></div><div className={styles.timelineMain}><p>IRON MOUNTAIN</p><h3>{t.current}</h3><ul>{t.currentPoints.map((point) => <li key={point}>{point}</li>)}</ul></div></article>
-          <article className={styles.timelineItem} data-reveal><div className={styles.timelineDate}>{t.civilDate}<span>02 / 03</span></div><div className={styles.timelineMain}><p>CIVILTECH INGENIERÍA Y CONSTRUCCIÓN S.A.S.</p><h3>{t.civil}</h3><p className={styles.timelineDescription}>{t.civilDetail}</p></div></article>
-          <article className={styles.timelineItem} data-reveal><div className={styles.timelineDate}>{t.foundDate}<span>03 / 03</span></div><div className={styles.timelineMain}><p>FOUNDEVER DE COLOMBIA</p><h3>{t.found}</h3><p className={styles.timelineDescription}>{t.foundDetail}</p></div></article>
+        <ul className={styles.numbers} data-reveal>{t.numbers.map(([n, label]) => <li key={label}><strong>{n}</strong><span>{label}</span></li>)}</ul>
+        <div className={styles.toolkit} data-reveal>
+          <h3 className={styles.plainWord}>{t.toolkit}</h3>
+          <div className={styles.toolCols}>
+            <div><p className={styles.colLabel}>{t.using}</p><ul>{t.tools.map(([a, b]) => <li key={a}><span>{a}</span><span>{b}</span></li>)}</ul></div>
+            <div><p className={styles.colLabel}>{t.learning}</p><ul>{t.next.map(([a, b]) => <li key={a}><span>{a}</span><span>{b}</span></li>)}</ul></div>
+          </div>
         </div>
       </section>
 
-      <section className={styles.education} id="education">
-        <div className={styles.educationHeading} data-reveal><p className={styles.eyebrow}>{t.educationEyebrow}</p><h2>{t.educationTitle}</h2></div>
-        <div className={styles.educationGrid}>
-          <article className={styles.degreeCard} data-reveal><span className={styles.degreeIcon}>E</span><p className={styles.projectType}>UNIVERSIDAD DE LOS ANDES</p><h3>{t.degree}</h3><p>{t.university}</p><div className={styles.thesis}><span>{t.thesisLabel}</span><p>{t.thesis}</p></div></article>
-          <div className={styles.certificates} data-reveal><p className={styles.projectType}>{t.learningLabel}</p>{t.certificates.map((certificate, index) => <div className={styles.certificate} key={certificate}><span>0{index + 1}</span><p>{certificate}</p><a href={index === 0 ? "/certificates/data-analytics-essentials.pdf" : "/certificates/introduction-to-data-science.pdf"} target="_blank" rel="noreferrer">{language === "es" ? "Ver certificado" : "View certificate"} ↗</a></div>)}<details className={styles.otherCourses}><summary>{t.coursesLabel}</summary>{t.courses.map((course, index) => <div className={styles.certificate} key={`${course}-${index}`}><span>0{index + 1}</span><p>{course}</p>{course.includes("Cybersecurity") || course.includes("Ciberseguridad") ? <a href="/certificates/introduction-to-cybersecurity.pdf" target="_blank" rel="noreferrer">{language === "es" ? "Ver certificado" : "View certificate"} ↗</a> : null}</div>)}</details></div>
+      <section className={styles.work} id="work" aria-labelledby="work-title">
+        <div className={styles.ledger} data-reveal>
+          <h2 id="work-title" className={styles.h2}>{t.workTitle}</h2>
+          <div className={styles.filters} role="group" aria-label={t.filterLabel}>
+            {(["all", "sql", "python", "excel", "dashboards", "script"] as const).map((key) => <button type="button" key={key} aria-pressed={filter === key} onClick={() => setFilter(key)}>{key === "all" ? t.all : t.skills[key]}</button>)}
+          </div>
+          <ul className={styles.rows} onMouseLeave={() => setHovered(null)}>
+            {shown.map((p) => <li key={p.id} className={hovered && hovered !== p.id ? styles.dim : undefined}>
+              {p.img && <img className={styles.rowImage} src={p.img} alt="" width={640} height={400} loading="lazy"/>}
+              <a href={p.href} onMouseEnter={() => setHovered(p.id)} onFocus={() => setHovered(p.id)} onBlur={() => setHovered(null)}>
+                <span className={styles.rowName}>{p[language][0]}</span>
+                <span className={styles.rowKind}>{p[language][1]}</span>
+                <span className={styles.rowTag}>{p[language][2]}</span>
+              </a>
+            </li>)}
+          </ul>
+          <div className={styles.preview} aria-hidden="true">{preview && <img key={preview.id} src={preview.img} alt="" width={640} height={400}/>}</div>
         </div>
       </section>
-    </div>
 
-    <footer className={styles.footer} id="contact">
-      <div className={styles.footerTop}><div className={styles.footerCopy} data-reveal><p className={styles.eyebrow}>{t.contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><div className={styles.contactLinks}><a className={styles.footerLinkedin} href="mailto:juguibavi27@gmail.com">{t.email}<Arrow diagonal/></a><a className={styles.footerLinkedin} href={language === "en" ? "/cv/Juan-Guillermo-Barrios-Resume.pdf" : "/cv/Juan-Guillermo-Barrios-Hoja-de-Vida.pdf"} download>{t.resumeDownload}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://www.linkedin.com/in/juan-guillermo-barrios-villamil-474733234/" target="_blank" rel="noreferrer">{t.linkedin}<Arrow diagonal/></a><a className={styles.footerLinkedin} href="https://github.com/barriosj136-oss" target="_blank" rel="noreferrer">{t.github}<Arrow diagonal/></a></div></div></div>
-      <div className={styles.footerBottom}><a className={styles.footerBrand} href="#top">JGB<span>.</span></a><p>{t.footer}</p><span>© 2026 JUAN GUILLERMO BARRIOS VILLAMIL</span></div>
+      <figure className={styles.band}>
+        <a href="/projects/reserve-dashboard"><img src="/shots/reserve.jpg" alt={language === "en" ? "Reserve dashboard showing the reserve by month and a table by collector" : "Dashboard de reserva con la reserva por mes y una tabla por cobrador"} width={1180} height={738} loading="lazy"/></a>
+        <figcaption>{t.bandCaption}</figcaption>
+      </figure>
+
+      <ValueCleaner language={language}/>
+
+      <section className={styles.gallery} aria-labelledby="gallery-title">
+        <h2 id="gallery-title" className={styles.h2} data-reveal>{t.galleryTitle}</h2>
+        <div className={styles.galleryGrid}>
+          <figure className={styles.gWide} data-reveal><a href={t.gallery[0][1]}><img src="/shots/ops-actionplan.jpg" alt="" width={1260} height={680} loading="lazy"/></a><figcaption>{t.gallery[0][0]}</figcaption></figure>
+          <figure className={styles.gMid} data-reveal><a href={t.gallery[1][1]}><img src="/shots/bogota.jpg" alt="" width={1100} height={688} loading="lazy"/></a><figcaption>{t.gallery[1][0]}</figcaption></figure>
+          <figure className={styles.gPhones} data-reveal><a href={t.gallery[2][1]}><img src="/shots/lukas-home.jpg" alt="" width={375} height={812} loading="lazy"/><img src="/shots/lukas-calendar.jpg" alt="" width={375} height={812} loading="lazy"/></a><figcaption>{t.gallery[2][0]}</figcaption></figure>
+        </div>
+      </section>
+
+      <section className={styles.process} id="process" aria-labelledby="process-title">
+        <div className={styles.processText} data-reveal>
+          <h2 id="process-title" className={styles.h2Large}>{t.processTitle}</h2>
+          <p>{t.process}</p>
+        </div>
+        <div className={styles.slip} data-reveal>
+          {t.slip.map(([group, rows]) => <div key={group} className={styles.slipGroup}>
+            <h3>{group}</h3>
+            <ul>{rows.map(([what, tool]) => <li key={what}><span>{what}</span><i aria-hidden="true"/><span>{tool}</span></li>)}</ul>
+          </div>)}
+          <p className={styles.slipEnd}><span>{t.slipEnd[0]}</span><span>{t.slipEnd[1]}</span></p>
+        </div>
+      </section>
+
+      <section className={styles.experience} id="experience" aria-labelledby="exp-title">
+        <div className={styles.expColumn} data-reveal>
+          <h2 id="exp-title" className={styles.h2}>{t.expTitle}</h2>
+          {t.groups.map(([group, rows]) => <div key={group} className={styles.expGroup}>
+            <h3 className={styles.plainWord}>{group}</h3>
+            <ul>{rows.map(([name, line, when]) => <li key={name}><i aria-hidden="true"/><div><span className={styles.expName}>{name}</span>{line && <span className={styles.expLine}>{line}</span>}</div><span className={styles.expWhen}>{when}</span></li>)}</ul>
+          </div>)}
+          <a className={styles.textLink} href="/resume">{t.fullResume}</a>
+        </div>
+      </section>
+
+      <section className={styles.contact} id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" className={styles.contactLine}>{t.contactLine}</h2>
+        <a className={styles.email} href={`mailto:${EMAIL}`}>{EMAIL.split("@")[0]}<wbr/>@{EMAIL.split("@")[1]}</a>
+        <div className={styles.contactFoot}>
+          <span>{t.place}</span>
+          <span><a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a><a href={GITHUB} target="_blank" rel="noreferrer">GitHub</a><a href={t.pdfHref}>{t.resume} PDF</a></span>
+        </div>
+      </section>
+    </main>
+
+    <footer className={styles.footer}>
+      <p className={styles.footerName}>Juan Guillermo Barrios</p>
+      <div className={styles.footerRow}>
+        <ul className={styles.places}><li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li><li><a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a></li><li><a href={GITHUB} target="_blank" rel="noreferrer">GitHub</a></li></ul>
+        <div className={styles.footerCols}>{t.footerLinks.map(([head, links]) => <div key={head}><p>{head}</p><ul>{links.map(([label, href]) => <li key={href}><a href={href}>{label}</a></li>)}</ul></div>)}
+          <div><p>{language === "en" ? "Language" : "Idioma"}</p><ul><li><button type="button" onClick={toggleLanguage}>{t.lang}</button></li></ul></div>
+        </div>
+      </div>
+      <div className={styles.legal}><span>{t.legal}</span><a href="#top">{t.top}</a></div>
     </footer>
-  </main>;
+  </div>;
 }

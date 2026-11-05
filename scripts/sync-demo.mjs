@@ -7,6 +7,9 @@ for(const name of ["index.html","app.js","data.js","i18n.js","styles.css","READM
 const opsStudio=resolve(root,"public/ops-studio");
 await mkdir(opsStudio,{recursive:true});
 for(const name of ["index.html","app.js","data.js","action-plan.js","styles.css","README.md"]) await cp(resolve(root,"projects/ops-studio",name),resolve(opsStudio,name));
+const reserve=resolve(root,"public/reserve-dashboard");
+await mkdir(reserve,{recursive:true});
+for(const name of ["index.html","demo-data.js","README.md"]) await cp(resolve(root,"projects/reserve-dashboard",name),resolve(reserve,name));
 const nova=resolve(root,"public/projects/novatech");
 await mkdir(nova,{recursive:true});
 for(const name of ["analyze.py","validate.py","model.md","schema.sql","analysis.sql","README.md"]) await cp(resolve(root,"projects/novatech",name),resolve(nova,name));

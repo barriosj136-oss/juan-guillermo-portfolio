@@ -17,10 +17,13 @@ For an optimized local preview, run `pnpm build` then `pnpm start`.
 
 ## Routes
 
-- `/` — bilingual portfolio and experience.
+- `/` — bilingual Data Analyst portfolio: projects ledger with skill filter, value-cleaner demo, process, experience.
 - `/resume` — recruiter-friendly bilingual web résumé with project, GitHub, and LinkedIn links. Use **Print / save as PDF** to export a copy from the browser.
-- `/projects/operations-data-review-suite` — case study with embedded interactive app.
-- `/operations-data-review-suite/index.html` — standalone interactive app.
+- `/projects/reserve-dashboard` — reserve & rolling dashboard case; demo at `/reserve-dashboard/index.html` (fictional data from `projects/reserve-dashboard/demo-data.js`).
+- `/projects/ops-studio` — collections workspace case; one page per view at `/projects/ops-studio/<view>`; demo at `/ops-studio/index.html`.
+- `/projects/lukas` — personal budgeting PWA case (screenshots use a test account with invented data).
+- `/projects/unit-economics` — cost and break-even model case, method only (figures stay private).
+- `/projects/bogota-budget` — public Bogotá 2025 budget analysis in SQL and Python.
 - `/projects/novatech` — synthetic monthly performance case, data model, SQL, and Python checks.
 - `/projects/operations-decision-copilot` — fictional bilingual decision-support demonstration.
 - `docs/COLOMBIA-PUBLIC-DATA-PROJECTS.md` — three public-data case-study plans with sources, questions, methods, and validation gates.

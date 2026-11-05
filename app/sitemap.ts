@@ -10,7 +10,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects/bogota-budget",
     "/projects/novatech",
     "/projects/operations-decision-copilot",
-    "/operations-data-review-suite/",
+    "/projects/reserve-dashboard",
+    "/projects/ops-studio",
+    "/projects/lukas",
+    "/projects/unit-economics",
     ...opsViews.map(({ slug }) => `/projects/ops-studio/${slug}`),
   ];
   return paths.map((path) => ({
