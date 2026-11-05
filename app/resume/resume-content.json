@@ -19,7 +19,8 @@
         "bullets": [
           "Contributed to the bulk load of approximately 18,000 accounts into Oracle, replacing record-by-record manual entry.",
           "Built a reserve dashboard in Google Apps Script that replaced a manual Excel workbook: rebuilt its pivot and per-account running-total logic, validated results against control totals, and found a bug where a total read from the wrong source tab and came out inflated.",
-          "Built an internal multi-tab operations suite for bulk reference lookup, account-key normalization and deduplication, data-freshness monitoring, and settlement tracking.",
+          "Built an internal multi-tab operations suite in Apps Script for bulk reference lookup, account-key normalization and deduplication, data-freshness monitoring, and settlement tracking; it reads 1M+ row exports in the browser and keeps only the relevant accounts.",
+          "Instrumented the suite to time every task: in its first four days it logged 103 tasks and an estimated 38 hours of manual work saved. Building the settlement view dropped from about 45 minutes by hand to 1.3 minutes on average, and the backlog dashboard from about 15 minutes to under 3 seconds.",
           "Automated abandoned-record processing with a web tool and a dashboard that tracks account loading and recovery.",
           "Reconcile account, invoice, payment, inventory, and service records in Excel to find and investigate billing discrepancies.",
           "Prioritize and follow up High Risk account cases, and explain outstanding balances and payment requirements on inactive accounts so authorized teams can decide on service restoration."
@@ -119,7 +120,8 @@
         "bullets": [
           "Participé en la carga masiva de aproximadamente 18.000 cuentas a Oracle, en reemplazo del ingreso manual registro por registro.",
           "Construí en Google Apps Script un dashboard de reservas que reemplazó un libro manual de Excel: reconstruí su lógica de tablas dinámicas y saldos acumulados por cuenta, validé los resultados contra totales de control y detecté un error que tomaba un total de la pestaña de origen equivocada y lo inflaba.",
-          "Construí una suite interna de operaciones con varias pestañas: búsqueda masiva de referencias, normalización y depuración de duplicados en llaves de cuenta, monitoreo de actualización de los datos y seguimiento de acuerdos de pago.",
+          "Construí en Apps Script una suite interna de operaciones con varias pestañas: búsqueda masiva de referencias, normalización y depuración de duplicados en llaves de cuenta, monitoreo de actualización de los datos y seguimiento de acuerdos de pago; lee en el navegador exportes de más de 1 millón de filas y conserva solo las cuentas relevantes.",
+          "Medí cada tarea de la suite: en sus primeros cuatro días registró 103 tareas y un ahorro estimado de 38 horas de trabajo manual. Armar la vista de acuerdos pasó de unos 45 minutos a mano a 1,3 minutos en promedio, y el dashboard de backlog de unos 15 minutos a menos de 3 segundos.",
           "Automaticé el procesamiento de registros abandonados con una herramienta web y un dashboard que sigue la carga y recuperación de cuentas.",
           "Concilio en Excel registros de cuentas, facturas, pagos, inventario y servicio para detectar e investigar diferencias de facturación.",
           "Priorizo y hago seguimiento a casos de cuentas High Risk, y explico saldos pendientes y pagos requeridos en cuentas inactivas para que los equipos autorizados decidan sobre la restauración del servicio."

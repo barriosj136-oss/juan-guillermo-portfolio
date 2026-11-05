@@ -37,7 +37,7 @@ const copy = {
     aboutTitle: "Engineer first, analyst by practice",
     about: "Engineering taught me to measure before I trust a reading. My job in collections operations put that to work on invoices, payments, write-offs and reserves: when a total looks wrong, I rebuild the logic behind the spreadsheet, test it against the numbers the team already trusts, and only then turn it into a dashboard people can read in a minute.",
     facts: [["Based in", "Bogotá, Colombia"], ["Degree", "Electronic Engineering, Universidad de los Andes"], ["Languages", "Spanish, English (C1)"]],
-    numbers: [["7,681", "official budget records cleaned and reconciled in SQL and Python"], ["18,000", "accounts I helped bulk-load into Oracle instead of typing them one by one"], ["0", "difference between my rebuilt reserve logic and the workbook’s control totals"]],
+    numbers: [["7,681", "official budget records cleaned and reconciled in SQL and Python"], ["18,000", "accounts I helped bulk-load into Oracle instead of typing them one by one"], ["0", "difference between my rebuilt reserve logic and the workbook’s control totals"], ["38 h", "of manual work saved, by its own timer, in the first four days of my operations suite"]],
     toolkit: "Toolkit", using: "Working with", learning: "Learning now",
     tools: [["SQL", "joins, CTEs, window functions"], ["Python", "cleaning and validation"], ["Excel", "pivots, lookups, reconciliation"], ["Apps Script and JavaScript", "dashboards and tools"], ["Charts", "SVG, Chart.js"], ["AI-assisted development", "Claude Code, Codex"]],
     next: [["Power BI and DAX", "in progress"], ["pandas", "in progress"], ["PostgreSQL", "next"], ["Statistics", "next"]],
@@ -53,7 +53,7 @@ const copy = {
     expTitle: "Experience and education",
     groups: [
       ["Experience", [
-        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Reconcile invoices, payments and services; built a reserve dashboard and an internal operations suite.", "2026 – now"],
+        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Reconcile invoices, payments and services; built a reserve dashboard and an operations suite that cut a 45-minute settlement review to about a minute.", "2026 – now"],
         ["CivilTech Ingeniería y Construcción · IT Support Assistant", "Software quality testing and electronics inventory.", "2025 – 2026"],
         ["Foundever de Colombia · Customer Service Agent", "Support in an English-language environment.", "2025"]]],
       ["Education", [["Universidad de los Andes · Electronic Engineering", "Thesis: IoT automation of an adjustable voltage source and an AD9833 signal generator.", "2025"]]],
@@ -73,7 +73,7 @@ const copy = {
     aboutTitle: "Ingeniero de base, analista en la práctica",
     about: "La ingeniería me enseñó a medir antes de confiar en una lectura. Mi trabajo en operaciones de cobranza lo puso a prueba con facturas, pagos, castigos y reservas: cuando un total no se ve bien, reconstruyo la lógica detrás de la hoja de cálculo, la pruebo contra los números en los que el equipo ya confía y solo entonces la convierto en un dashboard que se lee en un minuto.",
     facts: [["Ciudad", "Bogotá, Colombia"], ["Título", "Ingeniería Electrónica, Universidad de los Andes"], ["Idiomas", "Español, inglés (C1)"]],
-    numbers: [["7.681", "registros oficiales de presupuesto limpiados y conciliados en SQL y Python"], ["18.000", "cuentas que ayudé a cargar a Oracle en bloque, en vez de digitarlas una por una"], ["0", "de diferencia entre mi lógica de reserva y los totales de control del libro de Excel"]],
+    numbers: [["7.681", "registros oficiales de presupuesto limpiados y conciliados en SQL y Python"], ["18.000", "cuentas que ayudé a cargar a Oracle en bloque, en vez de digitarlas una por una"], ["0", "de diferencia entre mi lógica de reserva y los totales de control del libro de Excel"], ["38 h", "de trabajo manual ahorradas, según su propio cronómetro, en los primeros cuatro días de mi suite operativa"]],
     toolkit: "Herramientas", using: "Trabajo con", learning: "Aprendiendo",
     tools: [["SQL", "JOIN, CTE, funciones de ventana"], ["Python", "limpieza y validación"], ["Excel", "tablas dinámicas, búsquedas, conciliación"], ["Apps Script y JavaScript", "dashboards y herramientas"], ["Gráficos", "SVG, Chart.js"], ["Desarrollo asistido por IA", "Claude Code, Codex"]],
     next: [["Power BI y DAX", "en curso"], ["pandas", "en curso"], ["PostgreSQL", "siguiente"], ["Estadística", "siguiente"]],
@@ -89,7 +89,7 @@ const copy = {
     expTitle: "Experiencia y formación",
     groups: [
       ["Experiencia", [
-        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Concilio facturas, pagos y servicios; construí un dashboard de reserva y una suite operativa interna.", "2026 – hoy"],
+        ["Iron Mountain · Strategic Planning & High-Risk Account Specialist", "Concilio facturas, pagos y servicios; construí un dashboard de reserva y una suite operativa que bajó una revisión de acuerdos de 45 minutos a cerca de uno.", "2026 – hoy"],
         ["CivilTech Ingeniería y Construcción · Auxiliar de Soporte IT", "Pruebas de calidad de software e inventario de electrónicos.", "2025 – 2026"],
         ["Foundever de Colombia · Agente de Servicio al Cliente", "Soporte en un entorno en inglés.", "2025"]]],
       ["Formación", [["Universidad de los Andes · Ingeniería Electrónica", "Tesis: automatización IoT de una fuente de voltaje ajustable y un generador de señales AD9833.", "2025"]]],

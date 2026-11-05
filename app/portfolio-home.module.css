@@ -67,9 +67,9 @@
 .facts dd { margin: 2px 0 0; }
 .aboutText { max-width: 920px; }
 .statement { margin: 0; font-size: var(--lead); line-height: 1.38; letter-spacing: -0.01em; }
-.numbers { list-style: none; margin: 120px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.numbers { list-style: none; margin: 120px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
 .numbers li { display: grid; gap: 12px; align-content: start; }
-.numbers strong { font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: .85; letter-spacing: -0.05em; }
+.numbers strong { font-size: clamp(3.25rem, 6vw, 6.25rem); white-space: nowrap; font-weight: 300; line-height: .85; letter-spacing: -0.05em; }
 .numbers span { max-width: 30ch; }
 .toolkit { display: grid; grid-template-columns: 34% 1fr; margin-top: 120px; }
 .toolCols { display: grid; grid-template-columns: repeat(2, minmax(0, 360px)); gap: 64px; }
@@ -207,6 +207,7 @@
   .rows { width: min(560px, 58%); }
   .filters { max-width: none; }
   .gallery .galleryGrid { grid-template-columns: repeat(6, 1fr); }
+  .numbers { grid-template-columns: repeat(2, 1fr); row-gap: 56px; }
   .gWide { grid-column: 1 / -1; }
   .gMid { grid-column: 1 / span 3; }
   .gPhones { grid-column: 4 / span 3; grid-row: auto; }
