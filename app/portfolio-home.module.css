@@ -44,7 +44,8 @@
 /* Hero: a composed void, then the statement on the axis */
 .hero { min-height: 100svh; display: grid; grid-template-columns: 42% 1fr; grid-template-rows: 1fr auto auto; padding: 120px var(--m) 64px; column-gap: 0; }
 .heroTitle { grid-column: 2; grid-row: 2; margin: 0; font-size: var(--display); font-weight: 300; line-height: .9; letter-spacing: -0.05em; }
-.line { display: block; overflow: hidden; padding: 0 0 .08em; }
+/* The mask needs room above the cap height and below descenders, or tight leading clips the glyphs. */
+.line { display: block; overflow: hidden; padding: .16em 0 .12em; margin: -.16em 0 -.12em; }
 .line > span { display: inline-block; }
 .heroLead { grid-column: 1; grid-row: 2; align-self: end; max-width: 34ch; margin: 0 40px 1.2em 0; font-size: clamp(1.1875rem, 1.1rem + 0.3vw, 1.3125rem); }
 .heroActions { grid-column: 2; grid-row: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 32px; margin-top: 40px; }
@@ -98,10 +99,10 @@
 @keyframes fade { from { opacity: 0; } }
 
 /* Full-bleed picture band */
-.band { margin: var(--gap) 0 0; }
-.band a { display: block; overflow: hidden; background: var(--surface); }
-.band img { width: 100%; max-height: 82svh; object-fit: cover; object-position: top center; }
-.band figcaption { margin: 18px var(--m) 0; max-width: 60ch; font-size: var(--small); color: var(--muted); }
+.band { margin: var(--gap) var(--m) 0; }
+.band a { display: block; max-width: 1400px; margin: 0 auto; background: var(--surface); }
+.band img { width: 100%; height: auto; }
+.band figcaption { margin: 18px auto 0; max-width: 1400px; font-size: var(--small); color: var(--muted); }
 
 /* Live thing: the value cleaner */
 .cleaner { padding: var(--gap) var(--m) 0; }
@@ -193,10 +194,8 @@
 .motion [data-reveal] { transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .motion .gMid[data-reveal] { transition-delay: .08s; }
 .motion .gPhones[data-reveal] { transition-delay: .16s; }
-.motion .band img { animation: drift 24s ease-in-out infinite alternate; transform-origin: 50% 0; }
 @keyframes rise { from { transform: translateY(105%); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } }
-@keyframes drift { to { transform: scale(1.045); } }
 @media (prefers-reduced-motion: reduce) {
   .page *, .page *::before { animation: none !important; transition: none !important; }
 }
